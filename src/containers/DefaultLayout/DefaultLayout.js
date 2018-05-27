@@ -31,7 +31,7 @@ class DefaultLayout extends Component {
           <DefaultHeader />
         </AppHeader>
         <div className="app-body">
-          <AppSidebar fixed display="lg">
+          <AppSidebar hidden display="lg">
             <AppSidebarHeader />
             <AppSidebarForm />
             <AppSidebarNav navConfig={navigation} {...this.props} />

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import marquis from '../../assets/img/brand/MQ-OFFICIAL-LOGO.png'
+import { Img } from 'reactstrap'
 
 const propTypes = {
   children: PropTypes.node,
@@ -15,8 +17,7 @@ class DefaultFooter extends Component {
 
     return (
       <React.Fragment>
-        <span><a href="https://coreui.io">CoreUI</a> &copy; 2018 creativeLabs.</span>
-        <span className="ml-auto">Powered by <a href="https://coreui.io/react">CoreUI for React</a></span>
+        <span className="ml-auto">Powered by <img src={marquis} /></span>
       </React.Fragment>
     );
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Nav, NavItem, NavLink } from 'reactstrap';
+import { Nav, NavItem, NavLink, Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 import { AppAsideToggler, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
@@ -15,10 +15,35 @@ const propTypes = {
 const defaultProps = {};
 
 class DefaultHeader extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      dropdownOpen: [false, false],
+    };
+  }
+
+  toggle(i) {
+    const newArray = this.state.dropdownOpen.map((element, index) => {
+      return (index === i ? !element : false);
+    });
+    this.setState({
+      dropdownOpen: newArray,
+    });
+  }
+
   render() {
 
     // eslint-disable-next-line
     const { children, ...attributes } = this.props;
+
+    const activeMenuStyle = {
+      backgroundColor: '#f86c6b',
+      padding: '5px 15px 5px 15px',
+      marginTop: '-5px',
+    }
 
     return (
       <React.Fragment>
@@ -28,17 +53,27 @@ class DefaultHeader extends Component {
           minimized={{ src: logo, width: 30, height: 30, alt: 'CDTrax' }}
         />
 
-        <Nav className="d-md-down-none" navbar>
-          <NavItem className="px-3">
-            <NavLink href="/">Dashboard</NavLink>
-          </NavItem>
-          <NavItem className="px-3">
-            <NavLink href="#">Users</NavLink>
-          </NavItem>
-          <NavItem className="px-3">
-            <NavLink href="#">Settings</NavLink>
-          </NavItem>
-        </Nav>
+            <Nav pills>
+              <NavItem>
+                <NavLink href="/" active style={activeMenuStyle}>Dashboard</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="#">Organizations</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="#/base/breadcrumbs">Employees</NavLink>
+              </NavItem>
+              <Dropdown nav isOpen={this.state.dropdownOpen[1]} toggle={() => {this.toggle(1);}}>
+                <DropdownToggle nav caret>
+                  Setup
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem href="http://google.com">Banks</DropdownItem>
+                  <DropdownItem>Branches</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </Nav>
+
         <Nav className="ml-auto" navbar>
           <DefaultHeaderDropdown notif/>
           <DefaultHeaderDropdown tasks/>

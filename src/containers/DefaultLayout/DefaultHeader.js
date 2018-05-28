@@ -68,7 +68,7 @@ class DefaultHeader extends Component {
                   Setup
                 </DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem href="http://google.com">Banks</DropdownItem>
+                  <DropdownItem href="#/setup/banks">Banks</DropdownItem>
                   <DropdownItem>Branches</DropdownItem>
                 </DropdownMenu>
               </Dropdown>

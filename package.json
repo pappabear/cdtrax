@@ -45,7 +45,11 @@
     "react-toastify": "^4.0.1",
     "reactstrap": "^6.0.1",
     "simple-line-icons": "^2.4.1",
-    "spinkit": "1.2.5"
+    "spinkit": "1.2.5",
+    "react-redux": "^5.0.5",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.2.0",
+    "superagent": "^3.6.3"
   },
   "devDependencies": {
     "babel-jest": "^22.4.3",

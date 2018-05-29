@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Card, CardHeader, CardBody, Row, Col} from 'reactstrap'
+import {Card, CardHeader, CardBody, Row, Col, Button} from 'reactstrap'
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table'
 import 'react-bootstrap-table/dist//react-bootstrap-table-all.min.css'
 
@@ -24,13 +24,16 @@ class Banks extends Component
     //this.table = this.props.banks
     this.options = {
       sortIndicator: true,
-      hideSizePerPage: true,
+      hideSizePerPage: false,
       paginationSize: 3,
-      hidePageListOnlyOnePage: true,
+      hidePageListOnlyOnePage: false,
       clearSearch: true,
-      alwaysShowAllBtns: false,
-      withFirstAndLast: false
+      alwaysShowAllBtns: true,
+      withFirstAndLast: false,
+      onRowClick: this.onRowClick
     }
+
+    //this.gotoEditForm = this.gotoEditForm.bind(this)
 
   }
 
@@ -41,25 +44,34 @@ class Banks extends Component
 
   gotoAddForm()
   {
-      this.props.history.push("/views/banks/addbank")
+    //console.log(this.props.history)    
+    this.props.history.push("/views/banks/addbank")
   }
 
-  gotoEditForm(id)
+  gotoEditForm()
   {
-      this.props.history.push("/views/banks/editbank?id=" + id)
+    //this.props.history.push("/views/banks/editbank?id=" + id)
+    console.log('gotoEditForm')
   }
 
   actionFormatter(cell, row) 
   {  
       return (
-          <span> 'add' button here
+          <span> 
+              hello world {row.id}
           </span>
       )
   }
 
+  onRowClick(row)
+  {
+      console.log('onRowClick ' + row.id)
+  }
+
   //rowEvents = {
   //    onClick: (e, row, rowIndex) => {
-  //        this.props.history.push("/views/banks/editactivity?id=" + row.id)
+  //        //this.props.history.push("/views/banks/editactivity?id=" + row.id)
+  //        alert('hello ' + rowIndex + ' ' + row.id)
   //    }
   //}
 
@@ -95,12 +107,12 @@ class Banks extends Component
         <Card>
             <CardHeader> <h3>Banks</h3> </CardHeader>
                 <CardBody>
-                    <BootstrapTable data={this.props.banks} version="4" striped hover pagination search options={this.options}>
-                        <TableHeaderColumn isKey dataField="id">ID</TableHeaderColumn>
+                    <BootstrapTable data={this.props.banks} version="4" striped hover pagination search options={this.options} >
                         <TableHeaderColumn dataField="code" dataSort>Code</TableHeaderColumn>
-                        <TableHeaderColumn dataField="description" dataSort>Name</TableHeaderColumn>
-                        
+                        <TableHeaderColumn dataField="description" dataSort>Name</TableHeaderColumn>                        
+                        <TableHeaderColumn isKey dataField="id" dataFormat={this.actionFormatter} >Actions</TableHeaderColumn>
                     </BootstrapTable>
+                <p><Button outline color="success" onClick={ () => this.gotoAddForm() } >Add a new bank</Button></p>
                 </CardBody>
         </Card>
 

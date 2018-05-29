@@ -48,24 +48,27 @@ class Banks extends Component
     this.props.history.push("/views/banks/addbank")
   }
 
-  gotoEditForm()
+  gotoEditForm(id)
   {
     //this.props.history.push("/views/banks/editbank?id=" + id)
-    console.log('gotoEditForm')
+    console.log('gotoEditForm ' + id)
   }
 
   actionFormatter(cell, row) 
   {  
+      var editUrl = "http://google.com?" + row.id
+      var deleteUrl = ""
+
       return (
           <span> 
-              hello world {row.id}
+              <Button outline color="info" href={editUrl} >Edit</Button>
           </span>
       )
   }
 
   onRowClick(row)
   {
-      console.log('onRowClick ' + row.id)
+      console.log('onRowClick()= ' + row.id)
   }
 
   //rowEvents = {

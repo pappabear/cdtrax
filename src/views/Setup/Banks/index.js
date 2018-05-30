@@ -96,7 +96,6 @@ class Banks extends Component
                     <TableHeaderColumn dataField="code" dataSort>Code</TableHeaderColumn>
                     <TableHeaderColumn dataField="description" dataSort>Name</TableHeaderColumn>                        
                     <TableHeaderColumn isKey dataField="id" dataFormat={ this.actionFormatter } > </TableHeaderColumn>
-                    <TableHeaderColumn dataField="id" dataFormat={ this.actionFormatter } > click me </TableHeaderColumn>
                 </BootstrapTable>
             <p><Button outline color="success" href="#/setup/banks?id=new" >Add a new bank</Button></p>
             </CardBody>

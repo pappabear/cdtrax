@@ -6,6 +6,7 @@ import 'react-bootstrap-table/dist//react-bootstrap-table-all.min.css'
 import { connect } from 'react-redux'
 import { getBanks } from '../../../actions/banks'
 
+
 const mapStateToProps = state => {
   return { 
     banks: state.banks,
@@ -21,7 +22,6 @@ class Banks extends Component
   constructor(props) {
     super(props)
 
-    //this.table = this.props.banks
     this.options = {
       sortIndicator: true,
       hideSizePerPage: false,
@@ -30,11 +30,8 @@ class Banks extends Component
       clearSearch: true,
       alwaysShowAllBtns: true,
       withFirstAndLast: false,
-      onRowClick: this.onRowClick
+      //onRowClick: this.onRowClick
     }
-
-    //this.gotoEditForm = this.gotoEditForm.bind(this)
-
   }
 
   componentDidMount() 
@@ -42,23 +39,10 @@ class Banks extends Component
       this.props.getBanks()
   }
 
-  gotoAddForm()
-  {
-    //console.log(this.props.history)    
-    this.props.history.push("/views/banks/addbank")
-  }
-
-  gotoEditForm(id)
-  {
-    //this.props.history.push("/views/banks/editbank?id=" + id)
-    console.log('gotoEditForm ' + id)
-  }
-
   actionFormatter(cell, row) 
   {  
-      var editUrl = "http://google.com?" + row.id
-      var deleteUrl = ""
-
+      var editUrl = "#/setup/banks?id=" + row.id
+  
       return (
           <span> 
               <Button outline color="info" href={editUrl} >Edit</Button>
@@ -66,17 +50,15 @@ class Banks extends Component
       )
   }
 
-  onRowClick(row)
+  onRowClick(row, columnIndex)
   {
-      console.log('onRowClick()= ' + row.id)
+        console.log("THIS IS NOT WORKING!")
+        console.log("Cannot access 'this' in callback from datatable....")
+        console.log('onRowClick() row.id = ' + row.id)
+        console.log('onRowClick() columnIndex = ' + columnIndex)
+        console.log(this.props.history)
+      //this.props.history.push("/views/banks/editbank?id=" + row.id)  //-- desired functionality
   }
-
-  //rowEvents = {
-  //    onClick: (e, row, rowIndex) => {
-  //        //this.props.history.push("/views/banks/editactivity?id=" + row.id)
-  //        alert('hello ' + rowIndex + ' ' + row.id)
-  //    }
-  //}
 
   render() {
 
@@ -109,20 +91,22 @@ class Banks extends Component
 
         <Card>
             <CardHeader> <h3>Banks</h3> </CardHeader>
-                <CardBody>
-                    <BootstrapTable data={this.props.banks} version="4" striped hover pagination search options={this.options} >
-                        <TableHeaderColumn dataField="code" dataSort>Code</TableHeaderColumn>
-                        <TableHeaderColumn dataField="description" dataSort>Name</TableHeaderColumn>                        
-                        <TableHeaderColumn isKey dataField="id" dataFormat={this.actionFormatter} >Actions</TableHeaderColumn>
-                    </BootstrapTable>
-                <p><Button outline color="success" onClick={ () => this.gotoAddForm() } >Add a new bank</Button></p>
-                </CardBody>
+            <CardBody>
+                <BootstrapTable data={this.props.banks} version="4" striped bordered={false} hover pagination search options={this.options} >
+                    <TableHeaderColumn dataField="code" dataSort>Code</TableHeaderColumn>
+                    <TableHeaderColumn dataField="description" dataSort>Name</TableHeaderColumn>                        
+                    <TableHeaderColumn isKey dataField="id" dataFormat={ this.actionFormatter } > </TableHeaderColumn>
+                    <TableHeaderColumn dataField="id" dataFormat={ this.actionFormatter } > click me </TableHeaderColumn>
+                </BootstrapTable>
+            <p><Button outline color="success" href="#/setup/banks?id=new" >Add a new bank</Button></p>
+            </CardBody>
         </Card>
 
       </div>
     )
   }
 }
+
 
 const mapDispatchToProps = (dispatch) => {
     return {

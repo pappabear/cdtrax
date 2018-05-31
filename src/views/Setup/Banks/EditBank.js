@@ -84,7 +84,12 @@ class EditBank extends Component
     handleDeleteBank() 
     {
         this.props.deleteBank(this.props.bank.id)
-        this.props.history.push("#/setup/banks")
+        this.props.history.push("/setup/banks")
+    }
+
+    handleCancel() 
+    {
+        this.props.history.push("/setup/banks")
     }
 
     render() {
@@ -120,7 +125,7 @@ class EditBank extends Component
                     <Col xs={12} >
                         <form >
                         <Card>
-                            <CardHeader><CardTitle>Editing {this.props.bank.code} </CardTitle></CardHeader>
+                            <CardHeader><CardTitle> <b> {this.props.bank.description} </b> </CardTitle></CardHeader>
                                 <CardBody>
                                     <FormGroup row className="my-0">
                                     <Col xs="4">
@@ -141,9 +146,10 @@ class EditBank extends Component
                                         </Col>
                                     </FormGroup>
 
-                                    <Button outline color="success" onClick={() => this.handleUpdateBank()}>Update</Button> &nbsp;
+                                    <Button outline color="success" onClick={() => this.handleUpdateBank()}>Save changes</Button> &nbsp;
                                     <Button outline color="danger" onClick={() => this.handleDeleteBank()}>Delete</Button> &nbsp;
-                                    <Button outline color="info" onClick={() => this.handleCancel()}>Cancel</Button>                                
+                                    <Button outline color="info" onClick={() => this.handleCancel()}>Back to list</Button>     
+
                                 </CardBody>
                             </Card>
                         </form>

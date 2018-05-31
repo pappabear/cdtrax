@@ -45,7 +45,7 @@ class Banks extends Component
   
       return (
           <span> 
-              <Button outline color="info" >Edit</Button>
+              <Button outline color="info" href={editUrl} >Edit</Button>
           </span>
       )
   }
@@ -63,6 +63,11 @@ class Banks extends Component
   gotoAddBankForm()
   {
         this.props.history.push("/setup/banks/addbank")  
+  }
+
+  gotoEditBankForm(id)
+  {
+        this.props.history.push("/setup/banks/editbank/" + id)  
   }
 
   render() {

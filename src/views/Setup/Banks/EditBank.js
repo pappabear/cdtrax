@@ -4,7 +4,7 @@ import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table'
 import 'react-bootstrap-table/dist//react-bootstrap-table-all.min.css'
 
 import { connect } from 'react-redux'
-import { getBanks, deleteBank, updateBank } from '../../../actions/banks'
+import { getBank, deleteBank, updateBank } from '../../../actions/banks'
 
 var bankBuffer = {}
 
@@ -57,12 +57,19 @@ class EditBank extends Component
 
     componentDidMount() 
     {
-        this.props.getBanks()
+        var b = this.props.location.pathname.split("/")
+        var id = 0
+        for (var i=0; i<b.length; i++)
+            id = b[i]
+        this.props.getBank(id)
     }
 
-    handleChange(event) 
+    componentWillReceiveProps(nextProps) 
     {
-        this.setState({ [event.target.id]: event.target.value })
+        // capture the props and data entry form state BEFORE it fires another render
+        this.setState({ code: nextProps.bank.code, 
+                        description: nextProps.bank.description,
+        })
     }
 
     handleUpdateBank() 
@@ -72,13 +79,17 @@ class EditBank extends Component
             return
         }
 
+        //console.log("this.props.bank.id=" + this.props.bank.id)
+        //console.log("this.state.code=" + this.state.code)
+        //console.log("this.state.description=" + this.state.description)
+
         this.props.updateBank(this.props.bank.id, this.state.code, this.state.description)
         this.setState({ code: "", 
                         description: "", 
                         codeHasErrors: false,
                         descriptionHasErrors: false
              })
-        this.props.history.push("#/setup/banks")
+        this.props.history.push("/setup/banks")
     }
 
     handleDeleteBank() 
@@ -127,24 +138,31 @@ class EditBank extends Component
                         <Card>
                             <CardHeader><CardTitle> <b> {this.props.bank.description} </b> </CardTitle></CardHeader>
                                 <CardBody>
-                                    <FormGroup row className="my-0">
-                                    <Col xs="4">
+
+                                    <Row>
+                                        <Col xs="12">
                                             <FormGroup>
-                                            <Label htmlFor="code">Code</Label>
-                                            <Input type="text" id="code" placeholder="code"                                                         
+                                                <Label htmlFor="name">Code</Label>
+                                                <Input type="text" id="code" 
+                                                    placeholder="code"
+                                                    requird
                                                     value={this.state.code} 
-                                                    onChange={this.handleChange} />
-                                            </FormGroup>
-                                    </Col>
-                                    <Col xs="8">
-                                            <FormGroup>
-                                            <Label htmlFor="description">Description</Label>
-                                            <Input type="text" id="description" placeholder="description" 
-                                                    value={this.state.code} 
-                                                    onChange={this.handleChange} />
+                                                    onChange={(e) => this.setState({ code: e.target.value})} />
                                             </FormGroup>
                                         </Col>
-                                    </FormGroup>
+                                    </Row>
+
+                                    <Row>
+                                        <Col xs="12">
+                                            <FormGroup>
+                                                <Label htmlFor="description">Description</Label>
+                                                <Input type="text" id="description" placeholder="description" 
+                                                    required
+                                                    value={this.state.description} 
+                                                    onChange={(e) => this.setState({ description: e.target.value})} />
+                                            </FormGroup>
+                                        </Col>
+                                    </Row>
 
                                     <Button outline color="success" onClick={() => this.handleUpdateBank()}>Save changes</Button> &nbsp;
                                     <Button outline color="danger" onClick={() => this.handleDeleteBank()}>Delete</Button> &nbsp;
@@ -164,7 +182,7 @@ class EditBank extends Component
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getBanks: () => dispatch(getBanks()),
+        getBank: (id) => dispatch(getBank(id)),
         deleteBank: (id) => dispatch(deleteBank(id)),
         updateBank: (id, code, description) => dispatch(updateBank(id, code, description))
     }

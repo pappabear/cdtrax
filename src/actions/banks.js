@@ -99,5 +99,28 @@ export function getBanks() {
 	}
 }
 
+export function getBank(id) {
+	return (dispatch) => {
+        dispatch(banksIsLoading(true));
+
+		request
+            .get('http://localhost:3001/banks/' + id)
+            .end((err, res) => {
+                if (err) {
+                    dispatch(banksHasErrored(true));
+                }
+        
+                // HACK: Rails API is returning from a SQL statement, not a bound entity call
+                console.log("inside action handler")
+                const bank = JSON.parse(res.text)
+                const banks = []
+                banks.push(bank)
+                console.log(banks)
+
+                dispatch(banksIsLoading(false))
+                dispatch(banksFetchDataSuccess(banks))
+			})
+	}
+}
 
 

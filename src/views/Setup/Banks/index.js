@@ -41,11 +41,11 @@ class Banks extends Component
 
   actionFormatter(cell, row) 
   {  
-      var editUrl = "#/setup/banks?id=" + row.id
+      var editUrl = "#/setup/banks/editbank/" + row.id
   
       return (
           <span> 
-              <Button outline color="info" href={editUrl} >Edit</Button>
+              <Button outline color="info" >Edit</Button>
           </span>
       )
   }
@@ -58,6 +58,11 @@ class Banks extends Component
         console.log('onRowClick() columnIndex = ' + columnIndex)
         console.log(this.props.history)
       //this.props.history.push("/views/banks/editbank?id=" + row.id)  //-- desired functionality
+  }
+
+  gotoAddBankForm()
+  {
+        this.props.history.push("/setup/banks/addbank")  
   }
 
   render() {
@@ -97,7 +102,7 @@ class Banks extends Component
                     <TableHeaderColumn dataField="description" dataSort>Name</TableHeaderColumn>                        
                     <TableHeaderColumn isKey dataField="id" dataFormat={ this.actionFormatter } > </TableHeaderColumn>
                 </BootstrapTable>
-            <p><Button outline color="success" href="#/setup/banks?id=new" >Add a new bank</Button></p>
+            <p><Button outline color="success" onClick={() => this.gotoAddBankForm() } >Add a new bank</Button></p>
             </CardBody>
         </Card>
 

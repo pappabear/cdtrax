@@ -5,6 +5,8 @@ import CodeEditors from './views/Editors/CodeEditors'
 import DefaultLayout from './containers/DefaultLayout';
 
 import Banks from './views/Setup/Banks'
+import AddBank from './views/Setup/Banks/AddBank'
+import EditBank from './views/Setup/Banks/EditBank'
 
 function Loading() {
   return <div>Loading...</div>;
@@ -243,12 +245,14 @@ const Widgets = Loadable({
 });
 
 
-
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: '/', name: 'Home', component: DefaultLayout, exact: true },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
-  { path: '/setup/banks', name: 'Banks', component: Banks },
+  { path: '/setup/banks', name: 'Banks', component: Banks, exact: true },
+  { path: '/setup/banks/addbank', name: 'Add Bank', component: AddBank },
+  { path: '/setup/banks/editbank/:id', name: 'Edit Bank', component: EditBank },
+  
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },

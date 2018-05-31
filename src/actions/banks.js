@@ -111,11 +111,9 @@ export function getBank(id) {
                 }
         
                 // HACK: Rails API is returning from a SQL statement, not a bound entity call
-                console.log("inside action handler")
                 const bank = JSON.parse(res.text)
                 const banks = []
                 banks.push(bank)
-                console.log(banks)
 
                 dispatch(banksIsLoading(false))
                 dispatch(banksFetchDataSuccess(banks))

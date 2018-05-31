@@ -107,7 +107,7 @@ class EditBank extends Component
 
         if (this.props.hasErrored) 
         {
-            return (<p>Sorry! There was an error loading the list of banks</p>)
+            return (<p>Sorry! There was an error getting the bank record requested.</p>)
         }
 
         if (this.props.isLoading) 
@@ -144,8 +144,9 @@ class EditBank extends Component
                                             <FormGroup>
                                                 <Label htmlFor="name">Code</Label>
                                                 <Input type="text" id="code" 
-                                                    placeholder="code"
-                                                    requird
+                                                    //placeholder="code"
+                                                    required
+                                                    className={ this.state.codeHasErrors ? "is-invalid" : "" }
                                                     value={this.state.code} 
                                                     onChange={(e) => this.setState({ code: e.target.value})} />
                                             </FormGroup>
@@ -156,8 +157,10 @@ class EditBank extends Component
                                         <Col xs="12">
                                             <FormGroup>
                                                 <Label htmlFor="description">Description</Label>
-                                                <Input type="text" id="description" placeholder="description" 
+                                                <Input type="text" id="description" 
+                                                    //placeholder="description" 
                                                     required
+                                                    className={ this.state.descriptionHasErrors ? "is-invalid" : "" }
                                                     value={this.state.description} 
                                                     onChange={(e) => this.setState({ description: e.target.value})} />
                                             </FormGroup>

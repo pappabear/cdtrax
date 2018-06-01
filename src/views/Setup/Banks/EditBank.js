@@ -79,16 +79,7 @@ class EditBank extends Component
             return
         }
 
-        //console.log("this.props.bank.id=" + this.props.bank.id)
-        //console.log("this.state.code=" + this.state.code)
-        //console.log("this.state.description=" + this.state.description)
-
         this.props.updateBank(this.props.bank.id, this.state.code, this.state.description)
-        this.setState({ code: "", 
-                        description: "", 
-                        codeHasErrors: false,
-                        descriptionHasErrors: false
-             })
         this.props.history.push("/setup/banks")
     }
 

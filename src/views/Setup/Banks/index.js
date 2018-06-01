@@ -50,24 +50,20 @@ class Banks extends Component
       )
   }
 
-  onRowClick(row, columnIndex)
-  {
-        console.log("THIS IS NOT WORKING!")
-        console.log("Cannot access 'this' in callback from datatable....")
-        console.log('onRowClick() row.id = ' + row.id)
-        console.log('onRowClick() columnIndex = ' + columnIndex)
-        console.log(this.props.history)
-      //this.props.history.push("/views/banks/editbank?id=" + row.id)  //-- desired functionality
-  }
+  ////TODO - figure out how to access this.props.history from this event handler
+  //onRowClick(row, columnIndex)
+  //{
+  //      console.log("THIS IS NOT WORKING!")
+  //      console.log("Cannot access 'this' in callback from datatable....")
+  //      console.log('onRowClick() row.id = ' + row.id)
+  //      console.log('onRowClick() columnIndex = ' + columnIndex)
+  //      console.log(this.props.history)
+  //    //this.props.history.push("/views/banks/editbank?id=" + row.id)  //-- desired functionality
+  //}
 
   gotoAddBankForm()
   {
         this.props.history.push("/setup/banks/addbank")  
-  }
-
-  gotoEditBankForm(id)
-  {
-        this.props.history.push("/setup/banks/editbank/" + id)  
   }
 
   render() {

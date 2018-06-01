@@ -24,11 +24,32 @@ import DefaultFooter from './DefaultFooter';
 import DefaultHeader from './DefaultHeader';
 
 class DefaultLayout extends Component {
+
+  activeMenuShouldBe = "dashboard"
+
+  calculateTopNav() 
+  {
+      if (this.props.location.pathname.includes("setup"))
+        return "setup"
+      
+      if (this.props.location.pathname.includes("employees"))
+        return "employees"
+
+      if (this.props.location.pathname.includes("organizations"))
+        return "organizations"
+      
+      return "dashboard"
+  }
+
+
   render() {
+
+    var activeMenuShouldBe = this.calculateTopNav()
+
     return (
       <div className="app">
         <AppHeader fixed>
-          <DefaultHeader />
+          <DefaultHeader activeMenuShouldBe={activeMenuShouldBe} />
         </AppHeader>
         <div className="app-body">
           <AppSidebar hidden display="lg">

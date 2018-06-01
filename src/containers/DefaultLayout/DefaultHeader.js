@@ -43,36 +43,42 @@ class DefaultHeader extends Component {
       backgroundColor: '#f86c6b',
       padding: '5px 15px 5px 15px',
       marginTop: '-5px',
+      color: 'white'
     }
 
+    console.log("this.props.activeMenuShouldBe=")
+    console.log(this.props.activeMenuShouldBe)
+
     return (
+      
+
       <React.Fragment>
         
         <AppNavbarBrand
-          full={{ src: logo, width: 89, height: 25, alt: 'CDTrax' }}
+          full={{ src: logo, width: 120, height: 25, alt: 'CDTrax' }}
           minimized={{ src: logo, width: 30, height: 30, alt: 'CDTrax' }}
         />
 
-            <Nav pills>
-              <NavItem>
-                <NavLink href="/" active style={activeMenuStyle}>Dashboard</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="#">Organizations</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="#/base/breadcrumbs">Employees</NavLink>
-              </NavItem>
-              <Dropdown nav isOpen={this.state.dropdownOpen[1]} toggle={() => {this.toggle(1);}}>
-                <DropdownToggle nav caret>
-                  Setup
-                </DropdownToggle>
-                <DropdownMenu>
-                  <DropdownItem href="#/setup/banks">Banks</DropdownItem>
-                  <DropdownItem>Branches</DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </Nav>
+        <Nav pills>
+          <NavItem>
+            <NavLink href="/" style={this.props.activeMenuShouldBe === "dashboard" ? activeMenuStyle : null } >Dashboard</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="#">Organizations</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="#/base/breadcrumbs">Employees</NavLink>
+          </NavItem>
+          <Dropdown nav isOpen={this.state.dropdownOpen[1]} toggle={() => {this.toggle(1);}} style={ this.props.activeMenuShouldBe === "setup" ? activeMenuStyle : null } >
+            <DropdownToggle nav caret>
+              Setup
+            </DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem href="#/setup/banks">Banks</DropdownItem>
+              <DropdownItem>Branches</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        </Nav>
 
         <Nav className="ml-auto" navbar>
           <DefaultHeaderDropdown notif/>

@@ -8,6 +8,14 @@ import Banks from './views/Setup/Banks'
 import AddBank from './views/Setup/Banks/AddBank'
 import EditBank from './views/Setup/Banks/EditBank'
 
+import CallCodes from './views/Setup/CallCodes'
+import AddCallCode from './views/Setup/CallCodes/AddCallCode'
+import EditCallCode from './views/Setup/CallCodes/EditCallCode'
+
+import CollateralCodes from './views/Setup/CollateralCodes'
+import AddCollateralCode from './views/Setup/CollateralCodes/AddCollateralCode'
+import EditCollateralCode from './views/Setup/CollateralCodes/EditCollateralCode'
+
 function Loading() {
   return <div>Loading...</div>;
 }
@@ -252,6 +260,14 @@ const routes = [
   { path: '/setup/banks', name: 'Banks', component: Banks, exact: true },
   { path: '/setup/banks/addbank', name: 'Add Bank', component: AddBank },
   { path: '/setup/banks/editbank/:id', name: 'Edit Bank', component: EditBank },
+  
+  { path: '/setup/callcodes', name: 'CallCodes', component: CallCodes, exact: true },
+  { path: '/setup/callcodes/addcallcode', name: 'addcallcode', component: AddCallCode },
+  { path: '/setup/callcodes/editcallcode/:id', name: 'editcallcode', component: EditCallCode },
+  
+  { path: '/setup/collateralcodes', name: 'collateralcodes', component: CollateralCodes, exact: true },
+  { path: '/setup/collateralcodes/addcollateralcode', name: 'addcollateralcode', component: AddCallCode },
+  { path: '/setup/collateralcodes/addcollateralcode/:id', name: 'addcollateralcode', component: EditCallCode },
   
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },

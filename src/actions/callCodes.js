@@ -100,4 +100,25 @@ export function getCallCodes() {
 }
 
 
+export function getCallCode(id) {
+	return (dispatch) => {
+        dispatch(callCodesIsLoading(true));
+
+		request
+            .get('http://localhost:3001/call_codes/' + id)
+            .end((err, res) => {
+                if (err) {
+                    dispatch(callCodesHasErrored(true));
+                }
+        
+                // HACK: Rails API is returning from a SQL statement, not a bound entity call
+                const callCode = JSON.parse(res.text)
+                const callCodes = []
+                callCodes.push(callCode)
+
+                dispatch(callCodesIsLoading(false))
+                dispatch(callCodesFetchDataSuccess(callCodes))
+			})
+	}
+}
 

@@ -75,6 +75,8 @@ class DefaultHeader extends Component {
             </DropdownToggle>
             <DropdownMenu>
               <DropdownItem href="#/setup/banks">Banks</DropdownItem>
+              <DropdownItem href="#/setup/callcodes">Call Codes</DropdownItem>
+              <DropdownItem href="#/setup/collateralcodes">Collateral Codes</DropdownItem>
               <DropdownItem>Branches</DropdownItem>
             </DropdownMenu>
           </Dropdown>

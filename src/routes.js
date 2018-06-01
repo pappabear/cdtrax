@@ -16,6 +16,10 @@ import CollateralCodes from './views/Setup/CollateralCodes'
 import AddCollateralCode from './views/Setup/CollateralCodes/AddCollateralCode'
 import EditCollateralCode from './views/Setup/CollateralCodes/EditCollateralCode'
 
+import InvestmentTypes from './views/Setup/InvestmentTypes'
+import AddInvestmentType from './views/Setup/InvestmentTypes/AddInvestmentType'
+import EditInvestmentType from './views/Setup/InvestmentTypes/EditInvestmentType'
+
 function Loading() {
   return <div>Loading...</div>;
 }
@@ -266,8 +270,12 @@ const routes = [
   { path: '/setup/callcodes/editcallcode/:id', name: 'editcallcode', component: EditCallCode },
   
   { path: '/setup/collateralcodes', name: 'collateralcodes', component: CollateralCodes, exact: true },
-  { path: '/setup/collateralcodes/addcollateralcode', name: 'addcollateralcode', component: AddCallCode },
-  { path: '/setup/collateralcodes/addcollateralcode/:id', name: 'addcollateralcode', component: EditCallCode },
+  { path: '/setup/collateralcodes/addcollateralcode', name: 'addcollateralcode', component: AddCollateralCode },
+  { path: '/setup/collateralcodes/editcollateralcode/:id', name: 'editcollateralcode', component: EditCollateralCode },
+  
+  { path: '/setup/investmenttypes', name: 'investmenttypes', component: InvestmentTypes, exact: true },
+  { path: '/setup/investmenttypes/addinvestmenttype', name: 'addinvestmenttype', component: AddInvestmentType },
+  { path: '/setup/investmenttypes/editinvestmenttype/:id', name: 'editinvestmenttype', component: EditInvestmentType },
   
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },

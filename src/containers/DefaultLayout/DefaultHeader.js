@@ -46,12 +46,8 @@ class DefaultHeader extends Component {
       color: 'white'
     }
 
-    console.log("this.props.activeMenuShouldBe=")
-    console.log(this.props.activeMenuShouldBe)
-
     return (
       
-
       <React.Fragment>
         
         <AppNavbarBrand
@@ -77,7 +73,7 @@ class DefaultHeader extends Component {
               <DropdownItem href="#/setup/banks">Banks</DropdownItem>
               <DropdownItem href="#/setup/callcodes">Call Codes</DropdownItem>
               <DropdownItem href="#/setup/collateralcodes">Collateral Codes</DropdownItem>
-              <DropdownItem>Branches</DropdownItem>
+              <DropdownItem href="#/setup/investmenttypes">Investment Types</DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </Nav>

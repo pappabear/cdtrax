@@ -100,4 +100,24 @@ export function getInvestmentTypes() {
 }
 
 
+export function getInvestmentType(id) {
+	return (dispatch) => {
+        dispatch(investmentTypesIsLoading(true));
 
+		request
+            .get('http://localhost:3001/investment_types/' + id)
+            .end((err, res) => {
+                if (err) {
+                    dispatch(investmentTypesHasErrored(true));
+                }
+        
+                // HACK: Rails API is returning from a SQL statement, not a bound entity call
+                const investmentType = JSON.parse(res.text)
+                const investmentTypes = []
+                investmentTypes.push(investmentType)
+
+                dispatch(investmentTypesIsLoading(false))
+                dispatch(investmentTypesFetchDataSuccess(investmentTypes))
+			})
+	}
+}

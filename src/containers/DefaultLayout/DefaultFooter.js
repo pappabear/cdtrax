@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import marquis from '../../assets/img/brand/MQ-OFFICIAL-LOGO.png'
-import { Img } from 'reactstrap'
 
 const propTypes = {
   children: PropTypes.node,
@@ -17,7 +16,7 @@ class DefaultFooter extends Component {
 
     return (
       <React.Fragment>
-        <span className="ml-auto">Powered by <img src={marquis} /></span>
+        <span className="ml-auto">Powered by <img src={marquis} alt="marquis"/></span>
       </React.Fragment>
     );
   }

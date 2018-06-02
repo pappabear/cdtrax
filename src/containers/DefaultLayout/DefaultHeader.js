@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Nav, NavItem, NavLink, Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import PropTypes from 'prop-types';
 
-import { AppAsideToggler, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
+//import { AppAsideToggler, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
+import { AppAsideToggler, AppNavbarBrand } from '@coreui/react'
 import DefaultHeaderDropdown  from './DefaultHeaderDropdown'
 //import logo from '../../assets/img/brand/logo.svg'
 //import sygnet from '../../assets/img/brand/sygnet.svg'

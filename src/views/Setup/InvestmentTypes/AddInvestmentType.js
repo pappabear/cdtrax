@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Card, CardHeader, CardBody, Row, Col, Button, CardTitle, FormGroup, Label, Input} from 'reactstrap'
-import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table'
+//import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table'
 import 'react-bootstrap-table/dist//react-bootstrap-table-all.min.css'
 
 import { connect } from 'react-redux'

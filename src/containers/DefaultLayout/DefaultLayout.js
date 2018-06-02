@@ -4,7 +4,7 @@ import { Container } from 'reactstrap';
 
 import {
   AppAside,
-  AppBreadcrumb,
+  //AppBreadcrumb,
   AppFooter,
   AppHeader,
   AppSidebar,

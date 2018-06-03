@@ -99,5 +99,25 @@ export function getLoanTypes() {
 	}
 }
 
+export function getLoanType(id) {
+	return (dispatch) => {
+        dispatch(loanTypesIsLoading(true));
 
+		request
+            .get('http://localhost:3001/loan_types/' + id)
+            .end((err, res) => {
+                if (err) {
+                    dispatch(loanTypesHasErrored(true));
+                }
+        
+                // HACK: Rails API is returning from a SQL statement, not a bound entity call
+                const loanType = JSON.parse(res.text)
+                const loanTypes = []
+                loanTypes.push(loanType)
+
+                dispatch(loanTypesIsLoading(false))
+                dispatch(loanTypesFetchDataSuccess(loanTypes))
+			})
+	}
+}
 

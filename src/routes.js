@@ -20,6 +20,10 @@ import InvestmentTypes from './views/Setup/InvestmentTypes'
 import AddInvestmentType from './views/Setup/InvestmentTypes/AddInvestmentType'
 import EditInvestmentType from './views/Setup/InvestmentTypes/EditInvestmentType'
 
+import LoanTypes from './views/Setup/LoanTypes'
+import AddLoanType from './views/Setup/LoanTypes/AddLoanType'
+import EditLoanType from './views/Setup/LoanTypes/EditLoanType'
+
 function Loading() {
   return <div>Loading...</div>;
 }
@@ -276,7 +280,11 @@ const routes = [
   { path: '/setup/investmenttypes', name: 'investmenttypes', component: InvestmentTypes, exact: true },
   { path: '/setup/investmenttypes/addinvestmenttype', name: 'addinvestmenttype', component: AddInvestmentType },
   { path: '/setup/investmenttypes/editinvestmenttype/:id', name: 'editinvestmenttype', component: EditInvestmentType },
-  
+
+  { path: '/setup/loantypes', name: 'loantypes', component: LoanTypes, exact: true },
+  { path: '/setup/loantypes/addloantype', name: 'addloantype', component: AddLoanType },
+  { path: '/setup/loantypes/editloantype/:id', name: 'editloantype', component: EditLoanType },
+
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },

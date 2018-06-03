@@ -61,10 +61,13 @@ class DefaultHeader extends Component {
             <NavLink href="/" style={this.props.activeMenuShouldBe === "dashboard" ? activeMenuStyle : null } >Dashboard</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="#">Organizations</NavLink>
+            <NavLink href="#">Development Activities</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="#/base/breadcrumbs">Employees</NavLink>
+            <NavLink href="#">Organizations Helped</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="#/base/breadcrumbs">Employees Involved</NavLink>
           </NavItem>
           <Dropdown nav isOpen={this.state.dropdownOpen[1]} toggle={() => {this.toggle(1);}} style={ this.props.activeMenuShouldBe === "setup" ? activeMenuStyle : null } >
             <DropdownToggle nav caret>
@@ -76,6 +79,7 @@ class DefaultHeader extends Component {
               <DropdownItem href="#/setup/collateralcodes">Collateral Codes</DropdownItem>
               <DropdownItem href="#/setup/investmenttypes">Investment Types</DropdownItem>
               <DropdownItem href="#/setup/loantypes">Loan Types</DropdownItem>
+              <DropdownItem href="#/setup/servicetypes">Service Types</DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </Nav>

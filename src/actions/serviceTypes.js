@@ -99,5 +99,25 @@ export function getServiceTypes() {
 	}
 }
 
+export function getServiceType(id) {
+	return (dispatch) => {
+        dispatch(serviceTypesIsLoading(true));
 
+		request
+            .get('http://localhost:3001/service_types/' + id)
+            .end((err, res) => {
+                if (err) {
+                    dispatch(serviceTypesHasErrored(true));
+                }
+        
+                // HACK: Rails API is returning from a SQL statement, not a bound entity call
+                const serviceType = JSON.parse(res.text)
+                const serviceTypes = []
+                serviceTypes.push(serviceType)
+
+                dispatch(serviceTypesIsLoading(false))
+                dispatch(serviceTypesFetchDataSuccess(serviceTypes))
+			})
+	}
+}
 

@@ -24,6 +24,10 @@ import LoanTypes from './views/Setup/LoanTypes'
 import AddLoanType from './views/Setup/LoanTypes/AddLoanType'
 import EditLoanType from './views/Setup/LoanTypes/EditLoanType'
 
+import ServiceTypes from './views/Setup/ServiceTypes'
+import AddServiceType from './views/Setup/ServiceTypes/AddServiceType'
+import EditServiceType from './views/Setup/ServiceTypes/EditServiceType'
+
 function Loading() {
   return <div>Loading...</div>;
 }
@@ -284,6 +288,10 @@ const routes = [
   { path: '/setup/loantypes', name: 'loantypes', component: LoanTypes, exact: true },
   { path: '/setup/loantypes/addloantype', name: 'addloantype', component: AddLoanType },
   { path: '/setup/loantypes/editloantype/:id', name: 'editloantype', component: EditLoanType },
+
+  { path: '/setup/servicetypes', name: 'servicetypes', component: ServiceTypes, exact: true },
+  { path: '/setup/servicetypes/addServiceType', name: 'addServiceType', component: AddServiceType },
+  { path: '/setup/servicetypes/editServiceType/:id', name: 'editServiceType', component: EditServiceType },
 
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },

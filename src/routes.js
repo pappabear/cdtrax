@@ -32,6 +32,10 @@ import DisasterTypes from './views/Setup/DisasterTypes'
 import AddDisasterType from './views/Setup/DisasterTypes/AddDisasterType'
 import EditDisasterType from './views/Setup/DisasterTypes/EditDisasterType'
 
+import DeclarationTypes from './views/Setup/DeclarationTypes'
+import AddDeclarationType from './views/Setup/DeclarationTypes/AddDeclarationType'
+import EditDeclarationType from './views/Setup/DeclarationTypes/EditDeclarationType'
+
 function Loading() {
   return <div>Loading...</div>;
 }
@@ -300,6 +304,10 @@ const routes = [
   { path: '/setup/disastertypes', name: 'disastertypes', component: DisasterTypes, exact: true },
   { path: '/setup/disastertypes/addDisasterType', name: 'addDisasterType', component: AddDisasterType },
   { path: '/setup/disastertypes/editDisasterType/:id', name: 'editDisasterType', component: EditDisasterType },
+
+  { path: '/setup/declarationtypes', name: 'declarationtypes', component: DeclarationTypes, exact: true },
+  { path: '/setup/declarationtypes/addDeclarationType', name: 'addDeclarationType', component: AddDeclarationType },
+  { path: '/setup/declarationtypes/editDeclarationType/:id', name: 'editDeclarationType', component: EditDeclarationType },
 
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },

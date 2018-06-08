@@ -100,4 +100,26 @@ export function getDeclarationTypes() {
 }
 
 
+export function getDeclarationType(id) {
+	return (dispatch) => {
+        dispatch(declarationTypesIsLoading(true));
+
+		request
+            .get('http://localhost:3001/declaration_types/' + id)
+            .end((err, res) => {
+                if (err) {
+                    dispatch(declarationTypesHasErrored(true));
+                }
+        
+                // HACK: Rails API is returning from a SQL statement, not a bound entity call
+                const declarationType = JSON.parse(res.text)
+                const declarationTypes = []
+                declarationTypes.push(declarationType)
+
+                dispatch(declarationTypesIsLoading(false))
+                dispatch(declarationTypesFetchDataSuccess(declarationTypes))
+			})
+	}
+}
+
 

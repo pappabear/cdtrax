@@ -80,6 +80,7 @@ class DefaultHeader extends Component {
               <DropdownItem href="#/setup/investmenttypes">Investment Types</DropdownItem>
               <DropdownItem href="#/setup/loantypes">Loan Types</DropdownItem>
               <DropdownItem href="#/setup/servicetypes">Service Types</DropdownItem>
+              <DropdownItem href="#/setup/disastertypes">Disaster Types</DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </Nav>

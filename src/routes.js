@@ -28,6 +28,10 @@ import ServiceTypes from './views/Setup/ServiceTypes'
 import AddServiceType from './views/Setup/ServiceTypes/AddServiceType'
 import EditServiceType from './views/Setup/ServiceTypes/EditServiceType'
 
+import DisasterTypes from './views/Setup/DisasterTypes'
+import AddDisasterType from './views/Setup/DisasterTypes/AddDisasterType'
+import EditDisasterType from './views/Setup/DisasterTypes/EditDisasterType'
+
 function Loading() {
   return <div>Loading...</div>;
 }
@@ -292,6 +296,10 @@ const routes = [
   { path: '/setup/servicetypes', name: 'servicetypes', component: ServiceTypes, exact: true },
   { path: '/setup/servicetypes/addServiceType', name: 'addServiceType', component: AddServiceType },
   { path: '/setup/servicetypes/editServiceType/:id', name: 'editServiceType', component: EditServiceType },
+
+  { path: '/setup/disastertypes', name: 'disastertypes', component: DisasterTypes, exact: true },
+  { path: '/setup/disastertypes/addDisasterType', name: 'addDisasterType', component: AddDisasterType },
+  { path: '/setup/disastertypes/editDisasterType/:id', name: 'editDisasterType', component: EditDisasterType },
 
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },

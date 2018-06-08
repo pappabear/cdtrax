@@ -100,4 +100,25 @@ export function getDisasterTypes() {
 }
 
 
+export function getDisasterType(id) {
+	return (dispatch) => {
+        dispatch(disasterTypesIsLoading(true));
+
+		request
+            .get('http://localhost:3001/disaster_types/' + id)
+            .end((err, res) => {
+                if (err) {
+                    dispatch(disasterTypesHasErrored(true));
+                }
+        
+                // HACK: Rails API is returning from a SQL statement, not a bound entity call
+                const disasterType = JSON.parse(res.text)
+                const disasterTypes = []
+                disasterTypes.push(disasterType)
+
+                dispatch(disasterTypesIsLoading(false))
+                dispatch(disasterTypesFetchDataSuccess(disasterTypes))
+			})
+	}
+}
 

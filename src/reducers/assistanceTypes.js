@@ -1,6 +1,6 @@
 export function assistanceTypesHasErrored(state = false, action) {
     switch (action.type) {
-        case 'ASSITANCETYPES_HAS_ERRORED':
+        case 'ASSISTANCETYPES_HAS_ERRORED':
             return action.hasErrored
   
         default:
@@ -10,7 +10,7 @@ export function assistanceTypesHasErrored(state = false, action) {
   
   export function assistanceTypesIsLoading(state = false, action) {
     switch (action.type) {
-        case 'ASSITANCETYPES_IS_LOADING':
+        case 'ASSISTANCETYPES_IS_LOADING':
             return action.isLoading
   
         default:
@@ -26,16 +26,16 @@ export function assistanceTypesHasErrored(state = false, action) {
           // like a beuracrat.  so i change the state at the API in the action controller and 
           // just give the reducer the new state.
           // HACK ????
-          case 'ASSITANCETYPES_FETCH_DATA_SUCCESS':
+          case 'ASSISTANCETYPES_FETCH_DATA_SUCCESS':
               return action.assistanceTypes
   
-          case 'ADD_ASSITANCETYPE':
+          case 'ADD_ASSISTANCETYPE':
               return [...state, action.payload]
   
-          case 'DELETE_ASSITANCETYPE':
+          case 'DELETE_ASSISTANCETYPE':
               return state
   
-          case 'UPDATE_ASSITANCETYPE':
+          case 'UPDATE_ASSISTANCETYPE':
               return state
   
           default:

@@ -36,6 +36,10 @@ import DeclarationTypes from './views/Setup/DeclarationTypes'
 import AddDeclarationType from './views/Setup/DeclarationTypes/AddDeclarationType'
 import EditDeclarationType from './views/Setup/DeclarationTypes/EditDeclarationType'
 
+import AssistanceTypes from './views/Setup/AssistanceTypes'
+import AddAssistanceType from './views/Setup/AssistanceTypes/AddAssistanceType'
+import EditAssistanceType from './views/Setup/AssistanceTypes/EditAssistanceType'
+
 function Loading() {
   return <div>Loading...</div>;
 }
@@ -308,6 +312,10 @@ const routes = [
   { path: '/setup/declarationtypes', name: 'declarationtypes', component: DeclarationTypes, exact: true },
   { path: '/setup/declarationtypes/addDeclarationType', name: 'addDeclarationType', component: AddDeclarationType },
   { path: '/setup/declarationtypes/editDeclarationType/:id', name: 'editDeclarationType', component: EditDeclarationType },
+
+  { path: '/setup/assistancetypes', name: 'assistancetypes', component: AssistanceTypes, exact: true },
+  { path: '/setup/assistancetypes/addAssistanceType', name: 'addAssistanceType', component: AddAssistanceType },
+  { path: '/setup/assistancetypes/editAssistanceType/:id', name: 'editAssistanceType', component: EditAssistanceType },
 
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },

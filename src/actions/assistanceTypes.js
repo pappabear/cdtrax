@@ -2,14 +2,14 @@ import request from 'superagent'
 
 export function assistanceTypesHasErrored(bool) {
     return {
-        type: 'ASSITANCETYPES_HAS_ERRORED',
+        type: 'ASSISTANCETYPES_HAS_ERRORED',
         hasErrored: bool
     };
 }
 
 export function assistanceTypesIsLoading(bool) {
     return {
-        type: 'ASSITANCETYPES_IS_LOADING',
+        type: 'ASSISTANCETYPES_IS_LOADING',
         isLoading: bool
     };
 }
@@ -74,7 +74,7 @@ export function updateAssistanceType(id, code, description) {
 
 export function assistanceTypesFetchDataSuccess(assistanceTypes) {
     return {
-        type: 'ASSITANCETYPES_FETCH_DATA_SUCCESS',
+        type: 'ASSISTANCETYPES_FETCH_DATA_SUCCESS',
         assistanceTypes
     }
 }
@@ -100,4 +100,25 @@ export function getAssistanceTypes() {
 }
 
 
+export function getAssistanceType(id) {
+	return (dispatch) => {
+        dispatch(assistanceTypesIsLoading(true));
+
+		request
+            .get('http://localhost:3001/assistance_types/' + id)
+            .end((err, res) => {
+                if (err) {
+                    dispatch(assistanceTypesHasErrored(true));
+                }
+        
+                // HACK: Rails API is returning from a SQL statement, not a bound entity call
+                const assistanceType = JSON.parse(res.text)
+                const assistanceTypes = []
+                assistanceTypes.push(assistanceType)
+
+                dispatch(assistanceTypesIsLoading(false))
+                dispatch(assistanceTypesFetchDataSuccess(assistanceTypes))
+			})
+	}
+}
 

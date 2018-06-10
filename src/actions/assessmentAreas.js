@@ -19,6 +19,10 @@ export function addAssessmentArea(code, description, bankId) {
 
         dispatch(assessmentAreasIsLoading(true))
 
+        console.log(code)
+        console.log(description)
+        console.log(bankId)
+        
 		request
             .post('http://localhost:3001/assessment_areas')
             .send({code:code, description:description, bank_id:bankId})
@@ -109,5 +113,27 @@ export function getAssessmentAreas() {
 	}
 }
 
+
+export function getAssessmentArea(id) {
+	return (dispatch) => {
+        dispatch(assessmentAreasIsLoading(true));
+
+		request
+            .get('http://localhost:3001/assessment_areas/' + id)
+            .end((err, res) => {
+                if (err) {
+                    dispatch(assessmentAreasHasErrored(true));
+                }
+        
+                // HACK: Rails API is returning from a SQL statement, not a bound entity call
+                const assessmentArea = JSON.parse(res.text)
+                const assessmentAreas = []
+                assessmentAreas.push(assessmentArea)
+
+                dispatch(assessmentAreasIsLoading(false))
+                dispatch(assessmentAreasFetchDataSuccess(assessmentAreas))
+			})
+	}
+}
 
 

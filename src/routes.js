@@ -48,6 +48,10 @@ import AssessmentAreas from './views/Setup/AssessmentAreas'
 import AddAssessmentArea from './views/Setup/AssessmentAreas/AddAssessmentArea'
 import EditAssessmentArea from './views/Setup/AssessmentAreas/EditAssessmentArea'
 
+import Branches from './views/Setup/Branches'
+import AddBranch from './views/Setup/Branches/AddBranch'
+import EditBranch from './views/Setup/Branches/EditBranch'
+
 function Loading() {
   return <div>Loading...</div>;
 }
@@ -332,6 +336,10 @@ const routes = [
   { path: '/setup/assessmentareas', name: 'assessmentareas', component: AssessmentAreas, exact: true },
   { path: '/setup/assessmentareas/addAssessmentArea', name: 'addAssessmentArea', component: AddAssessmentArea },
   { path: '/setup/assessmentareas/editAssessmentArea/:id', name: 'editAssessmentArea', component: EditAssessmentArea },
+
+  { path: '/setup/branches', name: 'branches', component: Branches, exact: true },
+  { path: '/setup/branches/addBranch', name: 'addBranch', component: AddBranch },
+  { path: '/setup/branches/editBranch/:id', name: 'editBranch', component: EditBranch },
 
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },

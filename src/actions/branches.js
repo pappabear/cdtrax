@@ -110,4 +110,24 @@ export function getBranches() {
 }
 
 
+export function getBranch(id) {
+	return (dispatch) => {
+        dispatch(branchesIsLoading(true));
 
+		request
+            .get('http://localhost:3001/branches/' + id)
+            .end((err, res) => {
+                if (err) {
+                    dispatch(branchesHasErrored(true));
+                }
+        
+                // HACK: Rails API is returning from a SQL statement, not a bound entity call
+                const branch = JSON.parse(res.text)
+                const branches = []
+                branches.push(branch)
+
+                dispatch(branchesIsLoading(false))
+                dispatch(branchesFetchDataSuccess(branches))
+			})
+	}
+}

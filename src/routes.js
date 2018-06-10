@@ -40,6 +40,10 @@ import AssistanceTypes from './views/Setup/AssistanceTypes'
 import AddAssistanceType from './views/Setup/AssistanceTypes/AddAssistanceType'
 import EditAssistanceType from './views/Setup/AssistanceTypes/EditAssistanceType'
 
+import PurposeCodes from './views/Setup/PurposeCodes'
+import AddPurposeCode from './views/Setup/PurposeCodes/AddPurposeCode'
+import EditPurposeCode from './views/Setup/PurposeCodes/EditPurposeCode'
+
 function Loading() {
   return <div>Loading...</div>;
 }
@@ -316,6 +320,10 @@ const routes = [
   { path: '/setup/assistancetypes', name: 'assistancetypes', component: AssistanceTypes, exact: true },
   { path: '/setup/assistancetypes/addAssistanceType', name: 'addAssistanceType', component: AddAssistanceType },
   { path: '/setup/assistancetypes/editAssistanceType/:id', name: 'editAssistanceType', component: EditAssistanceType },
+
+  { path: '/setup/purposecodes', name: 'purposecodes', component: PurposeCodes, exact: true },
+  { path: '/setup/purposecodes/addPurposeCode', name: 'addPurposeCode', component: AddPurposeCode },
+  { path: '/setup/purposecodes/editPurposeCode/:id', name: 'editPurposeCode', component: EditPurposeCode },
 
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },

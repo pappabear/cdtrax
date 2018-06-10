@@ -83,6 +83,7 @@ class DefaultHeader extends Component {
               <DropdownItem href="#/setup/disastertypes">Disaster Types</DropdownItem>
               <DropdownItem href="#/setup/declarationtypes">Declaration Types</DropdownItem>
               <DropdownItem href="#/setup/assistancetypes">Assistance Types</DropdownItem>
+              <DropdownItem href="#/setup/purposecodes">Purpose Codes</DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </Nav>

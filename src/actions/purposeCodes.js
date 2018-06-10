@@ -99,5 +99,27 @@ export function getPurposeCodes() {
 	}
 }
 
+export function getPurposeCode(id) {
+	return (dispatch) => {
+        dispatch(purposeCodesIsLoading(true));
+
+		request
+            .get('http://localhost:3001/purpose_codes/' + id)
+            .end((err, res) => {
+                if (err) {
+                    dispatch(purposeCodesHasErrored(true));
+                }
+        
+                // HACK: Rails API is returning from a SQL statement, not a bound entity call
+                const purposeCode = JSON.parse(res.text)
+                const purposeCodes = []
+                purposeCodes.push(purposeCode)
+
+                dispatch(purposeCodesIsLoading(false))
+                dispatch(purposeCodesFetchDataSuccess(purposeCodes))
+			})
+	}
+}
+
 
 

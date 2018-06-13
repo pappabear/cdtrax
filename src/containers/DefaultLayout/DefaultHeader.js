@@ -67,7 +67,7 @@ class DefaultHeader extends Component {
             <NavLink href="#">Organizations Helped</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="#/base/breadcrumbs">Employees Involved</NavLink>
+            <NavLink href="#/employees" style={this.props.activeMenuShouldBe === "employees" ? activeMenuStyle : null }>Employees Involved</NavLink>
           </NavItem>
           <Dropdown nav isOpen={this.state.dropdownOpen[1]} toggle={() => {this.toggle(1);}} style={ this.props.activeMenuShouldBe === "setup" ? activeMenuStyle : null } >
             <DropdownToggle nav caret>

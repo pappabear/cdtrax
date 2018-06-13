@@ -55,6 +55,13 @@ export function updateEmployee(id, code, name, title, bank, branch) {
 	return (dispatch) => {
         dispatch(employeesIsLoading(true))
 
+        console.log(id)
+        console.log(code)
+        console.log(name)
+        console.log(title)
+        console.log(bank)
+        console.log(branch)
+
         request
             .put('http://localhost:3001/employees/' + id)
             .send({ id: id, code: code, name:name, title:title, default_bank_id:bank, default_branch_id:branch })

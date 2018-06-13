@@ -52,6 +52,10 @@ import Branches from './views/Setup/Branches'
 import AddBranch from './views/Setup/Branches/AddBranch'
 import EditBranch from './views/Setup/Branches/EditBranch'
 
+import Employees from './views/Employees'
+import AddEmployee from './views/Employees/AddEmployee'
+import EditEmployee from './views/Employees/EditEmployee'
+
 function Loading() {
   return <div>Loading...</div>;
 }
@@ -340,6 +344,10 @@ const routes = [
   { path: '/setup/branches', name: 'branches', component: Branches, exact: true },
   { path: '/setup/branches/addBranch', name: 'addBranch', component: AddBranch },
   { path: '/setup/branches/editBranch/:id', name: 'editBranch', component: EditBranch },
+
+  { path: '/employees', name: 'employees', component: Employees, exact: true },
+  { path: '/employees/addEmployee', name: 'addEmployee', component: AddEmployee },
+  { path: '/employees/editEmployee/:id', name: 'editEmployee', component: EditEmployee },
 
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },

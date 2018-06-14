@@ -64,7 +64,7 @@ class DefaultHeader extends Component {
             <NavLink href="#">Development Activities</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="#">Organizations Helped</NavLink>
+            <NavLink href="#/entities" style={this.props.activeMenuShouldBe === "entities" ? activeMenuStyle : null }>Organizations Helped</NavLink>
           </NavItem>
           <NavItem>
             <NavLink href="#/employees" style={this.props.activeMenuShouldBe === "employees" ? activeMenuStyle : null }>Employees Involved</NavLink>

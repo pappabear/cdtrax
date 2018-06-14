@@ -113,9 +113,6 @@ class Editemployee extends Component
         var bankValue = this.state.bank != null ? this.state.bank.value : null
         var branchValue = this.state.branch != null ? this.state.branch.value : null
         
-        console.log(bankValue)
-        console.log(branchValue)
-
         this.props.updateEmployee(this.props.employee.id, this.state.code, 
                                     this.state.name, this.state.title, bankValue, branchValue)
 

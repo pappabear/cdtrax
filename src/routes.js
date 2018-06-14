@@ -56,6 +56,10 @@ import Employees from './views/Employees'
 import AddEmployee from './views/Employees/AddEmployee'
 import EditEmployee from './views/Employees/EditEmployee'
 
+import Entities from './views/Entities'
+import AddEntity from './views/Entities/AddEntity'
+import EditEntity from './views/Entities/EditEntity'
+
 function Loading() {
   return <div>Loading...</div>;
 }
@@ -348,6 +352,10 @@ const routes = [
   { path: '/employees', name: 'employees', component: Employees, exact: true },
   { path: '/employees/addEmployee', name: 'addEmployee', component: AddEmployee },
   { path: '/employees/editEmployee/:id', name: 'editEmployee', component: EditEmployee },
+
+  { path: '/entities', name: 'entities', component: Entities, exact: true },
+  { path: '/entities/addEntity', name: 'addEntity', component: AddEntity },
+  { path: '/entities/editEntity/:id', name: 'editEntity', component: EditEntity },
 
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },

@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {Card, CardHeader, CardBody, Row, Col, Button, CardTitle, FormGroup, Label, Input, Nav, NavItem, NavLink,TabContent, TabPane} from 'reactstrap'
-//import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table'
 import 'react-bootstrap-table/dist//react-bootstrap-table-all.min.css'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
@@ -9,7 +8,7 @@ import classnames from 'classnames'
 import { connect } from 'react-redux'
 import { addActivity } from '../../actions/activities'
 import { getPurposeCodes } from '../../actions/purposeCodes'
-import { getEmployees, getEmployee } from '../../actions/employees'
+import { getEmployees } from '../../actions/employees'
 import { getEntities } from '../../actions/entities'
 import { getAssessmentAreas } from '../../actions/assessmentAreas'
 import { getDisasterTypes } from '../../actions/disasterTypes'
@@ -194,10 +193,14 @@ class AddActivity extends Component
             tract: "",
             msa: "",
             activity_typeHasErrors: null,
+            activity_dtHasErrors: null,
+            contact_nameHasErrors: null,
+            entity_nameHasErrors: null,
             activeTab: '1',
             }
 
             this.handleEmployeeChange = this.handleEmployeeChange.bind(this)
+            this.handleEntityChange = this.handleEntityChange.bind(this)
     }
 
     toggle(tab) {
@@ -213,6 +216,21 @@ class AddActivity extends Component
         if (this.state.activity_type === "")
         {
             this.setState({ activity_typeHasErrors: true })
+            v=false
+        }
+        if (this.state.activity_dt === "")
+        {
+            this.setState({ activity_dtHasErrors: true })
+            v=false
+        }
+        if (this.state.contact_name === "")
+        {
+            this.setState({ contact_nameHasErrors: true })
+            v=false
+        }
+        if (this.state.entity_id === null)
+        {
+            this.setState({ entity_nameHasErrors: true })
             v=false
         }
         return v
@@ -330,12 +348,6 @@ class AddActivity extends Component
         var callCodeValue = this.state.call_code_id != null ? this.state.call_code_id.value : null
         var collateralCodeValue = this.state.collateral_code_id != null ? this.state.collateral_code_id.value : null                
         
-        // convert the date strings to the correct format
-        //var activityDateValue = this.state.activity_dt != null ? this.reformatDate(this.state.activity_dt) : null
-        //var maturityDateValue = this.state.maturity_dt != null ? this.reformatDate(this.state.maturity_dt) : null
-        //var disasterStartDateValue = this.state.disaster_start_dt != null ? this.reformatDate(this.state.disaster_start_dt) : null
-        //var disasterEndDateValue = this.state.disaster_end_dt != null ? this.reformatDate(this.state.disaster_end_dt) : null
-
         this.props.addActivity(this.state.activity_dt, //activityDateValue,
                                 activityTypeValue,
                                 purposeCodeValue,
@@ -399,6 +411,7 @@ class AddActivity extends Component
         this.props.history.push("/activities")
     }
 
+    /*
     reformatDate(mmddyyyy)
     {
         if (mmddyyyy == null)
@@ -408,13 +421,13 @@ class AddActivity extends Component
         var o = s[2] + "-" + s[0] + "-" + s[1]
         return o
     }
+    */
 
     handleEmployeeChange(event)
     {
-        console.log( event.value )
         this.setState({ employee_id: event.value })
 
-        // hack?
+        // hack? ajax call to the API to get additional display info
 		request
             .get('http://localhost:3001/employees/' + event.value)
             .end((err, res) => {
@@ -424,6 +437,28 @@ class AddActivity extends Component
         
                 const employee = JSON.parse(res.text)
                 this.setState({ employee_title: employee.title })
+            })
+    }
+
+    handleEntityChange(event)
+    {
+        this.setState({ entity_id: event.value })
+
+        // hack? ajax call to the API to get additional display info
+		request
+            .get('http://localhost:3001/entities/' + event.value)
+            .end((err, res) => {
+                if (err) {
+                    console.log(err)
+                }
+        
+                const entity = JSON.parse(res.text)
+                console.log(entity)
+                this.setState({ entity_address: entity.address,
+                                entity_city: entity.city,
+                                entity_state: entity.state,
+                                entity_zip: entity.zip,
+                })
             })
     }
 
@@ -473,6 +508,7 @@ class AddActivity extends Component
                                                     id="activity_dt"
                                                     name="activity_dt" 
                                                     value={this.state.activity_dt} 
+                                                    className={ this.state.activity_dtHasErrors ? "is-invalid" : "" }
                                                     onChange={(e) => this.setState({ activity_dt: e.target.value})} 
                                                     />
                                             </FormGroup>
@@ -588,39 +624,31 @@ class AddActivity extends Component
                                                                     name="entitySelect"
                                                                     value={this.state.entity_id}
                                                                     options={entityOptions}
-                                                                    onChange={(value) => this.setState({ entity_id: value})}
+                                                                    className={ this.state.entity_nameHasErrors ? "is-invalid" : "" }
+                                                                    //onChange={(value) => this.setState({ entity_id: value})}
+                                                                    onChange={this.handleEntityChange}
                                                                 />
                                                             </FormGroup>
                                                         </Col>
                                                     </Row>
                                                     <Row>
-                                                        <Label sm={2}>Contact</Label>
-                                                        <Col xs={12} md={6}>
-                                                            <p className="form-control-static"><b>contact</b></p>
-                                                        </Col>                                                    
-                                                    </Row>
-                                                    <Row>
                                                         <Label sm={2}>Address</Label>
                                                         <Col xs={12} md={6}>
-                                                            <p className="form-control-static"><b>address</b></p>
+                                                            <p className="form-control-static">{this.state.entity_address} {this.state.entity_city} {this.state.entity_state} {this.state.entity_zip}</p>
                                                         </Col>                                                    
                                                     </Row>
                                                     <Row>
-                                                        <Label sm={2}>City</Label>
+                                                        <Label sm={2}>Contact</Label>
                                                         <Col xs={12} md={6}>
-                                                            <p className="form-control-static"><b>city</b></p>
-                                                        </Col>                                                    
-                                                    </Row>
-                                                    <Row>
-                                                        <Label sm={2}>State</Label>
-                                                        <Col xs={12} md={6}>
-                                                            <p className="form-control-static"><b>state</b></p>
-                                                        </Col>                                                    
-                                                    </Row>
-                                                    <Row>
-                                                        <Label sm={2}>Zip</Label>
-                                                        <Col xs={12} md={6}>
-                                                            <p className="form-control-static"><b>zip</b></p>
+                                                            <FormGroup>
+                                                                <Input  type="text" 
+                                                                    id="contact_name"
+                                                                    name="contact_name" 
+                                                                    value={this.state.contact_name} 
+                                                                    className={ this.state.contact_nameHasErrors ? "is-invalid" : "" }
+                                                                    onChange={(e) => this.setState({ contact_name: e.target.value})} 
+                                                                    />
+                                                            </FormGroup>
                                                         </Col>                                                    
                                                     </Row>
                                                 </TabPane>
@@ -700,7 +728,6 @@ const mapDispatchToProps = (dispatch) => {
         getPurposeCodes: () => dispatch(getPurposeCodes()),
         getActivityTypes: () => dispatch(getActivityTypes()),
         getEmployees: () => dispatch(getEmployees()),
-        getEmployee: (id) => dispatch(getEmployee(id)),
         getEntities: () => dispatch(getEntities()),
         getAssessmentAreas: () => dispatch(getAssessmentAreas()),
         getDisasterTypes: () => dispatch(getDisasterTypes()),

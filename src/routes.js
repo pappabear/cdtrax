@@ -60,6 +60,10 @@ import Entities from './views/Entities'
 import AddEntity from './views/Entities/AddEntity'
 import EditEntity from './views/Entities/EditEntity'
 
+import Activities from './views/Activities'
+import AddActivity from './views/Activities/AddActivity'
+import EditActivity from './views/Activities/EditActivity'
+
 function Loading() {
   return <div>Loading...</div>;
 }
@@ -356,6 +360,10 @@ const routes = [
   { path: '/entities', name: 'entities', component: Entities, exact: true },
   { path: '/entities/addEntity', name: 'addEntity', component: AddEntity },
   { path: '/entities/editEntity/:id', name: 'editEntity', component: EditEntity },
+
+  { path: '/activities', name: 'activities', component: Activities, exact: true },
+  { path: '/activities/AddActivity', name: 'AddActivity', component: AddActivity },
+  { path: '/activities/EditActivity/:id', name: 'EditActivity', component: EditActivity },
 
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },

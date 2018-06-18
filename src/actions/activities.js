@@ -91,7 +91,7 @@ export function addActivity(activity_dt, activity_type_id, purpose_code_id,
                 console.log('addActivity() API call failed')
                 dispatch(activitiesHasErrored(true))
             }
-            console.log('addActivity() API call succeeded')
+            //console.log('addActivity() API call succeeded')
             dispatch(activitiesIsLoading(false))
             dispatch(getActivities())
             })
@@ -109,7 +109,7 @@ export function deleteActivity(id) {
                     console.log('deleteActivity() API call failed')
                     dispatch(activitiesHasErrored(true))
                 }
-                console.log('deleteActivity() API call succeeded')
+                //console.log('deleteActivity() API call succeeded')
                 dispatch(activitiesIsLoading(false))
                 dispatch(getActivities())
 			})
@@ -191,7 +191,7 @@ export function updateActivity(id, activity_dt, activity_type_id, purpose_code_i
                     console.log('updateActivity() API call failed')
                     dispatch(activitiesHasErrored(true))
                 }
-                console.log('updateActivity() API call succeeded')
+                //console.log('updateActivity() API call succeeded')
                 dispatch(activitiesIsLoading(false))
                 dispatch(getActivities())
 			})

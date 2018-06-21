@@ -320,11 +320,6 @@ class AddActivity extends Component
         })
     }
 
-    handleChange(event) 
-    {
-        this.setState({ [event.target.id]: event.target.value })
-    }
-
     handleAddActivity() 
     {
 
@@ -335,8 +330,6 @@ class AddActivity extends Component
     
         // these values are not required so the dropdown may be null
         var purposeCodeValue = this.state.purpose_code_id != null ? this.state.purpose_code_id.value : null
-        var employeeValue = this.state.employee_id != null ? this.state.employee_id.value : null
-        var entityValue = this.state.entity_id != null ? this.state.entity_id.value : null
         var assessmentAreaValue = this.state.assessment_area_id != null ? this.state.assessment_area_id.value : null
         var disasterTypeValue = this.state.disaster_type_id != null ? this.state.disaster_type_id.value : null
         var activityTypeValue = this.state.activity_type_id != null ? this.state.activity_type_id.value : null
@@ -351,8 +344,8 @@ class AddActivity extends Component
         this.props.addActivity(this.state.activity_dt, //activityDateValue,
                                 activityTypeValue,
                                 purposeCodeValue,
-                                employeeValue,
-                                entityValue,
+                                this.state.employee_id,
+                                this.state.entity_id,
                                 this.state.contact_name,
                                 assessmentAreaValue,
                                 this.state.disaster_number,
@@ -624,7 +617,7 @@ class AddActivity extends Component
                                                                     name="entitySelect"
                                                                     value={this.state.entity_id}
                                                                     options={entityOptions}
-                                                                    className={ this.state.entity_nameHasErrors ? "is-invalid" : "" }
+                                                                    //className={ this.state.entity_nameHasErrors ? "is-invalid" : "" }
                                                                     //onChange={(value) => this.setState({ entity_id: value})}
                                                                     onChange={this.handleEntityChange}
                                                                 />
@@ -654,17 +647,692 @@ class AddActivity extends Component
                                                 </TabPane>
 
                                                 <TabPane tabId="3">
-                                                    Impact
+                                                    <Row>
+                                                        <Label sm={2}>Assessment Area</Label>
+                                                        <Col xs={12} md={6}>
+                                                            <FormGroup >
+                                                                <Select
+                                                                    className="primary"
+                                                                    name="assessmentAreaSelect"
+                                                                    value={this.state.assessment_area_id}
+                                                                    options={assessmentAreaOptions}
+                                                                    onChange={(value) => this.setState({ assessment_area_id: value})}
+                                                                />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>Disaster #</Label>
+                                                        <Col xs={12} sm={2}>
+                                                            <FormGroup >
+                                                                <Input  type="text" 
+                                                                        id="disaster_number"
+                                                                        name="disaster_number" 
+                                                                        value={this.state.disaster_number} 
+                                                                        onChange={(e) => this.setState({ disaster_number: e.target.value})}    
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>Disaster Start Date </Label>
+                                                        <Col xs={12} md={3}>
+                                                            <FormGroup>
+                                                            <Input  type="date" 
+                                                                    id="disaster_start_dt"
+                                                                    name="disaster_start_dt" 
+                                                                    value={this.state.disaster_start_dt} 
+                                                                    onChange={(e) => this.setState({ disaster_start_dt: e.target.value})} 
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>Disaster End Date </Label>
+                                                        <Col xs={12} md={3}>
+                                                            <FormGroup>
+                                                            <Input  type="date" 
+                                                                    id="disaster_end_dt"
+                                                                    name="disaster_end_dt" 
+                                                                    value={this.state.disaster_end_dt} 
+                                                                    onChange={(e) => this.setState({ disaster_end_dt: e.target.value})} 
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>Disaster Type</Label>
+                                                        <Col xs={12} md={6}>
+                                                            <FormGroup >
+                                                                <Select
+                                                                    name="disasterTypeSelect"
+                                                                    value={this.state.disaster_type_id}
+                                                                    options={disasterTypeOptions}
+                                                                    onChange={(value) => this.setState({ disaster_type_id: value})}
+                                                                />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>Declaration Type</Label>
+                                                        <Col xs={12} md={6}>
+                                                            <FormGroup >
+                                                                <Select
+                                                                    name="declarationTypeSelect"
+                                                                    value={this.state.declaration_type_id}
+                                                                    options={declarationTypeOptions}
+                                                                    onChange={(value) => this.setState({ declaration_type_id: value})}
+                                                                />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>Assistance Type</Label>
+                                                        <Col xs={12} md={6}>
+                                                            <FormGroup >
+                                                                <Select
+                                                                    name="assistanceTypeSelect"
+                                                                    value={this.state.assistance_type_id}
+                                                                    options={assistanceTypeOptions}
+                                                                    onChange={(value) => this.setState({ assistance_type_id: value})}
+                                                                />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>Related</Label>
+                                                        <Col xs={12} sm={10} >
+                                                            <FormGroup check>
+                                                                <Label check>
+                                                                    <Input type="checkbox" 
+                                                                        checked={this.state.related_service_flag}
+                                                                        name="related_service_flag"
+                                                                        onChange={() => this.setState({ related_service_flag: !this.state.related_service_flag})} />
+                                                                    <span className="form-check-sign"></span>
+                                                                    Service
+                                                                </Label>
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>
+                                                            &nbsp;
+                                                        </Label>
+                                                        <Col xs={12} sm={10}>
+                                                            <FormGroup check>
+                                                                <Label check>
+                                                                    <Input type="checkbox" 
+                                                                        checked={this.state.related_investment_flag}
+                                                                        name="related_investment_flag"
+                                                                        onChange={() => this.setState({ related_investment_flag: !this.state.related_investment_flag})} />
+                                                                    <span className="form-check-sign"></span>
+                                                                    Investment
+                                                                </Label>
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>
+                                                            &nbsp;
+                                                        </Label>
+                                                        <Col xs={12} sm={10} >
+                                                            <FormGroup check>
+                                                                <Label check>
+                                                                    <Input type="checkbox" 
+                                                                        checked={this.state.related_loan_flag} 
+                                                                        name="related_loan_flag"
+                                                                        onChange={() => this.setState({ related_loan_flag: !this.state.related_loan_flag})} />
+                                                                    <span className="form-check-sign"></span>
+                                                                    Loan
+                                                                </Label>
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>LMI Percentage</Label>
+                                                        <Col xs={12} sm={2}>
+                                                            <FormGroup >
+                                                                <Input  type="text" 
+                                                                        id="lmi_percentage"
+                                                                        name="lmi_percentage" 
+                                                                        value={this.state.lmi_percentage}
+                                                                        onChange={(e) => this.setState({ lmi_percentage: e.target.value})}    
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>
+                                                            Benefit
+                                                        </Label>
+                                                        <Col xs={12} sm={10} >
+                                                            <FormGroup check>
+                                                                <Label check>
+                                                                    <Input type="checkbox" 
+                                                                        checked={this.state.is_benefit_statewide} 
+                                                                        name="is_benefit_statewide"
+                                                                        onChange={() => this.setState({ is_benefit_statewide: !this.state.is_benefit_statewide})} />
+                                                                    <span className="form-check-sign"></span>
+                                                                    Statewide
+                                                                </Label>
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>
+                                                            &nbsp;
+                                                        </Label>
+                                                        <Col xs={12} sm={10} >
+                                                            <FormGroup check>
+                                                                <Label check>
+                                                                    <Input type="checkbox" 
+                                                                        checked={this.state.is_benefit_investment} 
+                                                                        name="is_benefit_investment"
+                                                                        onChange={() => this.setState({ is_benefit_investment: !this.state.is_benefit_investment})} />
+                                                                    <span className="form-check-sign"></span>
+                                                                    Investment
+                                                                </Label>
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>
+                                                            &nbsp;
+                                                        </Label>
+                                                        <Col xs={12} sm={10} >
+                                                            <FormGroup check>
+                                                                <Label check>
+                                                                    <Input type="checkbox" 
+                                                                        checked={this.state.is_benefit_empowerment}
+                                                                        name="is_benefit_empowerment"
+                                                                        onChange={() => this.setState({ is_benefit_empowerment: !this.state.is_benefit_empowerment})} />
+                                                                    <span className="form-check-sign"></span>
+                                                                    Empowerment
+                                                                </Label>
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>
+                                                            &nbsp;
+                                                        </Label>
+                                                        <Col xs={12} sm={10} >
+                                                            <FormGroup check>
+                                                                <Label check>
+                                                                    <Input type="checkbox" 
+                                                                        checked={this.state.is_benefit_distressed} 
+                                                                        name="is_benefit_distressed"
+                                                                        onChange={() => this.setState({ is_benefit_distressed: !this.state.is_benefit_distressed})} />
+                                                                    <span className="form-check-sign"></span>
+                                                                    Distressed
+                                                                </Label>
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>
+                                                            &nbsp;
+                                                        </Label>
+                                                        <Col xs={12} sm={10} >
+                                                            <FormGroup check>
+                                                                <Label check>
+                                                                    <Input type="checkbox" 
+                                                                        checked={this.state.is_benefit_underserved} 
+                                                                        name="is_benefit_underserved"
+                                                                        onChange={() => this.setState({ is_benefit_underserved: !this.state.is_benefit_underserved})} />
+                                                                    <span className="form-check-sign"></span>
+                                                                    Underserved
+                                                                </Label>
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>
+                                                            &nbsp;
+                                                        </Label>
+                                                        <Col xs={12} sm={10} >
+                                                            <FormGroup check>
+                                                                <Label check>
+                                                                    <Input type="checkbox" 
+                                                                        checked={this.state.is_benefit_disaster} 
+                                                                        name="is_benefit_disaster"
+                                                                        onChange={() => this.setState({ is_benefit_disaster: !this.state.is_benefit_disaster})} />
+                                                                    <span className="form-check-sign"></span>
+                                                                    Disaster
+                                                                </Label>
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
                                                 </TabPane>
+
                                                 <TabPane tabId="4">
-                                                    Service
+                                                    <Row>
+                                                        <Label sm={2}>Service Type</Label>
+                                                        <Col xs={12} md={6}>
+                                                            <FormGroup >
+                                                                <Select
+                                                                    name="serviceTypeSelect"
+                                                                    value={this.state.service_type_id}
+                                                                    options={serviceTypeOptions}
+                                                                    onChange={(value) => this.setState({ service_type_id: value})}
+                                                                />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>Hours</Label>
+                                                        <Col xs={12} sm={2}>
+                                                            <FormGroup >
+                                                                <Input  type="text" 
+                                                                        id="hours"
+                                                                        name="hours" 
+                                                                        value={this.state.hours}
+                                                                        onChange={(e) => this.setState({ hours: e.target.value})}    
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}> CRA Hours</Label>
+                                                        <Col xs={12} sm={2}>
+                                                            <FormGroup >
+                                                                <Input  type="text" 
+                                                                        id="cra_hours"
+                                                                        name="cra_hours" 
+                                                                        value={this.state.cra_hours}
+                                                                        onChange={(e) => this.setState({ cra_hours: e.target.value})}    
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>
+                                                            &nbsp;
+                                                        </Label>
+                                                        <Col xs={12} sm={10} >
+                                                            <FormGroup check>
+                                                                <Label check>
+                                                                    <Input type="checkbox" 
+                                                                        checked={this.state.is_financial_expertise} 
+                                                                        name="is_financial_expertise"
+                                                                        onChange={() => this.setState({ is_financial_expertise: !this.state.is_financial_expertise})} />
+                                                                    <span className="form-check-sign"></span>
+                                                                    Financial expertise?
+                                                                </Label>
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
                                                 </TabPane>
+
                                                 <TabPane tabId="5">
-                                                    Investment
+                                                    <Row>
+                                                        <Label sm={2}>Investment Type</Label>
+                                                        <Col xs={12} md={6}>
+                                                            <FormGroup >
+                                                                <Select
+                                                                    name="investmentTypeSelect"
+                                                                    value={this.state.investment_type_id}
+                                                                    options={investmentTypeOptions}
+                                                                    onChange={(value) => this.setState({ investment_type_id: value})}
+                                                                />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>CUSIP#</Label>
+                                                        <Col xs={12} sm={3}>
+                                                            <FormGroup >
+                                                                <Input  type="text" 
+                                                                        id="cusip_number"
+                                                                        name="cusip_number" 
+                                                                        value={this.state.cusip_number}
+                                                                        onChange={(e) => this.setState({ cusip_number: e.target.value})}    
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>Maturity Date </Label>
+                                                        <Col xs={12} md={3}>
+                                                            <FormGroup>
+                                                            <Input  type="date" 
+                                                                    id="maturity_dt"
+                                                                    name="maturity_dt" 
+                                                                    value={this.state.maturity_dt} 
+                                                                    onChange={(e) => this.setState({ maturity_dt: e.target.value})} 
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>Original Amount</Label>
+                                                        <Col xs={12} sm={3}>
+                                                            <FormGroup >
+                                                                <Input  type="text" 
+                                                                        id="original_amount"
+                                                                        name="original_amount" 
+                                                                        value={this.state.original_amount}
+                                                                        onChange={(e) => this.setState({ original_amount: e.target.value})}    
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>Book Value</Label>
+                                                        <Col xs={12} sm={3}>
+                                                            <FormGroup >
+                                                                <Input  type="text" 
+                                                                        id="book_value"
+                                                                        name="book_value" 
+                                                                        value={this.state.book_value}
+                                                                        onChange={(e) => this.setState({ book_value: e.target.value})}    
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>Unfunded Committment</Label>
+                                                        <Col xs={12} sm={3}>
+                                                            <FormGroup >
+                                                                <Input  type="text" 
+                                                                        id="unfunded_committment"
+                                                                        name="unfunded_committment" 
+                                                                        value={this.state.unfunded_committment}
+                                                                        onChange={(e) => this.setState({ unfunded_committment: e.target.value})}    
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>Self Funding %</Label>
+                                                        <Col xs={12} sm={3}>
+                                                            <FormGroup >
+                                                                <Input  type="text" 
+                                                                        id="percent_of_entity_funding"
+                                                                        name="percent_of_entity_funding" 
+                                                                        value={this.state.percent_of_entity_funding}
+                                                                        onChange={(e) => this.setState({ percent_of_entity_funding: e.target.value})}    
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
                                                 </TabPane>
+
                                                 <TabPane tabId="6">
-                                                    Loan
+                                                    <Row>
+                                                        <Label sm={2}>Account Number</Label>
+                                                        <Col xs={12} sm={3}>
+                                                            <FormGroup >
+                                                                <Input  type="text" 
+                                                                        id="account_number"
+                                                                        name="account_number" 
+                                                                        value={this.state.account_number}
+                                                                        onChange={(e) => this.setState({ account_number: e.target.value})}    
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>Loan Number</Label>
+                                                        <Col xs={12} sm={3}>
+                                                            <FormGroup >
+                                                                <Input  type="text" 
+                                                                        id="loan_number"
+                                                                        name="loan_number" 
+                                                                        value={this.state.loan_number}
+                                                                        onChange={(e) => this.setState({ loan_number: e.target.value})}    
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>Loan Type</Label>
+                                                        <Col xs={12} md={6}>
+                                                            <FormGroup >
+                                                                <Select
+                                                                    name="loanTypeSelect"
+                                                                    value={this.state.loan_type_id}
+                                                                    options={loanTypeOptions}
+                                                                    onChange={(value) => this.setState({ loan_type_id: value})}
+                                                                />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>Call Code</Label>
+                                                        <Col xs={12} md={6}>
+                                                            <FormGroup >
+                                                                <Select
+                                                                    name="callCodeSelect"
+                                                                    value={this.state.call_code_id}
+                                                                    options={callCodeOptions}
+                                                                    onChange={(value) => this.setState({ call_code_id: value})}
+                                                                />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>Collateral Code</Label>
+                                                        <Col xs={12} md={6}>
+                                                            <FormGroup >
+                                                                <Select
+                                                                    name="collateralCodeSelect"
+                                                                    value={this.state.collateral_code_id}
+                                                                    options={collateralCodeOptions}
+                                                                    onChange={(value) => this.setState({ collateral_code_id: value})}
+                                                                />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>Lien Address</Label>
+                                                        <Col xs={12} sm={7}>
+                                                            <FormGroup >
+                                                                <Input  type="text" 
+                                                                        id="address"
+                                                                        name="address" 
+                                                                        value={this.state.address}
+                                                                        onChange={(e) => this.setState({ address: e.target.value})}    
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}></Label>
+                                                        <Col xs={12} sm={5}>
+                                                            <FormGroup >
+                                                                <Input  type="text" 
+                                                                        id="city"
+                                                                        name="city" 
+                                                                        value={this.state.city}
+                                                                        onChange={(e) => this.setState({ city: e.target.value})}    
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+
+                                                        <Col xs={12} sm={2}>
+                                                            <FormGroup >
+                                                                <Input  type="text" 
+                                                                        id="state"
+                                                                        name="state" 
+                                                                        value={this.state.state}
+                                                                        onChange={(e) => this.setState({ state: e.target.value})}    
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+
+                                                        <Col xs={12} sm={2}>
+                                                            <FormGroup >
+                                                                <Input  type="text" 
+                                                                        id="zip"
+                                                                        name="zip" 
+                                                                        value={this.state.zip}
+                                                                        onChange={(e) => this.setState({ zip: e.target.value})}    
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>Term</Label>
+                                                        <Col xs={12} sm={2}>
+                                                            <FormGroup >
+                                                                <Input  type="text" 
+                                                                        id="term"
+                                                                        name="term" 
+                                                                        value={this.state.term}
+                                                                        onChange={(e) => this.setState({ term: e.target.value})}    
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>
+                                                            &nbsp;
+                                                        </Label>
+                                                        <Col xs={12} sm={10} >
+                                                            <FormGroup check>
+                                                                <Label check>
+                                                                    <Input type="checkbox" 
+                                                                        checked={this.state.is_cra_qualified} 
+                                                                        name="is_cra_qualified"
+                                                                        onChange={() => this.setState({ is_cra_qualified: !this.state.is_cra_qualified})} />
+                                                                    <span className="form-check-sign"></span>
+                                                                    CRA Qualified
+                                                                </Label>
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>
+                                                            &nbsp;
+                                                        </Label>
+                                                        <Col xs={12} sm={10} >
+                                                            <FormGroup check>
+                                                                <Label check>
+                                                                    <Input type="checkbox" 
+                                                                        checked={this.state.is_3rd_party} 
+                                                                        name="is_3rd_party"
+                                                                        onChange={() => this.setState({ is_3rd_party: !this.state.is_3rd_party})} />
+                                                                    <span className="form-check-sign"></span>
+                                                                    3rd Party
+                                                                </Label>
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>
+                                                            &nbsp;
+                                                        </Label>
+                                                        <Col xs={12} sm={10} >
+                                                            <FormGroup check>
+                                                                <Label check>
+                                                                    <Input type="checkbox" 
+                                                                        checked={this.state.is_affiliate}                                                                    
+                                                                        name="is_affiliate"
+                                                                        onChange={() => this.setState({ is_affiliate: !this.state.is_affiliate})} />
+                                                                    <span className="form-check-sign"></span>
+                                                                    Affiliate
+                                                                </Label>
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <h5>Geocoding</h5>
+                                                    <hr />
+
+                                                    <Row>
+                                                        <Label sm={2}>State Code</Label>
+                                                        <Col xs={12} sm={2}>
+                                                            <FormGroup >
+                                                                <Input  type="text" 
+                                                                        id="state_code"
+                                                                        name="state_code" 
+                                                                        value={this.state.state_code}
+                                                                        onChange={(e) => this.setState({ state_code: e.target.value})}    
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>County Code</Label>
+                                                        <Col xs={12} sm={2}>
+                                                            <FormGroup >
+                                                                <Input  type="text" 
+                                                                        id="county_code"
+                                                                        name="county_code" 
+                                                                        value={this.state.county_code}
+                                                                        onChange={(e) => this.setState({ county_code: e.target.value})}    
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>Tract</Label>
+                                                        <Col xs={12} sm={2}>
+                                                            <FormGroup >
+                                                                <Input  type="text" 
+                                                                        id="tract"
+                                                                        name="tract" 
+                                                                        value={this.state.tract}
+                                                                        onChange={(e) => this.setState({ tract: e.target.value})}    
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
+
+                                                    <Row>
+                                                        <Label sm={2}>MSA</Label>
+                                                        <Col xs={12} sm={2}>
+                                                            <FormGroup >
+                                                                <Input  type="text" 
+                                                                        id="msa"
+                                                                        name="msa" 
+                                                                        value={this.state.msa}
+                                                                        onChange={(e) => this.setState({ msa: e.target.value})}    
+                                                                    />
+                                                            </FormGroup>
+                                                        </Col>
+                                                    </Row>
                                                 </TabPane>
+
                                             </TabContent>
 
                                         </Col>

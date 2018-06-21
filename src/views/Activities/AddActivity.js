@@ -1332,9 +1332,7 @@ class AddActivity extends Component
                                                         </Col>
                                                     </Row>
                                                 </TabPane>
-
                                             </TabContent>
-
                                         </Col>
                                     </Row>
 

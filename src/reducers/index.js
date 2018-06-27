@@ -15,6 +15,7 @@ import { employees, employeesHasErrored, employeesIsLoading } from './employees'
 import { entities, entitiesHasErrored, entitiesIsLoading } from './entities'
 import { activities, activitiesHasErrored, activitiesIsLoading } from './activities'
 import { activityTypes, activityTypesHasErrored, activityTypesIsLoading } from './activityTypes'
+import { dashboardData, dashboardHasErrored, dashboardIsLoading } from './dashboard'
 
 const rootReducer = combineReducers({
   banks, banksHasErrored, banksIsLoading,
@@ -32,7 +33,8 @@ const rootReducer = combineReducers({
   employees, employeesHasErrored, employeesIsLoading,
   entities, entitiesHasErrored, entitiesIsLoading,
   activities, activitiesHasErrored, activitiesIsLoading,
-  activityTypes, activityTypesHasErrored, activityTypesIsLoading
+  activityTypes, activityTypesHasErrored, activityTypesIsLoading,
+  dashboardData, dashboardHasErrored, dashboardIsLoading
 })
 
 export default rootReducer

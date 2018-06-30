@@ -4,19 +4,19 @@ import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table'
 import 'react-bootstrap-table/dist//react-bootstrap-table-all.min.css'
 
 import { connect } from 'react-redux'
-import { getAssistanceTypes } from '../../../actions/assistanceTypes'
+import { getVolunteers } from '../../actions/volunteers'
 
 
 const mapStateToProps = state => {
   return { 
-    assistanceTypes: state.assistanceTypes,
-    hasErrored: state.assistanceTypesHasErrored,
-    isLoading: state.assistanceTypesIsLoading
+    volunteers: state.volunteers,
+    hasErrored: state.volunteersHasErrored,
+    isLoading: state.volunteersIsLoading
     }
 }
 
 
-class AssistanceTypes extends Component 
+class Volunteers extends Component 
 {
 
   constructor(props) {
@@ -36,12 +36,12 @@ class AssistanceTypes extends Component
 
   componentDidMount() 
   {
-      this.props.getAssistanceTypes()
+      this.props.getVolunteers()
   }
 
   actionFormatter(cell, row) 
   {  
-      var editUrl = "#/setup/assistanceTypes/editassistanceType/" + row.id
+      var editUrl = "#/volunteers/editvolunteer/" + row.id
   
       return (
           <span> 
@@ -50,16 +50,16 @@ class AssistanceTypes extends Component
       )
   }
 
-  gotoAddAssistanceTypeForm()
+  gotoAddVolunteerForm()
   {
-        this.props.history.push("/setup/assistanceTypes/addassistanceType")  
+        this.props.history.push("/volunteers/addvolunteer")  
   }
 
   render() {
 
     if (this.props.hasErrored) 
     {
-        return (<p>Sorry! There was an error loading the list of assistance types</p>)
+        return (<p>Sorry! There was an error loading the list of volunteers</p>)
     }
 
     if (this.props.isLoading) 
@@ -71,7 +71,7 @@ class AssistanceTypes extends Component
                     <Col xs={12}>
                         <Card>
                             <CardBody>
-                                <h3>Retreiving list of assistance types...</h3>
+                                <h3>Retreiving list of volunteers...</h3>
                             </CardBody>
                         </Card>
                     </Col>
@@ -85,14 +85,15 @@ class AssistanceTypes extends Component
       <div className="animated fadeIn">
 
         <Card>
-            <CardHeader> <h3>Assistance Types</h3> </CardHeader>
+            <CardHeader> <h3>Volunteers</h3> </CardHeader>
             <CardBody>
-                <BootstrapTable data={this.props.assistanceTypes} version="4" striped bordered={false} hover pagination search options={this.options} >
-                    <TableHeaderColumn dataField="code" dataSort>Code</TableHeaderColumn>
-                    <TableHeaderColumn dataField="description" dataSort>Name</TableHeaderColumn>                        
+                <BootstrapTable data={this.props.volunteers} version="4" striped bordered={false} hover pagination search options={this.options} >
+                    <TableHeaderColumn dataField="employee_code" dataSort>Employee Code</TableHeaderColumn>
+                    <TableHeaderColumn dataField="name" dataSort>Name</TableHeaderColumn>
+                    <TableHeaderColumn dataField="title" dataSort>Title</TableHeaderColumn>                        
                     <TableHeaderColumn isKey dataField="id" dataFormat={ this.actionFormatter } > </TableHeaderColumn>
                 </BootstrapTable>
-            <p><Button outline color="success" onClick={() => this.gotoAddAssistanceTypeForm() } >Add a new assistance type</Button></p>
+            <p><Button outline color="success" onClick={() => this.gotoAddVolunteerForm() } >Add a new volunteer</Button></p>
             </CardBody>
         </Card>
 
@@ -104,7 +105,7 @@ class AssistanceTypes extends Component
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getAssistanceTypes: () => dispatch(getAssistanceTypes()),
+        getVolunteers: () => dispatch(getVolunteers()),
     }
 }
 
@@ -112,5 +113,5 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(AssistanceTypes)
+  )(Volunteers)
 

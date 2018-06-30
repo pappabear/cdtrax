@@ -1,6 +1,6 @@
-export function entitiesHasErrored(state = false, action) {
+export function loansHasErrored(state = false, action) {
     switch (action.type) {
-        case 'ENTITIES_HAS_ERRORED':
+        case 'LOANS_HAS_ERRORED':
             return action.hasErrored
   
         default:
@@ -8,9 +8,9 @@ export function entitiesHasErrored(state = false, action) {
     }
   }
   
-  export function entitiesIsLoading(state = false, action) {
+  export function loansIsLoading(state = false, action) {
     switch (action.type) {
-        case 'ENTITIES_IS_LOADING':
+        case 'LOANS_IS_LOADING':
             return action.isLoading
   
         default:
@@ -18,23 +18,23 @@ export function entitiesHasErrored(state = false, action) {
     }
   }
   
-  export function entities(state = [], action) {
+  export function loans(state = [], action) {
       switch (action.type) 
       {
       
           // the reducer is the only one allowed to change state.  
           // like a beuracrat.  so i change the state at the API in the action controller and just give the reducer the new state.
           // HACK ????
-          case 'ENTITIES_FETCH_DATA_SUCCESS':
-              return action.entities
+          case 'LOANS_FETCH_DATA_SUCCESS':
+              return action.loans
   
-          case 'ADD_ENTITY':
+          case 'ADD_LOAN':
               return [...state, action.payload]
   
-          case 'DELETE_ENTITY':
+          case 'DELETE_LOAN':
               return state
   
-          case 'UPDATE_ENTITY':
+          case 'UPDATE_LOAN':
               return state
   
           default:

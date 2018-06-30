@@ -6,15 +6,17 @@ import { investmentTypes, investmentTypesHasErrored, investmentTypesIsLoading } 
 import { loanTypes, loanTypesHasErrored, loanTypesIsLoading } from './loanTypes'
 import { serviceTypes, serviceTypesHasErrored, serviceTypesIsLoading } from './serviceTypes'
 import { purposeCodes, purposeCodesHasErrored, purposeCodesIsLoading } from './purposeCodes'
-import { disasterTypes, disasterTypesHasErrored, disasterTypesIsLoading } from './disasterTypes'
-import { declarationTypes, declarationTypesHasErrored, declarationTypesIsLoading } from './declarationTypes'
-import { assistanceTypes, assistanceTypesHasErrored, assistanceTypesIsLoading } from './assistanceTypes'
-import { branches, branchesHasErrored, branchesIsLoading } from './branches'
+//import { disasterTypes, disasterTypesHasErrored, disasterTypesIsLoading } from './disasterTypes'
+//import { declarationTypes, declarationTypesHasErrored, declarationTypesIsLoading } from './declarationTypes'
+//import { assistanceTypes, assistanceTypesHasErrored, assistanceTypesIsLoading } from './assistanceTypes'
+//import { branches, branchesHasErrored, branchesIsLoading } from './branches'
 import { assessmentAreas, assessmentAreasHasErrored, assessmentAreasIsLoading } from './assessmentAreas'
-import { employees, employeesHasErrored, employeesIsLoading } from './employees'
-import { entities, entitiesHasErrored, entitiesIsLoading } from './entities'
-import { activities, activitiesHasErrored, activitiesIsLoading } from './activities'
-import { activityTypes, activityTypesHasErrored, activityTypesIsLoading } from './activityTypes'
+import { volunteers, volunteersHasErrored, volunteersIsLoading } from './volunteers'
+import { loans, loansHasErrored, loansIsLoading } from './loans'
+import { investments, investmentsHasErrored, investmentsIsLoading } from './investments'
+import { organizations, organizationsHasErrored, organizationsIsLoading } from './organizations'
+//import { activities, activitiesHasErrored, activitiesIsLoading } from './activities'
+//import { activityTypes, activityTypesHasErrored, activityTypesIsLoading } from './activityTypes'
 import { dashboardData, dashboardHasErrored, dashboardIsLoading } from './dashboard'
 
 const rootReducer = combineReducers({
@@ -25,15 +27,11 @@ const rootReducer = combineReducers({
   loanTypes, loanTypesHasErrored, loanTypesIsLoading,
   serviceTypes, serviceTypesHasErrored, serviceTypesIsLoading,
   purposeCodes, purposeCodesHasErrored, purposeCodesIsLoading,
-  disasterTypes, disasterTypesHasErrored, disasterTypesIsLoading,
-  declarationTypes, declarationTypesHasErrored, declarationTypesIsLoading,
-  assistanceTypes, assistanceTypesHasErrored, assistanceTypesIsLoading,
-  branches, branchesHasErrored, branchesIsLoading,
   assessmentAreas, assessmentAreasHasErrored, assessmentAreasIsLoading,
-  employees, employeesHasErrored, employeesIsLoading,
-  entities, entitiesHasErrored, entitiesIsLoading,
-  activities, activitiesHasErrored, activitiesIsLoading,
-  activityTypes, activityTypesHasErrored, activityTypesIsLoading,
+  volunteers, volunteersHasErrored, volunteersIsLoading,
+  loans, loansHasErrored, loansIsLoading,
+  investments, investmentsHasErrored, investmentsIsLoading,
+  organizations, organizationsHasErrored, organizationsIsLoading,
   dashboardData, dashboardHasErrored, dashboardIsLoading
 })
 

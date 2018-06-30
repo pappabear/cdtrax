@@ -21,29 +21,6 @@ class Dashboard extends Component
   constructor(props) 
   {
     super(props)
-
-    this.toggle = this.toggle.bind(this);
-    this.onRadioBtnClick = this.onRadioBtnClick.bind(this)
-
-    this.state = 
-    {
-      dropdownOpen: false,
-      radioSelected: 2,
-    }
-  }
-
-  toggle() 
-  {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen,
-    })
-  }
-
-  onRadioBtnClick(radioSelected) 
-  {
-    this.setState({
-      radioSelected: radioSelected,
-    })
   }
 
   componentDidMount() 
@@ -82,27 +59,48 @@ class Dashboard extends Component
     var employeesWithServiceHoursYTD="n/a"
     var areasWithServiceHoursYTD="n/a"
     var activitiesWithServiceHoursYTD="n/a"
-    var ytd=0
+    var craHoursYTD="n/a"
+    var nonCraHoursYTD="n/a"
 
-    console.log("props??")
+    //console.log("props??")
     console.log(this.props.dashboardData)
     if (this.props.dashboardData.length > 0)
     {
       // pull out the total service hours from the API payload
       var len = this.props.dashboardData[1].length
-      serviceHoursYTD = this.props.dashboardData[1][len-1].cra_hours + this.props.dashboardData[1][len-1].hours
+      serviceHoursYTD = this.props.dashboardData[1][len-1].hours
+      craHoursYTD = this.props.dashboardData[1][len-1].cra_hours
+      nonCraHoursYTD = serviceHoursYTD - craHoursYTD
+      
       // pull out the total organizations from the API payload
-      var len = this.props.dashboardData[3].length
+      len = this.props.dashboardData[3].length
       orgsWithServiceHoursYTD = this.props.dashboardData[3][len-1].sum_of_entities_with_service_hours
+      
       // pull out the total employees from the API payload
-      var len = this.props.dashboardData[9].length
+      len = this.props.dashboardData[9].length
       employeesWithServiceHoursYTD = this.props.dashboardData[9][len-1].sum_of_employees_with_service_hours
+      
       // pull out the total areas from the API payload
-      var len = this.props.dashboardData[7].length
+      len = this.props.dashboardData[7].length
       areasWithServiceHoursYTD = this.props.dashboardData[7][len-1].sum_of_areas_with_service_hours
+      
       // pull out the total activities from the API payload
-      var len = this.props.dashboardData[5].length
+      len = this.props.dashboardData[5].length
       activitiesWithServiceHoursYTD = this.props.dashboardData[5][len-1].sum_of_activities_with_service_hours
+
+      // determine YoY values
+      var timePeriodArray = []
+      var craHoursArray = []
+      var notCraHoursArray = []
+      for (var i=0; i<this.props.dashboardData[1].length; i++)
+      {
+        timePeriodArray.push(this.props.dashboardData[1][i].service_year)
+        craHoursArray.push(this.props.dashboardData[1][i].cra_hours)
+        notCraHoursArray.push(this.props.dashboardData[1][i].hours - this.props.dashboardData[1][i].cra_hours)
+      }
+      console.log(timePeriodArray)
+      console.log(craHoursArray)
+      console.log(notCraHoursArray)
     }
 
     const pieOpts = 
@@ -121,7 +119,7 @@ class Dashboard extends Component
       ],
       datasets: [
         {
-          data: [3, 15],
+          data: [craHoursYTD, nonCraHoursYTD],
           backgroundColor: [
             '#FF6384',
             '#36A2EB',
@@ -137,25 +135,28 @@ class Dashboard extends Component
     
     const barData = 
     {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      //labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      labels: timePeriodArray,
       datasets: [
         {
-          label: 'My First dataset',
-          backgroundColor: 'rgba(255,99,132,0.2)',
+          label: 'CRA Eligible',
+          backgroundColor: '#FF6384',
           borderColor: 'rgba(255,99,132,1)',
           borderWidth: 1,
           hoverBackgroundColor: 'rgba(255,99,132,0.4)',
           hoverBorderColor: 'rgba(255,99,132,1)',
-          data: [65, 59, 80, 81, 56, 55, 40],
+          //data: [65, 59, 80, 81, 56, 55, 40],
+          data: craHoursArray
         },
         {
-          label: 'My 2nd dataset',
-          backgroundColor: 'rgba(0,99,132,0.2)',
+          label: 'Not CRA Eligible',
+          backgroundColor: '#36A2EB',
           borderColor: 'rgba(10,99,132,1)',
           borderWidth: 1,
           hoverBackgroundColor: 'rgba(255,99,132,0.4)',
           hoverBorderColor: 'rgba(255,99,132,1)',
-          data: [60, 50, 90, 91, 46, 45, 30],
+          //data: [60, 50, 90, 91, 46, 45, 30],
+          data: notCraHoursArray
         },
       ],
     }
@@ -246,7 +247,6 @@ class Dashboard extends Component
   }
 }
 
-//export default Dashboard
 
 const mapDispatchToProps = (dispatch) => {
   return {

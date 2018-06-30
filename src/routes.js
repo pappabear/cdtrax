@@ -27,11 +27,12 @@ import EditLoanType from './views/Setup/LoanTypes/EditLoanType'
 import ServiceTypes from './views/Setup/ServiceTypes'
 import AddServiceType from './views/Setup/ServiceTypes/AddServiceType'
 import EditServiceType from './views/Setup/ServiceTypes/EditServiceType'
-
+/*
 import DisasterTypes from './views/Setup/DisasterTypes'
 import AddDisasterType from './views/Setup/DisasterTypes/AddDisasterType'
 import EditDisasterType from './views/Setup/DisasterTypes/EditDisasterType'
-
+*/
+/*
 import DeclarationTypes from './views/Setup/DeclarationTypes'
 import AddDeclarationType from './views/Setup/DeclarationTypes/AddDeclarationType'
 import EditDeclarationType from './views/Setup/DeclarationTypes/EditDeclarationType'
@@ -39,7 +40,7 @@ import EditDeclarationType from './views/Setup/DeclarationTypes/EditDeclarationT
 import AssistanceTypes from './views/Setup/AssistanceTypes'
 import AddAssistanceType from './views/Setup/AssistanceTypes/AddAssistanceType'
 import EditAssistanceType from './views/Setup/AssistanceTypes/EditAssistanceType'
-
+*/
 import PurposeCodes from './views/Setup/PurposeCodes'
 import AddPurposeCode from './views/Setup/PurposeCodes/AddPurposeCode'
 import EditPurposeCode from './views/Setup/PurposeCodes/EditPurposeCode'
@@ -47,23 +48,25 @@ import EditPurposeCode from './views/Setup/PurposeCodes/EditPurposeCode'
 import AssessmentAreas from './views/Setup/AssessmentAreas'
 import AddAssessmentArea from './views/Setup/AssessmentAreas/AddAssessmentArea'
 import EditAssessmentArea from './views/Setup/AssessmentAreas/EditAssessmentArea'
-
+/*
 import Branches from './views/Setup/Branches'
 import AddBranch from './views/Setup/Branches/AddBranch'
 import EditBranch from './views/Setup/Branches/EditBranch'
+*/
+import Volunteers from './views/Volunteers'
+import AddVolunteer from './views/Volunteers/AddVolunteer'
+import EditVolunteer from './views/Volunteers/EditVolunteer'
 
-import Employees from './views/Employees'
-import AddEmployee from './views/Employees/AddEmployee'
-import EditEmployee from './views/Employees/EditEmployee'
-
-import Entities from './views/Entities'
-import AddEntity from './views/Entities/AddEntity'
-import EditEntity from './views/Entities/EditEntity'
-
+/*
+import Organizations from './views/Organizations'
+import AddOrganization from './views/Organizations/AddOrganization'
+import EditOrganization from './views/Organizations/EditOrganization'
+*/
+/*
 import Activities from './views/Activities'
 import AddActivity from './views/Activities/AddActivity'
 import EditActivity from './views/Activities/EditActivity'
-
+*/
 function Loading() {
   return <div>Loading...</div>;
 }
@@ -305,6 +308,7 @@ const Widgets = Loadable({
 const routes = [
   { path: '/', name: 'Home', component: DefaultLayout, exact: true },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
+
   { path: '/setup/banks', name: 'Banks', component: Banks, exact: true },
   { path: '/setup/banks/addbank', name: 'Add Bank', component: AddBank },
   { path: '/setup/banks/editbank/:id', name: 'Edit Bank', component: EditBank },
@@ -328,7 +332,7 @@ const routes = [
   { path: '/setup/servicetypes', name: 'servicetypes', component: ServiceTypes, exact: true },
   { path: '/setup/servicetypes/addServiceType', name: 'addServiceType', component: AddServiceType },
   { path: '/setup/servicetypes/editServiceType/:id', name: 'editServiceType', component: EditServiceType },
-
+/*
   { path: '/setup/disastertypes', name: 'disastertypes', component: DisasterTypes, exact: true },
   { path: '/setup/disastertypes/addDisasterType', name: 'addDisasterType', component: AddDisasterType },
   { path: '/setup/disastertypes/editDisasterType/:id', name: 'editDisasterType', component: EditDisasterType },
@@ -340,7 +344,7 @@ const routes = [
   { path: '/setup/assistancetypes', name: 'assistancetypes', component: AssistanceTypes, exact: true },
   { path: '/setup/assistancetypes/addAssistanceType', name: 'addAssistanceType', component: AddAssistanceType },
   { path: '/setup/assistancetypes/editAssistanceType/:id', name: 'editAssistanceType', component: EditAssistanceType },
-
+*/
   { path: '/setup/purposecodes', name: 'purposecodes', component: PurposeCodes, exact: true },
   { path: '/setup/purposecodes/addPurposeCode', name: 'addPurposeCode', component: AddPurposeCode },
   { path: '/setup/purposecodes/editPurposeCode/:id', name: 'editPurposeCode', component: EditPurposeCode },
@@ -348,23 +352,34 @@ const routes = [
   { path: '/setup/assessmentareas', name: 'assessmentareas', component: AssessmentAreas, exact: true },
   { path: '/setup/assessmentareas/addAssessmentArea', name: 'addAssessmentArea', component: AddAssessmentArea },
   { path: '/setup/assessmentareas/editAssessmentArea/:id', name: 'editAssessmentArea', component: EditAssessmentArea },
-
+/*
   { path: '/setup/branches', name: 'branches', component: Branches, exact: true },
   { path: '/setup/branches/addBranch', name: 'addBranch', component: AddBranch },
   { path: '/setup/branches/editBranch/:id', name: 'editBranch', component: EditBranch },
+*/
+  { path: '/volunteers', name: 'volunteers', component: Volunteers, exact: true },
+  { path: '/volunteers/addVolunteer', name: 'addVolunteer', component: AddVolunteer },
+  { path: '/volunteers/editVolunteer/:id', name: 'editVolunteer', component: EditVolunteer },
 
-  { path: '/employees', name: 'employees', component: Employees, exact: true },
-  { path: '/employees/addEmployee', name: 'addEmployee', component: AddEmployee },
-  { path: '/employees/editEmployee/:id', name: 'editEmployee', component: EditEmployee },
+  /*
+  { path: '/loans', name: 'loans', component: Loans, exact: true },
+  { path: '/loans/addVolunteer', name: 'addLoan', component: AddLoan },
+  { path: '/loans/editVolunteer/:id', name: 'editLoan', component: EditLoan },
 
-  { path: '/entities', name: 'entities', component: Entities, exact: true },
-  { path: '/entities/addEntity', name: 'addEntity', component: AddEntity },
-  { path: '/entities/editEntity/:id', name: 'editEntity', component: EditEntity },
+  { path: '/organizations', name: 'organizations', component: Organizations, exact: true },
+  { path: '/organizations/addOrganization', name: 'addOrganization', component: AddOrganization },
+  { path: '/organizations/editOrganization/:id', name: 'editOrganization', component: EditOrganization },
 
+  { path: '/investments', name: 'investments', component: Investments, exact: true },
+  { path: '/investments/addOrganization', name: 'AddInvestment', component: AddInvestment },
+  { path: '/investments/editOrganization/:id', name: 'EditInvestment', component: EditInvestment },
+*/
+
+/*
   { path: '/activities', name: 'activities', component: Activities, exact: true },
   { path: '/activities/AddActivity', name: 'AddActivity', component: AddActivity },
   { path: '/activities/EditActivity/:id', name: 'EditActivity', component: EditActivity },
-
+*/
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },

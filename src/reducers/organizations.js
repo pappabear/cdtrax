@@ -1,6 +1,6 @@
-export function activitiesHasErrored(state = false, action) {
+export function organizationsHasErrored(state = false, action) {
     switch (action.type) {
-        case 'ACTIVITIES_HAS_ERRORED':
+        case 'ORGANIZATIONS_HAS_ERRORED':
             return action.hasErrored
   
         default:
@@ -8,9 +8,9 @@ export function activitiesHasErrored(state = false, action) {
     }
   }
   
-  export function activitiesIsLoading(state = false, action) {
+  export function organizationsIsLoading(state = false, action) {
     switch (action.type) {
-        case 'ACTIVITIES_IS_LOADING':
+        case 'ORGANIZATIONS_IS_LOADING':
             return action.isLoading
   
         default:
@@ -18,27 +18,27 @@ export function activitiesHasErrored(state = false, action) {
     }
   }
   
-  export function activities(state = [], action) {
+  export function organizations(state = [], action) {
       switch (action.type) 
       {
       
           // the reducer is the only one allowed to change state.  
           // like a beuracrat.  so i change the state at the API in the action controller and just give the reducer the new state.
           // HACK ????
-          case 'ACTIVITIES_FETCH_DATA_SUCCESS':
-              return action.activities
+          case 'ORGANIZATIONS_FETCH_DATA_SUCCESS':
+              return action.organizations
   
-          case 'ADD_ACTIVITY':
+          case 'ADD_ORGANIZATION':
               return [...state, action.payload]
   
-          case 'DELETE_ACTIVITY':
+          case 'DELETE_ORGANIZATION':
               return state
   
-          case 'UPDATE_ACTIVITY':
+          case 'UPDATE_ORGANIZATION':
               return state
   
           default:
               return state  
     }
   }
- 
+  

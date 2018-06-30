@@ -1,6 +1,6 @@
-export function branchesHasErrored(state = false, action) {
+export function servicesHasErrored(state = false, action) {
     switch (action.type) {
-        case 'BRANCHES_HAS_ERRORED':
+        case 'SERVICES_HAS_ERRORED':
             return action.hasErrored
   
         default:
@@ -8,9 +8,9 @@ export function branchesHasErrored(state = false, action) {
     }
   }
   
-  export function branchesIsLoading(state = false, action) {
+  export function servicesIsLoading(state = false, action) {
     switch (action.type) {
-        case 'BRANCHES_IS_LOADING':
+        case 'SERVICES_IS_LOADING':
             return action.isLoading
   
         default:
@@ -18,23 +18,23 @@ export function branchesHasErrored(state = false, action) {
     }
   }
   
-  export function branches(state = [], action) {
+  export function services(state = [], action) {
       switch (action.type) 
       {
       
           // the reducer is the only one allowed to change state.  
           // like a beuracrat.  so i change the state at the API in the action controller and just give the reducer the new state.
           // HACK ????
-          case 'BRANCHES_FETCH_DATA_SUCCESS':
-              return action.branches
+          case 'SERVICES_FETCH_DATA_SUCCESS':
+              return action.services
   
-          case 'ADD_BRANCH':
+          case 'ADD_SERVICE':
               return [...state, action.payload]
   
-          case 'DELETE_BRANCH':
+          case 'DELETE_SERVICE':
               return state
   
-          case 'UPDATE_BRANCH':
+          case 'UPDATE_SERVICE':
               return state
   
           default:

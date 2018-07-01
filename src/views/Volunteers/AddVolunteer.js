@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {Card, CardHeader, CardBody, Row, Col, Button, CardTitle, FormGroup, Label, Input} from 'reactstrap'
-//import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table'
 import 'react-bootstrap-table/dist//react-bootstrap-table-all.min.css'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
@@ -70,6 +69,8 @@ class AddVolunteer extends Component
         }
 
         this.props.addVolunteer(this.state.employee_code, this.state.name, this.state.title)
+
+        // navigate back to /volunteers after dispatching the add
         this.props.history.push("/volunteers")
     }
 

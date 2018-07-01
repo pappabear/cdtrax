@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {Card, CardHeader, CardBody, Row, Col, Button, CardTitle, FormGroup, Label, Input} from 'reactstrap'
-//import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table'
 import 'react-bootstrap-table/dist//react-bootstrap-table-all.min.css'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
@@ -98,7 +97,9 @@ class EditVolunteer extends Component
     handleDeleteVolunteer() 
     {
         this.props.deleteVolunteer(this.props.volunteer.id)
-        this.props.history.push("/volunteer")
+
+        // navigate back to /volunteers after dispatching the delete
+        this.props.history.push("/volunteers")
     }
 
     handleCancel() 

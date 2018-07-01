@@ -4,6 +4,7 @@ export default {
     {
       name: 'Volunteers',
       url: '/volunteers',
+      icon: 'icon-people',
       badge: {
         variant: 'danger',
         text: '21',
@@ -13,6 +14,7 @@ export default {
     {
       name: 'Organizations',
       url: '/organizations',
+      icon: 'fa fa-institution',
       badge: {
         variant: 'danger',
         text: '8',
@@ -22,7 +24,7 @@ export default {
     {
       name: 'Dashboard',
       url: '/dashboard',
-      icon: 'icon-speedometer',
+      icon: 'icon-pie-chart',
       badge: {
         variant: 'info',
         text: 'NEW',
@@ -31,77 +33,50 @@ export default {
     {
       name: 'Setup',
       url: '/setup',
+      icon: 'icon-settings',
       children: [
         {
           name: 'Banks',
           url: '/setup/banks',
         },
         {
-          name: 'Cards',
-          url: '/base/cards',
-          icon: 'icon-puzzle',
+          name: 'Assessment Areas',
+          url: '/setup/assessmentareas',
         },
         {
-          name: 'Carousel',
-          url: '/base/carousels',
-          icon: 'icon-puzzle',
+          name: 'Call Codes',
+          url: '/setup/callcodes',
         },
         {
-          name: 'Collapse',
-          url: '/base/collapses',
-          icon: 'icon-puzzle',
+          name: 'Collateral Codes',
+          url: '/setup/collateralcodes',
         },
         {
-          name: 'Dropdowns',
-          url: '/base/dropdowns',
-          icon: 'icon-puzzle'
+          name: 'Loan Types',
+          url: '/setup/loantypes',
         },
         {
-          name: 'Jumbotrons',
-          url: '/base/jumbotrons',
-          icon: 'icon-puzzle',
+          name: 'Investment Types',
+          url: '/setup/investmenttypes',
         },
         {
-          name: 'List group',
-          url: '/base/list-groups',
-          icon: 'icon-puzzle',
+          name: 'Service Types',
+          url: '/setup/servicetypes',
         },
         {
-          name: 'Navs',
-          url: '/base/navs',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Paginations',
-          url: '/base/paginations',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Popovers',
-          url: '/base/popovers',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Progress Bar',
-          url: '/base/progress-bar',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Switches',
-          url: '/base/switches',
-          icon: 'icon-puzzle'
-        },
-        {
-          name: 'Tabs',
-          url: '/base/tabs',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Tooltips',
-          url: '/base/tooltips',
-          icon: 'icon-puzzle',
+          name: 'Purpose Codes',
+          url: '/setup/purposecodes',
         },
       ],
+    },
+    {
+      name: 'DELETE FROM HERE DOWN',
+      title: true,
+      url: '/volunteers',
+      badge: {
+        variant: 'danger',
+        text: '21',
+      },
     },
     {
       name: 'Buttons',

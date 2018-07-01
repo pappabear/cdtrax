@@ -11,6 +11,15 @@ export default {
     },
 
     {
+      name: 'Organizations',
+      url: '/organizations',
+      badge: {
+        variant: 'danger',
+        text: '8',
+      },
+    },
+
+    {
       name: 'Dashboard',
       url: '/dashboard',
       icon: 'icon-speedometer',

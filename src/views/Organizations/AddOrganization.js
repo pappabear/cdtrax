@@ -6,24 +6,24 @@ import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 
 import { connect } from 'react-redux'
-import { addEntity } from '../../actions/entities'
+import { addOrganization } from '../../actions/organizations'
 
-var entityBuffer = {}
+var organizationBuffer = {}
 
 const mapStateToProps = state => {
-    state.entities.map(e =>
-        entityBuffer = e
+    state.organizations.map(e =>
+        organizationBuffer = e
 )
 
   return { 
-    entity: entityBuffer,
-    hasErrored: state.entitiesHasErrored,
-    isLoading: state.entitiesIsLoading
+    organization: organizationBuffer,
+    hasErrored: state.organizationsHasErrored,
+    isLoading: state.organizationsIsLoading
     }
 }
 
 
-class AddEntity extends Component 
+class AddOrganization extends Component 
 {
 
     constructor(props) 
@@ -57,29 +57,29 @@ class AddEntity extends Component
         return v
     }
 
-    handleAddEntity() 
+    handleAddOrganization() 
     {
         if (!this.isValid())
         {
             return
         }
 
-        this.props.addEntity(this.state.name, this.state.address, this.state.city, this.state.state, this.state.zip, this.state.phone, this.state.mission, this.state.number_of_employees, this.state.revenue, this.state.website)
+        this.props.addOrganization(this.state.name, this.state.address, this.state.city, this.state.state, this.state.zip, this.state.phone, this.state.mission, this.state.number_of_employees, this.state.revenue, this.state.website)
 
-        // navigate back to /entities after dispatching the update
-        this.props.history.push('/entities')
+        // navigate back to /organizations after dispatching the add
+        this.props.history.push('/organizations')
     }
 
     handleCancel() 
     {
-        this.props.history.push("/entities")
+        this.props.history.push("/organizations")
     }
 
     render() {
 
         if (this.props.hasErrored) 
         {
-            return (<p>Sorry! There was an error getting the entity record requested.</p>)
+            return (<p>Sorry! There was an error getting the organization record requested.</p>)
         }
 
         if (this.props.isLoading) 
@@ -91,7 +91,7 @@ class AddEntity extends Component
                         <Col xs={12}>
                             <Card>
                                 <CardBody>
-                                    <h3>Retreiving entity...</h3>
+                                    <h3>Retreiving organization...</h3>
                                 </CardBody>
                             </Card>
                         </Col>
@@ -108,7 +108,7 @@ class AddEntity extends Component
                     <Col xs={12} >
                         <form >
                         <Card>
-                            <CardHeader><CardTitle> <b> Adding new Entity </b> </CardTitle></CardHeader>
+                            <CardHeader><CardTitle> <b> Adding new Organization </b> </CardTitle></CardHeader>
                                 <CardBody>
 
                                     <Row>
@@ -212,7 +212,7 @@ class AddEntity extends Component
                                         </Col>
                                     </Row>
 
-                                    <Button outline color="success" onClick={() => this.handleAddEntity()}>Save changes</Button> &nbsp;
+                                    <Button outline color="success" onClick={() => this.handleAddOrganization()}>Save changes</Button> &nbsp;
                                     <Button outline color="info" onClick={() => this.handleCancel()}>Back to list</Button>     
 
                                 </CardBody>
@@ -229,7 +229,7 @@ class AddEntity extends Component
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addEntity: (name, address, city, state, zip, phone, mission, number_of_employees, revenue, website) => dispatch(addEntity(name, address, city, state, zip, phone, mission, number_of_employees, revenue, website)),
+        addOrganization: (name, address, city, state, zip, phone, mission, number_of_employees, revenue, website) => dispatch(addOrganization(name, address, city, state, zip, phone, mission, number_of_employees, revenue, website)),
     }
 }
 
@@ -237,5 +237,5 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(AddEntity)
+  )(AddOrganization)
 

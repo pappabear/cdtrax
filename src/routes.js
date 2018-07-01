@@ -57,11 +57,10 @@ import Volunteers from './views/Volunteers'
 import AddVolunteer from './views/Volunteers/AddVolunteer'
 import EditVolunteer from './views/Volunteers/EditVolunteer'
 
-/*
 import Organizations from './views/Organizations'
 import AddOrganization from './views/Organizations/AddOrganization'
 import EditOrganization from './views/Organizations/EditOrganization'
-*/
+
 /*
 import Activities from './views/Activities'
 import AddActivity from './views/Activities/AddActivity'
@@ -365,11 +364,11 @@ const routes = [
   { path: '/loans', name: 'loans', component: Loans, exact: true },
   { path: '/loans/addVolunteer', name: 'addLoan', component: AddLoan },
   { path: '/loans/editVolunteer/:id', name: 'editLoan', component: EditLoan },
-
+*/
   { path: '/organizations', name: 'organizations', component: Organizations, exact: true },
   { path: '/organizations/addOrganization', name: 'addOrganization', component: AddOrganization },
   { path: '/organizations/editOrganization/:id', name: 'editOrganization', component: EditOrganization },
-
+/*
   { path: '/investments', name: 'investments', component: Investments, exact: true },
   { path: '/investments/addOrganization', name: 'AddInvestment', component: AddInvestment },
   { path: '/investments/editOrganization/:id', name: 'EditInvestment', component: EditInvestment },

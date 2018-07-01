@@ -4,19 +4,19 @@ import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table'
 import 'react-bootstrap-table/dist//react-bootstrap-table-all.min.css'
 
 import { connect } from 'react-redux'
-import { getEntities } from '../../actions/entities'
+import { getOrganizations } from '../../actions/organizations'
 
 
 const mapStateToProps = state => {
   return { 
-    entities: state.entities,
-    hasErrored: state.entitiesHasErrored,
-    isLoading: state.entitiesIsLoading
+    organizations: state.organizations,
+    hasErrored: state.organizationsHasErrored,
+    isLoading: state.organizationsIsLoading
     }
 }
 
 
-class Entities extends Component 
+class Organizations extends Component 
 {
 
   constructor(props) {
@@ -36,12 +36,12 @@ class Entities extends Component
 
   componentDidMount() 
   {
-      this.props.getEntities()
+      this.props.getOrganizations()
   }
 
   actionFormatter(cell, row) 
   {  
-      var editUrl = "#/entities/editentity/" + row.id
+      var editUrl = "#/organizations/editorganization/" + row.id
   
       return (
           <span> 
@@ -50,16 +50,16 @@ class Entities extends Component
       )
   }
 
-  gotoAddEntityForm()
+  gotoAddOrganizationForm()
   {
-        this.props.history.push("/entities/addentity")  
+        this.props.history.push("/organizations/addorganization")  
   }
 
   render() {
 
     if (this.props.hasErrored) 
     {
-        return (<p>Sorry! There was an error loading the list of entities</p>)
+        return (<p>Sorry! There was an error loading the list of organizations</p>)
     }
 
     if (this.props.isLoading) 
@@ -71,7 +71,7 @@ class Entities extends Component
                     <Col xs={12}>
                         <Card>
                             <CardBody>
-                                <h3>Retreiving list of entities...</h3>
+                                <h3>Retreiving list of organizations...</h3>
                             </CardBody>
                         </Card>
                     </Col>
@@ -85,16 +85,16 @@ class Entities extends Component
       <div className="animated fadeIn">
 
         <Card>
-            <CardHeader> <h3>Entities</h3> </CardHeader>
+            <CardHeader> <h3>Organizations</h3> </CardHeader>
             <CardBody>
-                <BootstrapTable data={this.props.entities} version="4" striped bordered={false} hover pagination search options={this.options} >
+                <BootstrapTable data={this.props.organizations} version="4" striped bordered={false} hover pagination search options={this.options} >
                     <TableHeaderColumn dataField="name" dataSort>Name</TableHeaderColumn>
                     <TableHeaderColumn dataField="city" dataSort>City</TableHeaderColumn>
                     <TableHeaderColumn dataField="state" dataSort>State</TableHeaderColumn>
                     <TableHeaderColumn dataField="zip" dataSort>Zip</TableHeaderColumn>                        
                     <TableHeaderColumn isKey dataField="id" dataFormat={ this.actionFormatter } > </TableHeaderColumn>
                 </BootstrapTable>
-            <p><Button outline color="success" onClick={() => this.gotoAddEntityForm() } >Add a new entity</Button></p>
+            <p><Button outline color="success" onClick={() => this.gotoAddOrganizationForm() } >Add a new organization</Button></p>
             </CardBody>
         </Card>
 
@@ -106,7 +106,7 @@ class Entities extends Component
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getEntities: () => dispatch(getEntities()),
+        getOrganizations: () => dispatch(getOrganizations()),
     }
 }
 
@@ -114,5 +114,5 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(Entities)
+  )(Organizations)
 

@@ -6,24 +6,24 @@ import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 
 import { connect } from 'react-redux'
-import { getEntity, updateEntity, deleteEntity } from '../../actions/entities'
+import { getOrganization, updateOrganization, deleteOrganization } from '../../actions/organizations'
 
-var entityBuffer = {}
+var organizationBuffer = {}
 
 const mapStateToProps = state => {
-    state.entities.map(e =>
-        entityBuffer = e
+    state.organizations.map(e =>
+        organizationBuffer = e
 )
 
   return { 
-    entity: entityBuffer,
-    hasErrored: state.entitiesHasErrored,
-    isLoading: state.entitiesIsLoading
+    organization: organizationBuffer,
+    hasErrored: state.organizationsHasErrored,
+    isLoading: state.organizationsIsLoading
     }
 }
 
 
-class EditEntity extends Component 
+class EditOrganization extends Component 
 {
 
     constructor(props) 
@@ -53,23 +53,23 @@ class EditEntity extends Component
         var id = 0
         for (var i=0; i<b.length; i++)
             id = b[i]
-        this.props.getEntity(id)
+        this.props.getOrganization(id)
     }
 
     componentWillReceiveProps(nextProps) 
     {
         // capture the props and data entry form state BEFORE it fires another render
-        this.setState({ id: nextProps.entity.id,
-                        name: nextProps.entity.name, 
-                        address: nextProps.entity.address,
-                        city: nextProps.entity.city,
-                        state: nextProps.entity.state,
-                        zip: nextProps.entity.zip,
-                        phone: nextProps.entity.phone,
-                        website: nextProps.entity.website,
-                        mission: nextProps.entity.mission,
-                        revenue: nextProps.entity.revenue,
-                        number_of_employees: nextProps.entity.number_of_employees
+        this.setState({ id: nextProps.organization.id,
+                        name: nextProps.organization.name, 
+                        address: nextProps.organization.address,
+                        city: nextProps.organization.city,
+                        state: nextProps.organization.state,
+                        zip: nextProps.organization.zip,
+                        phone: nextProps.organization.phone,
+                        website: nextProps.organization.website,
+                        mission: nextProps.organization.mission,
+                        revenue: nextProps.organization.revenue,
+                        number_of_employees: nextProps.organization.number_of_employees
                     })
     }
 
@@ -83,38 +83,38 @@ class EditEntity extends Component
         return v
     }
 
-    handleUpdateEntity() 
+    handleUpdateOrganization() 
     {
         if (!this.isValid())
         {
             return
         }
 
-        this.props.updateEntity(this.state.id, this.state.name, this.state.address, this.state.city, this.state.state, this.state.zip, this.state.phone, this.state.mission, this.state.number_of_employees, this.state.revenue, this.state.website)
+        this.props.updateOrganization(this.state.id, this.state.name, this.state.address, this.state.city, this.state.state, this.state.zip, this.state.phone, this.state.mission, this.state.number_of_employees, this.state.revenue, this.state.website)
 
-        // navigate back to /entities after dispatching the update
-        this.props.history.push('/entities')
+        // navigate back to /organizations after dispatching the update
+        this.props.history.push('/organizations')
     }
 
-    handleDeleteEntity() 
+    handleDeleteOrganization() 
     {        
         // perform the delete action
-        this.props.deleteEntity(this.state.id)
+        this.props.deleteOrganization(this.state.id)
 
-        // navigate back to /entities after dispatching the update
-        this.props.history.push('/entities')
+        // navigate back to /organizations after dispatching the update
+        this.props.history.push('/organizations')
     }
 
     handleCancel() 
     {
-        this.props.history.push("/entities")
+        this.props.history.push("/organizations")
     }
 
     render() {
 
         if (this.props.hasErrored) 
         {
-            return (<p>Sorry! There was an error getting the entity record requested.</p>)
+            return (<p>Sorry! There was an error getting the organization record requested.</p>)
         }
 
         if (this.props.isLoading) 
@@ -126,7 +126,7 @@ class EditEntity extends Component
                         <Col xs={12}>
                             <Card>
                                 <CardBody>
-                                    <h3>Retreiving entity...</h3>
+                                    <h3>Retreiving organization...</h3>
                                 </CardBody>
                             </Card>
                         </Col>
@@ -143,7 +143,7 @@ class EditEntity extends Component
                     <Col xs={12} >
                         <form >
                         <Card>
-                            <CardHeader><CardTitle> <b> Adding new Entity </b> </CardTitle></CardHeader>
+                            <CardHeader><CardTitle> <b> {this.props.organization.name} </b> </CardTitle></CardHeader>
                                 <CardBody>
 
                                     <Row>
@@ -247,8 +247,8 @@ class EditEntity extends Component
                                         </Col>
                                     </Row>
 
-                                    <Button outline color="success" onClick={() => this.handleUpdateEntity()}>Save changes</Button> &nbsp;
-                                    <Button outline color="danger" onClick={() => this.handleDeleteEntity()}>Delete</Button> &nbsp;
+                                    <Button outline color="success" onClick={() => this.handleUpdateOrganization()}>Save changes</Button> &nbsp;
+                                    <Button outline color="danger" onClick={() => this.handleDeleteOrganization()}>Delete</Button> &nbsp;
                                     <Button outline color="info" onClick={() => this.handleCancel()}>Back to list</Button>     
 
                                 </CardBody>
@@ -265,9 +265,9 @@ class EditEntity extends Component
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getEntity: (id) => dispatch(getEntity(id)),
-        updateEntity: (id, name, address, city, state, zip, phone, mission, number_of_employees, revenue, website) => dispatch(updateEntity(id, name, address, city, state, zip, phone, mission, number_of_employees, revenue, website)),
-        deleteEntity: (id) => dispatch(deleteEntity(id)),
+        getOrganization: (id) => dispatch(getOrganization(id)),
+        updateOrganization: (id, name, address, city, state, zip, phone, mission, number_of_employees, revenue, website) => dispatch(updateOrganization(id, name, address, city, state, zip, phone, mission, number_of_employees, revenue, website)),
+        deleteOrganization: (id) => dispatch(deleteOrganization(id)),
     }
 }
 
@@ -275,5 +275,5 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(EditEntity)
+  )(EditOrganization)
 

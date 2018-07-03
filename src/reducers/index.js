@@ -15,6 +15,7 @@ import { volunteers, volunteersHasErrored, volunteersIsLoading } from './volunte
 import { loans, loansHasErrored, loansIsLoading } from './loans'
 import { investments, investmentsHasErrored, investmentsIsLoading } from './investments'
 import { organizations, organizationsHasErrored, organizationsIsLoading } from './organizations'
+import { services, servicesHasErrored, servicesIsLoading } from './services'
 //import { activities, activitiesHasErrored, activitiesIsLoading } from './activities'
 //import { activityTypes, activityTypesHasErrored, activityTypesIsLoading } from './activityTypes'
 import { dashboardData, dashboardHasErrored, dashboardIsLoading } from './dashboard'
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
   loans, loansHasErrored, loansIsLoading,
   investments, investmentsHasErrored, investmentsIsLoading,
   organizations, organizationsHasErrored, organizationsIsLoading,
+  services, servicesHasErrored, servicesIsLoading,
   dashboardData, dashboardHasErrored, dashboardIsLoading
 })
 

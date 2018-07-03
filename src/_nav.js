@@ -2,6 +2,16 @@ export default {
   items: [
     
     {
+      name: 'Service Hours',
+      url: '/services',
+      icon: 'icon-people',
+      badge: {
+        variant: 'danger',
+        text: '21',
+      },
+    },
+
+    {
       name: 'Volunteers',
       url: '/volunteers',
       icon: 'icon-people',

@@ -268,7 +268,7 @@ class EditService extends Component
                     <Col xs={12} >
                         <form >
                         <Card>
-                            <CardHeader><CardTitle> <b> Ediing some Service </b> </CardTitle></CardHeader>
+                            <CardHeader><CardTitle> <b> Editing Service Hours Activity on {this.props.service.activity_dt_formatted}  (ID={this.props.service.id}) </b> </CardTitle></CardHeader>
                                 <CardBody>
 
                                     <Row>

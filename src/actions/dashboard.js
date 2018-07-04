@@ -26,7 +26,7 @@ export function getDashboardData() {
         dispatch(dashboardIsLoading(true));
 
 		request
-            .get('http://localhost:3001/dashboard/get_service_hours_dashboard_data')
+            .get('http://localhost:3001/dashboard/service_hours_analytics')
             .end((err, res) => {
                 if (err) {
                     console.log(err)
@@ -34,8 +34,6 @@ export function getDashboardData() {
                 }
         
                 const dashboardData = JSON.parse(res.text)
-                //console.log(dashboardData)
-                //console.log(dashboardData[1][1].cra_hours)
             
                 dispatch(dashboardIsLoading(false))
                 dispatch(dashboardFetchDataSuccess(dashboardData))

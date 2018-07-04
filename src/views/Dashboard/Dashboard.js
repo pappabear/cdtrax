@@ -56,51 +56,49 @@ class Dashboard extends Component
 
     var serviceHoursYTD="n/a"
     var orgsWithServiceHoursYTD="n/a"
-    var employeesWithServiceHoursYTD="n/a"
+    var volunteersWithServiceHoursYTD="n/a"
     var areasWithServiceHoursYTD="n/a"
     var activitiesWithServiceHoursYTD="n/a"
     var craHoursYTD="n/a"
     var nonCraHoursYTD="n/a"
 
-    //console.log("props??")
-    console.log(this.props.dashboardData)
     if (this.props.dashboardData.length > 0)
     {
       // pull out the total service hours from the API payload
-      var len = this.props.dashboardData[1].length
-      serviceHoursYTD = this.props.dashboardData[1][len-1].hours
-      craHoursYTD = this.props.dashboardData[1][len-1].cra_hours
+      var len = this.props.dashboardData[0].length
+      serviceHoursYTD = this.props.dashboardData[0][len-1].total_hours
+      craHoursYTD = this.props.dashboardData[0][len-1].cra_hours
       nonCraHoursYTD = serviceHoursYTD - craHoursYTD
-      
+
       // pull out the total organizations from the API payload
-      len = this.props.dashboardData[3].length
-      orgsWithServiceHoursYTD = this.props.dashboardData[3][len-1].sum_of_entities_with_service_hours
-      
+      len = this.props.dashboardData[1].length
+      orgsWithServiceHoursYTD = this.props.dashboardData[1][len-1].sum_of_organizations_with_service_hours
+
       // pull out the total employees from the API payload
-      len = this.props.dashboardData[9].length
-      employeesWithServiceHoursYTD = this.props.dashboardData[9][len-1].sum_of_employees_with_service_hours
-      
+      len = this.props.dashboardData[4].length
+      volunteersWithServiceHoursYTD = this.props.dashboardData[4][len-1].sum_of_volunteers_with_service_hours
+
       // pull out the total areas from the API payload
-      len = this.props.dashboardData[7].length
-      areasWithServiceHoursYTD = this.props.dashboardData[7][len-1].sum_of_areas_with_service_hours
-      
+      len = this.props.dashboardData[3].length
+      areasWithServiceHoursYTD = this.props.dashboardData[3][len-1].sum_of_areas_with_service_hours
+
       // pull out the total activities from the API payload
-      len = this.props.dashboardData[5].length
-      activitiesWithServiceHoursYTD = this.props.dashboardData[5][len-1].sum_of_activities_with_service_hours
+      len = this.props.dashboardData[2].length
+      activitiesWithServiceHoursYTD = this.props.dashboardData[2][len-1].sum_of_activities_with_service_hours
 
       // determine YoY values
       var timePeriodArray = []
       var craHoursArray = []
-      var notCraHoursArray = []
-      for (var i=0; i<this.props.dashboardData[1].length; i++)
+      var nonCraHoursArray = []
+      for (var i=0; i<this.props.dashboardData[0].length; i++)
       {
-        timePeriodArray.push(this.props.dashboardData[1][i].service_year)
-        craHoursArray.push(this.props.dashboardData[1][i].cra_hours)
-        notCraHoursArray.push(this.props.dashboardData[1][i].hours - this.props.dashboardData[1][i].cra_hours)
+        var totalHours = parseInt(this.props.dashboardData[0][i].total_hours)
+        var craHours = parseInt(this.props.dashboardData[0][i].cra_hours)
+        var year = this.props.dashboardData[0][i].service_year
+        timePeriodArray.push(year)
+        craHoursArray.push(craHours)
+        nonCraHoursArray.push(totalHours - craHours)
       }
-      console.log(timePeriodArray)
-      console.log(craHoursArray)
-      console.log(notCraHoursArray)
     }
 
     const pieOpts = 
@@ -156,7 +154,7 @@ class Dashboard extends Component
           hoverBackgroundColor: 'rgba(255,99,132,0.4)',
           hoverBorderColor: 'rgba(255,99,132,1)',
           //data: [60, 50, 90, 91, 46, 45, 30],
-          data: notCraHoursArray
+          data: nonCraHoursArray
         },
       ],
     }
@@ -215,9 +213,9 @@ class Dashboard extends Component
                       </Col>
                       <Col sm="3" className='text-center'>
                         <div>
-                          <small className="text-muted">Employees</small>
+                          <small className="text-muted">Vounteering Employees</small>
                           <br />
-                          <strong className="h2">{employeesWithServiceHoursYTD}</strong>
+                          <strong className="h2">{volunteersWithServiceHoursYTD}</strong>
                         </div>
                       </Col>
                       <Col sm="3" className='text-center'>

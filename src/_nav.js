@@ -2,9 +2,15 @@ export default {
   items: [
     
     {
+      name: 'Dashboard',
+      url: '/dashboard',
+      icon: 'fa fa-bar-chart-o',
+    },
+
+    {
       name: 'Service Hours',
       url: '/services',
-      icon: 'icon-people',
+      icon: 'fa fa-clock-o',
       badge: {
         variant: 'danger',
         text: '21',
@@ -31,15 +37,6 @@ export default {
       },
     },
 
-    {
-      name: 'Dashboard',
-      url: '/dashboard',
-      icon: 'icon-pie-chart',
-      badge: {
-        variant: 'info',
-        text: 'NEW',
-      },
-    },
     {
       name: 'Setup',
       url: '/setup',

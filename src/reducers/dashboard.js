@@ -20,14 +20,10 @@ export function dashboardHasErrored(state = false, action) {
   
   export function dashboardData(state = [], action) {
 
-    //console.log("Entering dashboardData in reducer")
-
       switch (action.type) 
       {
       
           case 'DASHBOARD_FETCH_DATA_SUCCESS':
-              //console.log("Entering DASHBOARD_FETCH_DATA_SUCCESS")
-              //console.log(action.dashboardData)
               return action.dashboardData
     
           default:

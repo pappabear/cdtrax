@@ -101,7 +101,7 @@ class AddService extends Component
 
     isValid = () => {
         var v=true
-        if (this.state.activity_dt == null)
+        if ((this.state.activity_dt == null) || (this.state.activity_dt === null) || (this.state.activity_dt == ""))
         {
             this.setState({ activity_dt_hasErrors: true })
             v=false

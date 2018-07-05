@@ -8,6 +8,16 @@ export default {
     },
 
     {
+      name: 'Loans',
+      url: '/loans',
+      icon: 'fa fa-handshake-o',
+      badge: {
+        variant: 'danger',
+        text: '11',
+      },
+    },
+
+    {
       name: 'Service Hours',
       url: '/services',
       icon: 'fa fa-clock-o',

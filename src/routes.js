@@ -65,6 +65,10 @@ import Services from './views/Services'
 import AddService from './views/Services/AddService'
 import EditService from './views/Services/EditService'
 
+import Loans from './views/Loans'
+import AddLoan from './views/Loans/AddLoan'
+import EditLoan from './views/Loans/EditLoan'
+
 /*
 import Activities from './views/Activities'
 import AddActivity from './views/Activities/AddActivity'
@@ -378,10 +382,13 @@ const routes = [
   { path: '/investments/editOrganization/:id', name: 'EditInvestment', component: EditInvestment },
 */
 
+  { path: '/loans', name: 'loans', component: Loans, exact: true },
+  { path: '/loans/AddLoan', name: 'AddLoan', component: AddLoan },
+  { path: '/loans/EditLoan/:id', name: 'EditLoan', component: EditLoan },
+
   { path: '/services', name: 'services', component: Services, exact: true },
   { path: '/services/AddService', name: 'AddService', component: AddService },
   { path: '/services/EditService/:id', name: 'EditService', component: EditService },
-
 
 /*
   { path: '/activities', name: 'activities', component: Activities, exact: true },

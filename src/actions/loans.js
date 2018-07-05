@@ -19,14 +19,14 @@ export function loansIsLoading(bool)
 }
 
 
-export function addLoan(activity_dt, purpose_code_id, organization_id, account_number, loan_number, loan_type_id, call_code_id, collateral_code_id, lien_address, lien_city, lien_state, lien_zip, term, is_cra_qualified, is_3rd_party, is_affiliate, state_code, county_code, tract, msa) 
+export function addLoan(activity_dt, purpose_code_id, organization_id, account_number, loan_number, loan_type_id, call_code_id, collateral_code_id, lien_address, lien_city, lien_state, lien_zip, amount, term, is_cra_qualified, is_3rd_party, is_affiliate, state_code, county_code, tract, msa) 
 {
 	return (dispatch) => {
         dispatch(loansIsLoading(true))
 
 		request
             .post('http://localhost:3001/loans')
-            .send({ activity_dt:activity_dt, purpose_code_id:purpose_code_id, organization_id:organization_id, account_number:account_number, loan_number:loan_number, loan_type_id:loan_type_id, call_code_id:call_code_id, collateral_code_id:collateral_code_id, lien_address:lien_address, lien_city:lien_city, lien_state:lien_state, lien_zip:lien_zip, term:term, is_cra_qualified:is_cra_qualified, is_3rd_party:is_3rd_party, is_affiliate:is_affiliate, state_code:state_code, county_code:county_code, tract:tract, msa:msa })
+            .send({ activity_dt:activity_dt, purpose_code_id:purpose_code_id, organization_id:organization_id, account_number:account_number, loan_number:loan_number, loan_type_id:loan_type_id, call_code_id:call_code_id, collateral_code_id:collateral_code_id, lien_address:lien_address, lien_city:lien_city, lien_state:lien_state, lien_zip:lien_zip, amount:amount, term:term, is_cra_qualified:is_cra_qualified, is_3rd_party:is_3rd_party, is_affiliate:is_affiliate, state_code:state_code, county_code:county_code, tract:tract, msa:msa })
             .end((err, res) => {
                 if (err) {
                     console.log('addLoan() API call failed')
@@ -62,14 +62,14 @@ export function deleteLoan(id)
 }
 
 
-export function updateLoan(id, activity_dt, purpose_code_id, organization_id, account_number, loan_number, loan_type_id, call_code_id, collateral_code_id, lien_address, lien_city, lien_state, lien_zip, term, is_cra_qualified, is_3rd_party, is_affiliate, state_code, county_code, tract, msa) 
+export function updateLoan(id, activity_dt, purpose_code_id, organization_id, account_number, loan_number, loan_type_id, call_code_id, collateral_code_id, lien_address, lien_city, lien_state, lien_zip, amount, term, is_cra_qualified, is_3rd_party, is_affiliate, state_code, county_code, tract, msa) 
 {
 	return (dispatch) => {
         dispatch(loansIsLoading(true))
 
         request
             .put('http://localhost:3001/loans/' + id)
-            .send({id: id, activity_dt:activity_dt, purpose_code_id:purpose_code_id, organization_id:organization_id, account_number:account_number, loan_number:loan_number, loan_type_id:loan_type_id, call_code_id:call_code_id, collateral_code_id:collateral_code_id, lien_address:lien_address, lien_city:lien_city, lien_state:lien_state, lien_zip:lien_zip, term:term, is_cra_qualified:is_cra_qualified, is_3rd_party:is_3rd_party, is_affiliate:is_affiliate, state_code:state_code, county_code:county_code, tract:tract, msa:msa })
+            .send({id: id, activity_dt:activity_dt, purpose_code_id:purpose_code_id, organization_id:organization_id, account_number:account_number, loan_number:loan_number, loan_type_id:loan_type_id, call_code_id:call_code_id, collateral_code_id:collateral_code_id, lien_address:lien_address, lien_city:lien_city, lien_state:lien_state, lien_zip:lien_zip, amount:amount, term:term, is_cra_qualified:is_cra_qualified, is_3rd_party:is_3rd_party, is_affiliate:is_affiliate, state_code:state_code, county_code:county_code, tract:tract, msa:msa })
             .end((err, res) => {
                 if (err) {
                     console.log('updateLoan() API call failed')

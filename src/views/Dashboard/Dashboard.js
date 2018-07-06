@@ -62,6 +62,13 @@ class Dashboard extends Component
     var craHoursYTD="n/a"
     var nonCraHoursYTD="n/a"
 
+    var craLoansYTD="n/a"
+    var nonCraLoansYTD="n/a"
+    var loansValueYTD="n/a"
+    var orgsLentToYTD="n/a"
+    var numberOfLoansYTD="n/a"
+
+
     if (this.props.dashboardData.length > 0)
     {
       // pull out the total service hours from the API payload
@@ -101,7 +108,7 @@ class Dashboard extends Component
       }
     }
 
-    const pieOpts = 
+    const servicePieOpts = 
     {
       title: {
         display: true,
@@ -109,7 +116,7 @@ class Dashboard extends Component
       }
     }
     
-    const pieData = 
+    const servicePieData = 
     {
       labels: [
         'CRA Eligible',
@@ -130,8 +137,8 @@ class Dashboard extends Component
           ],
         }],
     }
-    
-    const barData = 
+
+    const serviceBarData = 
     {
       //labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       labels: timePeriodArray,
@@ -159,7 +166,7 @@ class Dashboard extends Component
       ],
     }
     
-    const barOptions = {
+    const serviceBarOptions = {
       title: {
         display: true,
         text: 'Hours YoY'
@@ -170,6 +177,64 @@ class Dashboard extends Component
       },
       maintainAspectRatio: false
     }
+
+
+    if (this.props.dashboardData.length > 0)
+    {
+
+      var loanAmountsByYear = this.props.dashboardData[5]
+      len = loanAmountsByYear.length
+      craLoansYTD = loanAmountsByYear[len-1].cra_amount
+      nonCraLoansYTD = parseInt(loanAmountsByYear[len-1].total_amount) - parseInt(loanAmountsByYear[len-1].cra_amount)
+      
+      loansValueYTD = parseInt(loanAmountsByYear[len-1].total_amount)
+      if (loansValueYTD < 1000)
+      {
+        var opts = '{style: "decimal", currency: "USD", minimumFractionDigits: 0}'
+        loansValueYTD = "$" + loansValueYTD.toLocaleString("en-US", opts)
+      }
+      else
+      {
+        var opts = '{style: "decimal", currency: "USD", minimumFractionDigits: 0}'
+        loansValueYTD = parseInt(loansValueYTD / 1000)
+        loansValueYTD = "$" + loansValueYTD.toLocaleString("en-US", opts) + "k"
+
+      }
+
+      orgsLentToYTD = this.props.dashboardData[6][len-1].count_of_organizations_with_loan_by_year
+      numberOfLoansYTD = this.props.dashboardData[7][len-1].count_of_loans_by_year
+  }
+
+    const loanPieOpts = 
+    {
+      title: {
+        display: true,
+        text: 'Loans YTD'
+      }
+    }
+    
+    const loanPieData = 
+    {
+      labels: [
+        'CRA Eligible',
+        'Not CRA Eligible',
+      ],
+      datasets: [
+        {
+          data: [craLoansYTD, nonCraLoansYTD],
+          backgroundColor: [
+            '#FF6384',
+            '#36A2EB',
+            '#FFCE56',
+          ],
+          hoverBackgroundColor: [
+            '#FF6384',
+            '#36A2EB',
+            '#FFCE56',
+          ],
+        }],
+    }
+    
     
     return (
 
@@ -187,7 +252,7 @@ class Dashboard extends Component
                     <Row>
                       <Col sm="4">              
                         <div className="chart-wrapper">
-                          <Pie data={pieData} options={pieOpts} />
+                          <Pie data={servicePieData} options={servicePieOpts} />
                         </div>
                       </Col>
                       <Col sm="4" className='text-center'>
@@ -199,7 +264,7 @@ class Dashboard extends Component
                       </Col>
                       <Col sm="4">
                         <div className="chart-wrapper">
-                          <Bar data={barData} options={barOptions} />
+                          <Bar data={serviceBarData} options={serviceBarOptions} />
                         </div>
                       </Col>
                     </Row>
@@ -230,6 +295,57 @@ class Dashboard extends Component
                           <small className="text-muted">Activities</small>
                           <br />
                           <strong className="h2">{activitiesWithServiceHoursYTD}</strong>
+                        </div>
+                      </Col>
+                    </Row>
+                  </Col>
+                </Row>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col>
+            <Card>
+              <CardHeader>
+                Community Development Loans
+              </CardHeader>
+              <CardBody>
+                <Row>
+                  <Col xs="12" md="12" xl="12">
+                    <Row>
+                      <Col sm="4">              
+                        <div className="chart-wrapper">
+                          <Pie data={loanPieData} options={loanPieOpts} />
+                        </div>
+                      </Col>
+                      <Col sm="4" className='text-center'>
+                        <div>
+                          <small className="text-muted">Loans Value YTD</small>
+                          <br />
+                          <span className="display-2">{loansValueYTD}</span>
+                        </div>
+                      </Col>
+                      <Col sm="4">
+                        <div className="chart-wrapper">
+                          <Bar data={serviceBarData} options={serviceBarOptions} />
+                        </div>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col sm="3" className='text-center'>
+                        <div>
+                          <small className="text-muted">Number of Organizations Lent To YTD</small>
+                          <br />
+                          <strong className="h2">{orgsLentToYTD}</strong>
+                        </div>
+                      </Col>
+                      <Col sm="3" className='text-center'>
+                        <div>
+                          <small className="text-muted">Number of Loans YTD</small>
+                          <br />
+                          <strong className="h2">{numberOfLoansYTD}</strong>
                         </div>
                       </Col>
                     </Row>

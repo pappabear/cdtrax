@@ -203,8 +203,6 @@ class EditLoan extends Component
     componentWillReceiveProps(nextProps) 
     {
 
-        console.log(nextProps)
-
         if (nextProps.loan != null)
         {   
             // capture the props and data entry form state BEFORE it fires another render

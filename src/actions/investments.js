@@ -19,14 +19,14 @@ export function investmentsIsLoading(bool)
 }
 
 
-export function addInvestment(activity_dt, purpose_code_id, organization_id, investment_type_id, cusip_number, maturity_dt, original_amount, book_value, unfunded_committment, percent_of_entity_funding) 
+export function addInvestment(activity_dt, purpose_code_id, organization_id, investment_type_id, cusip_number, maturity_dt, original_amount, book_value, unfunded_committment, percent_of_entity_funding, is_cra_qualified) 
 {
 	return (dispatch) => {
         dispatch(investmentsIsLoading(true))
 
 		request
             .post('http://localhost:3001/investments')
-            .send({ activity_dt:activity_dt, purpose_code_id:purpose_code_id, organization_id:organization_id, investment_typ_id:investment_type_id, cusip_number:cusip_number, cusip_number:cusip_number, maturity_dt:maturity_dt, original_amount:original_amount, book_value:book_value, unfunded_committment:unfunded_committment, percent_of_entity_funding:percent_of_entity_funding })
+            .send({ activity_dt:activity_dt, purpose_code_id:purpose_code_id, organization_id:organization_id, investment_type_id:investment_type_id, cusip_number:cusip_number, maturity_dt:maturity_dt, original_amount:original_amount, book_value:book_value, unfunded_committment:unfunded_committment, percent_of_entity_funding:percent_of_entity_funding, is_cra_qualified:is_cra_qualified })
             .end((err, res) => {
                 if (err) {
                     console.log('addInvestment() API call failed')
@@ -62,14 +62,14 @@ export function deleteInvestment(id)
 }
 
 
-export function updateInvestment(id, activity_dt, purpose_code_id, organization_id, investment_type_id, cusip_number, maturity_dt, original_amount, book_value, unfunded_committment, percent_of_entity_funding) 
+export function updateInvestment(id, activity_dt, purpose_code_id, organization_id, investment_type_id, cusip_number, maturity_dt, original_amount, book_value, unfunded_committment, percent_of_entity_funding, is_cra_qualified) 
 {
 	return (dispatch) => {
         dispatch(investmentsIsLoading(true))
 
         request
             .put('http://localhost:3001/investments/' + id)
-            .send({id: id, activity_dt:activity_dt, purpose_code_id:purpose_code_id, organization_id:organization_id, investment_typ_id:investment_type_id, cusip_number:cusip_number, cusip_number:cusip_number, maturity_dt:maturity_dt, original_amount:original_amount, book_value:book_value, unfunded_committment:unfunded_committment, percent_of_entity_funding:percent_of_entity_funding })
+            .send({id: id, activity_dt:activity_dt, purpose_code_id:purpose_code_id, organization_id:organization_id, investment_type_id:investment_type_id, cusip_number:cusip_number, maturity_dt:maturity_dt, original_amount:original_amount, book_value:book_value, unfunded_committment:unfunded_committment, percent_of_entity_funding:percent_of_entity_funding, is_cra_qualified:is_cra_qualified })
             .end((err, res) => {
                 if (err) {
                     console.log('updateInvestment() API call failed')
@@ -82,6 +82,7 @@ export function updateInvestment(id, activity_dt, purpose_code_id, organization_
 			})
 	}
 }
+
 
 
 export function investmentsFetchDataSuccess(investments) 
@@ -138,5 +139,3 @@ export function getInvestment(id)
 			})
 	}
 }
-
-

@@ -18,6 +18,16 @@ export default {
     },
 
     {
+      name: 'Investments',
+      url: '/investments',
+      icon: 'fa fa-thumbs-o-up',
+      badge: {
+        variant: 'danger',
+        text: '9',
+      },
+    },
+
+    {
       name: 'Service Hours',
       url: '/services',
       icon: 'fa fa-clock-o',

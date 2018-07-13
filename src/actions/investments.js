@@ -25,7 +25,7 @@ export function addInvestment(activity_dt, purpose_code_id, organization_id, inv
         dispatch(investmentsIsLoading(true))
 
 		request
-            .post('http://localhost:3001/investments')
+            .post('http://cdtrax-backend-api.herokuapp.com/investments')
             .send({ activity_dt:activity_dt, purpose_code_id:purpose_code_id, organization_id:organization_id, investment_type_id:investment_type_id, cusip_number:cusip_number, maturity_dt:maturity_dt, original_amount:original_amount, book_value:book_value, unfunded_committment:unfunded_committment, percent_of_entity_funding:percent_of_entity_funding, is_cra_qualified:is_cra_qualified })
             .end((err, res) => {
                 if (err) {
@@ -47,7 +47,7 @@ export function deleteInvestment(id)
         dispatch(investmentsIsLoading(true))
 
         request
-            .delete('http://localhost:3001/investments/' + id)
+            .delete('http://cdtrax-backend-api.herokuapp.com/investments/' + id)
             .end((err, res) => {
                 if (err) {
                     console.log('deleteInvestment() API call failed')
@@ -68,7 +68,7 @@ export function updateInvestment(id, activity_dt, purpose_code_id, organization_
         dispatch(investmentsIsLoading(true))
 
         request
-            .put('http://localhost:3001/investments/' + id)
+            .put('http://cdtrax-backend-api.herokuapp.com/investments/' + id)
             .send({id: id, activity_dt:activity_dt, purpose_code_id:purpose_code_id, organization_id:organization_id, investment_type_id:investment_type_id, cusip_number:cusip_number, maturity_dt:maturity_dt, original_amount:original_amount, book_value:book_value, unfunded_committment:unfunded_committment, percent_of_entity_funding:percent_of_entity_funding, is_cra_qualified:is_cra_qualified })
             .end((err, res) => {
                 if (err) {
@@ -100,7 +100,7 @@ export function getInvestments()
         dispatch(investmentsIsLoading(true));
 
 		request
-            .get('http://localhost:3001/investments')
+            .get('http://cdtrax-backend-api.herokuapp.com/investments')
             .end((err, res) => {
                 if (err) {
                     console.log(err)
@@ -122,7 +122,7 @@ export function getInvestment(id)
         dispatch(investmentsIsLoading(true));
 
 		request
-            .get('http://localhost:3001/investments/' + id)
+            .get('http://cdtrax-backend-api.herokuapp.com/investments/' + id)
             .end((err, res) => {
                 if (err) {
                     console.log(err)

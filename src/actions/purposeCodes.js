@@ -19,7 +19,7 @@ export function addPurposeCode(code, description) {
         dispatch(purposeCodesIsLoading(true))
 
 		request
-            .post('http://localhost:3001/purpose_codes')
+            .post('http://cdtrax-backend-api.herokuapp.com/purpose_codes')
             .send({code:code, description:description})
             .end((err, res) => {
                 if (err) {
@@ -38,7 +38,7 @@ export function deletePurposeCode(id) {
         dispatch(purposeCodesIsLoading(true))
 
         request
-            .delete('http://localhost:3001/purpose_codes/' + id)
+            .delete('http://cdtrax-backend-api.herokuapp.com/purpose_codes/' + id)
             .end((err, res) => {
                 if (err) {
                     //console.log('addPurposeCode() API purpose failed')
@@ -56,7 +56,7 @@ export function updatePurposeCode(id, code, description) {
         dispatch(purposeCodesIsLoading(true))
 
         request
-            .put('http://localhost:3001/purpose_codes/' + id)
+            .put('http://cdtrax-backend-api.herokuapp.com/purpose_codes/' + id)
             .send({id: id, code: code, description: description })
             .end((err, res) => {
                 if (err) {
@@ -85,7 +85,7 @@ export function getPurposeCodes() {
         dispatch(purposeCodesIsLoading(true));
 
 		request
-            .get('http://localhost:3001/purpose_codes')
+            .get('http://cdtrax-backend-api.herokuapp.com/purpose_codes')
             .end((err, res) => {
                 if (err) {
                     dispatch(purposeCodesHasErrored(true));
@@ -104,7 +104,7 @@ export function getPurposeCode(id) {
         dispatch(purposeCodesIsLoading(true));
 
 		request
-            .get('http://localhost:3001/purpose_codes/' + id)
+            .get('http://cdtrax-backend-api.herokuapp.com/purpose_codes/' + id)
             .end((err, res) => {
                 if (err) {
                     dispatch(purposeCodesHasErrored(true));

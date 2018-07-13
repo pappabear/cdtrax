@@ -31,7 +31,7 @@ export function getDashboardData() {
         var investmentData = []
 
 		request
-            .get('http://localhost:3001/dashboard/service_hours_analytics')
+            .get('http://cdtrax-backend-api.herokuapp.com/dashboard/service_hours_analytics')
             .end((err, res) => {
                 if (err) {
                     console.log(err)
@@ -46,7 +46,7 @@ export function getDashboardData() {
                 //dispatch(dashboardIsLoading(false))
                 //dispatch(dashboardFetchDataSuccess(dashboardData))
                 request
-                    .get('http://localhost:3001/dashboard/loan_analytics')
+                    .get('http://cdtrax-backend-api.herokuapp.com/dashboard/loan_analytics')
                     .end((err, res) => {
                         if (err) {
                             console.log(err)
@@ -59,7 +59,7 @@ export function getDashboardData() {
                         //console.log(dashboardData)
 
                         request
-                        .get('http://localhost:3001/dashboard/investment_analytics')
+                        .get('http://cdtrax-backend-api.herokuapp.com/dashboard/investment_analytics')
                         .end((err, res) => {
                             if (err) {
                                 console.log(err)

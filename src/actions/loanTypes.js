@@ -19,7 +19,7 @@ export function addLoanType(code, description) {
         dispatch(loanTypesIsLoading(true))
 
 		request
-            .post('http://localhost:3001/loan_types')
+            .post('http://cdtrax-backend-api.herokuapp.com/loan_types')
             .send({code:code, description:description})
             .end((err, res) => {
                 if (err) {
@@ -38,7 +38,7 @@ export function deleteLoanType(id) {
         dispatch(loanTypesIsLoading(true))
 
         request
-            .delete('http://localhost:3001/loan_types/' + id)
+            .delete('http://cdtrax-backend-api.herokuapp.com/loan_types/' + id)
             .end((err, res) => {
                 if (err) {
                     //console.log('addLoanType() API call failed')
@@ -56,7 +56,7 @@ export function updateLoanType(id, code, description) {
         dispatch(loanTypesIsLoading(true))
 
         request
-            .put('http://localhost:3001/loan_types/' + id)
+            .put('http://cdtrax-backend-api.herokuapp.com/loan_types/' + id)
             .send({id: id, code: code, description: description })
             .end((err, res) => {
                 if (err) {
@@ -85,7 +85,7 @@ export function getLoanTypes() {
         dispatch(loanTypesIsLoading(true));
 
 		request
-            .get('http://localhost:3001/loan_types')
+            .get('http://cdtrax-backend-api.herokuapp.com/loan_types')
             .end((err, res) => {
                 if (err) {
                     dispatch(loanTypesHasErrored(true));
@@ -104,7 +104,7 @@ export function getLoanType(id) {
         dispatch(loanTypesIsLoading(true));
 
 		request
-            .get('http://localhost:3001/loan_types/' + id)
+            .get('http://cdtrax-backend-api.herokuapp.com/loan_types/' + id)
             .end((err, res) => {
                 if (err) {
                     dispatch(loanTypesHasErrored(true));

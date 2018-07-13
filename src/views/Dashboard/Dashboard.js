@@ -68,6 +68,12 @@ class Dashboard extends Component
     var orgsLentToYTD="n/a"
     var numberOfLoansYTD="n/a"
 
+    var craInvestmentsYTD="n/a"
+    var nonCraInvestmentsYTD="n/a"
+    var investmentsValueYTD="n/a"
+    var orgsInvestedInYTD="n/a"
+    var numberOfInvestmentsYTD="n/a"
+
 
     if (this.props.dashboardData.length > 0)
     {
@@ -236,6 +242,67 @@ class Dashboard extends Component
     }
     
     
+    if (this.props.dashboardData.length > 0)
+    {
+
+      var investmentAmountsByYear = this.props.dashboardData[8]
+      len = investmentAmountsByYear.length
+      craInvestmentsYTD = investmentAmountsByYear[len-1].cra_amount
+      nonCraInvestmentsYTD = investmentAmountsByYear[len-1].non_cra_amount
+      
+      investmentsValueYTD = parseInt(investmentAmountsByYear[len-1].cra_amount) + parseInt(investmentAmountsByYear[len-1].non_cra_amount)
+      if (investmentsValueYTD < 1000)
+      {
+        var opts = '{style: "decimal", currency: "USD", minimumFractionDigits: 0}'
+        investmentsValueYTD = "$" + investmentsValueYTD.toLocaleString("en-US", opts)
+      }
+      else
+      {
+        var opts = '{style: "decimal", currency: "USD", minimumFractionDigits: 0}'
+        investmentsValueYTD = parseInt(investmentsValueYTD / 1000)
+        investmentsValueYTD = "$" + investmentsValueYTD.toLocaleString("en-US", opts) + "k"
+
+      }
+
+      orgsInvestedInYTD = this.props.dashboardData[9][len-1].count_of_organizations_with_investment_by_year
+      numberOfInvestmentsYTD = this.props.dashboardData[10][len-1].count_of_investments_by_year
+      console.log("orgsInvestedInYTD")
+      console.log(orgsInvestedInYTD)
+      console.log(this.props.dashboardData[9][len-1].count_of_organizations_with_investment_by_year)
+      console.log(this.props.dashboardData[9])
+  }
+
+    const investmentPieOpts = 
+    {
+      title: {
+        display: true,
+        text: 'Investments YTD'
+      }
+    }
+    
+    const investmentPieData = 
+    {
+      labels: [
+        'CRA Eligible',
+        'Not CRA Eligible',
+      ],
+      datasets: [
+        {
+          data: [craInvestmentsYTD, nonCraInvestmentsYTD],
+          backgroundColor: [
+            '#FF6384',
+            '#36A2EB',
+            '#FFCE56',
+          ],
+          hoverBackgroundColor: [
+            '#FF6384',
+            '#36A2EB',
+            '#FFCE56',
+          ],
+        }],
+    }
+
+
     return (
 
       <div className="animated fadeIn">
@@ -346,6 +413,57 @@ class Dashboard extends Component
                           <small className="text-muted">Number of Loans YTD</small>
                           <br />
                           <strong className="h2">{numberOfLoansYTD}</strong>
+                        </div>
+                      </Col>
+                    </Row>
+                  </Col>
+                </Row>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col>
+            <Card>
+              <CardHeader>
+                Community Development Investments
+              </CardHeader>
+              <CardBody>
+                <Row>
+                  <Col xs="12" md="12" xl="12">
+                    <Row>
+                      <Col sm="4">              
+                        <div className="chart-wrapper">
+                          <Pie data={investmentPieData} options={investmentPieOpts} />
+                        </div>
+                      </Col>
+                      <Col sm="4" className='text-center'>
+                        <div>
+                          <small className="text-muted">Investments Value YTD</small>
+                          <br />
+                          <span className="display-2">{investmentsValueYTD}</span>
+                        </div>
+                      </Col>
+                      <Col sm="4">
+                        <div className="chart-wrapper">
+                          <Bar data={serviceBarData} options={serviceBarOptions} />
+                        </div>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col sm="3" className='text-center'>
+                        <div>
+                          <small className="text-muted">Number of Organizations Invested in YTD</small>
+                          <br />
+                          <strong className="h2">{orgsInvestedInYTD}</strong>
+                        </div>
+                      </Col>
+                      <Col sm="3" className='text-center'>
+                        <div>
+                          <small className="text-muted">Number of Investments YTD</small>
+                          <br />
+                          <strong className="h2">{numberOfInvestmentsYTD}</strong>
                         </div>
                       </Col>
                     </Row>

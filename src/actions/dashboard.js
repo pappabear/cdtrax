@@ -26,8 +26,9 @@ export function getDashboardData() {
         dispatch(dashboardIsLoading(true));
 
         var dashboardData = []
-        var serviceData = []
+        //var serviceData = []
         var loanData = []
+        var investmentData = []
 
 		request
             .get('http://localhost:3001/dashboard/service_hours_analytics')
@@ -56,9 +57,26 @@ export function getDashboardData() {
                         dashboardData = dashboardData.concat(loanData)
                         //console.log("in action #2...")
                         //console.log(dashboardData)
-                        
-                        dispatch(dashboardIsLoading(false))
-                        dispatch(dashboardFetchDataSuccess(dashboardData))
+
+                        request
+                        .get('http://localhost:3001/dashboard/investment_analytics')
+                        .end((err, res) => {
+                            if (err) {
+                                console.log(err)
+                                dispatch(dashboardHasErrored(true));
+                            }
+                    
+                            investmentData = JSON.parse(res.text)
+                            dashboardData = dashboardData.concat(investmentData)
+                            //console.log("in action #2...")
+                            console.log(dashboardData)
+                            
+                            dispatch(dashboardIsLoading(false))
+                            dispatch(dashboardFetchDataSuccess(dashboardData))
+                        })
+    
+                        //dispatch(dashboardIsLoading(false))
+                        //dispatch(dashboardFetchDataSuccess(dashboardData))
                     })
     
         })

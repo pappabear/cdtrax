@@ -26,7 +26,6 @@ export function getDashboardData() {
         dispatch(dashboardIsLoading(true));
 
         var dashboardData = []
-        //var serviceData = []
         var loanData = []
         var investmentData = []
 
@@ -40,11 +39,6 @@ export function getDashboardData() {
         
                 dashboardData = JSON.parse(res.text)
 
-                //console.log("in action #1...")
-                //console.log(dashboardData)
-
-                //dispatch(dashboardIsLoading(false))
-                //dispatch(dashboardFetchDataSuccess(dashboardData))
                 request
                     .get('http://cdtrax-backend-api.herokuapp.com/dashboard/loan_analytics')
                     .end((err, res) => {
@@ -55,8 +49,6 @@ export function getDashboardData() {
                 
                         loanData = JSON.parse(res.text)
                         dashboardData = dashboardData.concat(loanData)
-                        //console.log("in action #2...")
-                        //console.log(dashboardData)
 
                         request
                         .get('http://cdtrax-backend-api.herokuapp.com/dashboard/investment_analytics')
@@ -68,15 +60,11 @@ export function getDashboardData() {
                     
                             investmentData = JSON.parse(res.text)
                             dashboardData = dashboardData.concat(investmentData)
-                            //console.log("in action #2...")
-                            console.log(dashboardData)
                             
                             dispatch(dashboardIsLoading(false))
                             dispatch(dashboardFetchDataSuccess(dashboardData))
                         })
     
-                        //dispatch(dashboardIsLoading(false))
-                        //dispatch(dashboardFetchDataSuccess(dashboardData))
                     })
     
         })

@@ -22,7 +22,7 @@ class DefaultFooter extends Component {
   }
 }
 
-DefaultFooter.propTypes = propTypes;
-DefaultFooter.defaultProps = defaultProps;
+DefaultFooter.propTypes = propTypes
+DefaultFooter.defaultProps = defaultProps
 
-export default DefaultFooter;
+export default DefaultFooter

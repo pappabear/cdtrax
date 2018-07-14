@@ -18,11 +18,6 @@ const mapStateToProps = state => {
 class Dashboard extends Component 
 {
 
-  constructor(props) 
-  {
-    super(props)
-  }
-
   componentDidMount() 
   {
       this.props.getDashboardData()
@@ -105,8 +100,8 @@ class Dashboard extends Component
       var nonCraHoursArray = []
       for (var i=0; i<this.props.dashboardData[0].length; i++)
       {
-        var totalHours = parseInt(this.props.dashboardData[0][i].total_hours)
-        var craHours = parseInt(this.props.dashboardData[0][i].cra_hours)
+        var totalHours = parseInt(this.props.dashboardData[0][i].total_hours, 10)
+        var craHours = parseInt(this.props.dashboardData[0][i].cra_hours, 10)
         var year = this.props.dashboardData[0][i].service_year
         timePeriodArray.push(year)
         craHoursArray.push(craHours)
@@ -191,18 +186,19 @@ class Dashboard extends Component
       var loanAmountsByYear = this.props.dashboardData[5]
       len = loanAmountsByYear.length
       craLoansYTD = loanAmountsByYear[len-1].cra_amount
-      nonCraLoansYTD = parseInt(loanAmountsByYear[len-1].total_amount) - parseInt(loanAmountsByYear[len-1].cra_amount)
+      nonCraLoansYTD = parseInt(loanAmountsByYear[len-1].total_amount, 10) - parseInt(loanAmountsByYear[len-1].cra_amount, 10)
       
-      loansValueYTD = parseInt(loanAmountsByYear[len-1].total_amount)
+      var opts=''
+      loansValueYTD = parseInt(loanAmountsByYear[len-1].total_amount, 10)
       if (loansValueYTD < 1000)
       {
-        var opts = '{style: "decimal", currency: "USD", minimumFractionDigits: 0}'
+        opts = '{style: "decimal", currency: "USD", minimumFractionDigits: 0}'
         loansValueYTD = "$" + loansValueYTD.toLocaleString("en-US", opts)
       }
       else
       {
-        var opts = '{style: "decimal", currency: "USD", minimumFractionDigits: 0}'
-        loansValueYTD = parseInt(loansValueYTD / 1000)
+        opts = '{style: "decimal", currency: "USD", minimumFractionDigits: 0}'
+        loansValueYTD = parseInt(loansValueYTD / 1000, 10)
         loansValueYTD = "$" + loansValueYTD.toLocaleString("en-US", opts) + "k"
 
       }
@@ -250,26 +246,22 @@ class Dashboard extends Component
       craInvestmentsYTD = investmentAmountsByYear[len-1].cra_amount
       nonCraInvestmentsYTD = investmentAmountsByYear[len-1].non_cra_amount
       
-      investmentsValueYTD = parseInt(investmentAmountsByYear[len-1].cra_amount) + parseInt(investmentAmountsByYear[len-1].non_cra_amount)
+      investmentsValueYTD = parseInt(investmentAmountsByYear[len-1].cra_amount, 10) + parseInt(investmentAmountsByYear[len-1].non_cra_amount, 10)
       if (investmentsValueYTD < 1000)
       {
-        var opts = '{style: "decimal", currency: "USD", minimumFractionDigits: 0}'
+        opts = '{style: "decimal", currency: "USD", minimumFractionDigits: 0}'
         investmentsValueYTD = "$" + investmentsValueYTD.toLocaleString("en-US", opts)
       }
       else
       {
-        var opts = '{style: "decimal", currency: "USD", minimumFractionDigits: 0}'
-        investmentsValueYTD = parseInt(investmentsValueYTD / 1000)
+        opts = '{style: "decimal", currency: "USD", minimumFractionDigits: 0}'
+        investmentsValueYTD = parseInt(investmentsValueYTD / 1000, 10)
         investmentsValueYTD = "$" + investmentsValueYTD.toLocaleString("en-US", opts) + "k"
 
       }
 
       orgsInvestedInYTD = this.props.dashboardData[9][len-1].count_of_organizations_with_investment_by_year
       numberOfInvestmentsYTD = this.props.dashboardData[10][len-1].count_of_investments_by_year
-      console.log("orgsInvestedInYTD")
-      console.log(orgsInvestedInYTD)
-      console.log(this.props.dashboardData[9][len-1].count_of_organizations_with_investment_by_year)
-      console.log(this.props.dashboardData[9])
   }
 
     const investmentPieOpts = 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Nav, NavItem, NavLink, Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import { Nav } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 import { AppAsideToggler, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
@@ -39,13 +39,6 @@ class DefaultHeader extends Component {
 
     // eslint-disable-next-line
     const { children, ...attributes } = this.props;
-
-    const activeMenuStyle = {
-      backgroundColor: '#f86c6b',
-      padding: '5px 15px 5px 15px',
-      marginTop: '-5px',
-      color: 'white'
-    }
 
     return (
       

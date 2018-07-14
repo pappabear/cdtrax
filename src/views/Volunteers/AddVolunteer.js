@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import {Card, CardHeader, CardBody, Row, Col, Button, CardTitle, FormGroup, Label, Input} from 'reactstrap'
 import 'react-bootstrap-table/dist//react-bootstrap-table-all.min.css'
-import Select from 'react-select'
-import 'react-select/dist/react-select.css'
 
 import { connect } from 'react-redux'
 import { addVolunteer } from '../../actions/volunteers'

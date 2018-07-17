@@ -55,14 +55,16 @@ import Investments from './views/Investments'
 import AddInvestment from './views/Investments/AddInvestment'
 import EditInvestment from './views/Investments/EditInvestment'
 
-function Loading() {
-  return <div>Loading...</div>;
-}
+import Dashboard from './views/Dashboard/Dashboard'
 
-const Dashboard = Loadable({
-  loader: () => import('./views/Dashboard'),
-  loading: Loading,
-})
+//function Loading() {
+//  return <div>Loading...</div>;
+//}
+
+//const Dashboard = Loadable({
+//  loader: () => import('./views/Dashboard'),
+//  loading: Loading,
+//})
 
 
 

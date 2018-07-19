@@ -8,6 +8,7 @@ import DefaultHeaderDropdown  from './DefaultHeaderDropdown'
 //import logo from '../../assets/img/brand/logo.svg'
 //import sygnet from '../../assets/img/brand/sygnet.svg'
 import logo from '../../assets/img/brand/logo.png'
+import customerLogo from '../../assets/img/brand/customer-logo.png'
 
 const propTypes = {
   children: PropTypes.node,
@@ -52,6 +53,8 @@ class DefaultHeader extends Component {
         />
 
         <AppSidebarToggler className="d-md-down-none" display="lg" />
+        
+        <img src={customerLogo} height="50" alt="marquis"/>
 
         <Nav className="ml-auto" navbar>
           <DefaultHeaderDropdown accnt/>

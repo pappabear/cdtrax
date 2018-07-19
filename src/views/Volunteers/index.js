@@ -45,7 +45,25 @@ class Volunteers extends Component
   
       return (
           <span> 
-              <Button outline color="info" href={editUrl} >Edit</Button>
+              <Button outline color="info" href={editUrl} >{row.employee_code}</Button>
+          </span>
+      )
+  }
+
+  totalHoursFormatter(cell, row) 
+  {    
+    return (
+        <span> 
+            {row.total_hours.toLocaleString()}
+        </span>
+    )
+}
+
+  craHoursFormatter(cell, row) 
+  {    
+      return (
+          <span> 
+              {row.cra_hours.toLocaleString()}
           </span>
       )
   }
@@ -88,10 +106,11 @@ class Volunteers extends Component
             <CardHeader> <h3>Volunteers</h3> </CardHeader>
             <CardBody>
                 <BootstrapTable data={this.props.volunteers} version="4" striped bordered={false} hover pagination search options={this.options} >
-                    <TableHeaderColumn dataField="employee_code" dataSort>Employee Code</TableHeaderColumn>
+                    <TableHeaderColumn isKey dataField="id" dataFormat={ this.actionFormatter } dataSort>Employee Code</TableHeaderColumn>
                     <TableHeaderColumn dataField="name" dataSort>Name</TableHeaderColumn>
-                    <TableHeaderColumn dataField="title" dataSort>Title</TableHeaderColumn>                        
-                    <TableHeaderColumn isKey dataField="id" dataFormat={ this.actionFormatter } > </TableHeaderColumn>
+                    <TableHeaderColumn dataField="title" dataSort>Title</TableHeaderColumn>
+                    <TableHeaderColumn dataField="total_hours" dataFormat={ this.totalHoursFormatter } dataAlign='right' dataSort>Total Hours</TableHeaderColumn>
+                    <TableHeaderColumn dataField="cra_hours" dataFormat={ this.craHoursFormatter } dataAlign='right' dataSort>CRA Hours</TableHeaderColumn>                        
                 </BootstrapTable>
             <p><Button outline color="success" onClick={() => this.gotoAddVolunteerForm() } >Add a new volunteer</Button></p>
             </CardBody>

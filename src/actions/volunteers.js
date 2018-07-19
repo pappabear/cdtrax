@@ -19,7 +19,7 @@ export function addVolunteer(code, name, title, bank, branch) {
         dispatch(volunteersIsLoading(true))
 
 		request
-            .post('http://cdtrax-backend-api.herokuapp.com/volunteers')
+            .post('http://localhost:3001/volunteers')
             .send({ employee_code:code, name:name, title:title })
             .end((err, res) => {
                 if (err) {
@@ -39,7 +39,7 @@ export function deleteVolunteer(id) {
         dispatch(volunteersIsLoading(true))
 
         request
-            .delete('http://cdtrax-backend-api.herokuapp.com/volunteers/' + id)
+            .delete('http://localhost:3001/volunteers/' + id)
             .end((err, res) => {
                 if (err) {
                     console.log('addVolunteer() API call failed')
@@ -58,7 +58,7 @@ export function updateVolunteer(id, code, name, title, bank, branch) {
         dispatch(volunteersIsLoading(true))
 
         request
-            .put('http://cdtrax-backend-api.herokuapp.com/volunteers/' + id)
+            .put('http://localhost:3001/volunteers/' + id)
             .send({ id: id, employee_code:code, name:name, title:title })
             .end((err, res) => {
                 if (err) {
@@ -88,7 +88,7 @@ export function getVolunteers() {
         dispatch(volunteersIsLoading(true));
 
 		request
-            .get('http://cdtrax-backend-api.herokuapp.com/volunteers')
+            .get('http://localhost:3001/volunteers')
             .end((err, res) => {
                 if (err) {
                     console.log('getVolunteers() API call failed')
@@ -109,7 +109,7 @@ export function getVolunteer(id) {
         dispatch(volunteersIsLoading(true));
 
 		request
-            .get('http://cdtrax-backend-api.herokuapp.com/volunteers/' + id)
+            .get('http://localhost:3001/volunteers/' + id)
             .end((err, res) => {
                 if (err) {
                     console.log('getVolunteer() API call failed')

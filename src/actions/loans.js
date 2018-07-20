@@ -25,7 +25,7 @@ export function addLoan(activity_dt, purpose_code_id, organization_id, account_n
         dispatch(loansIsLoading(true))
 
 		request
-            .post('http://cdtrax-backend-api.herokuapp.com/loans')
+            .post('http://localhost:3001/loans')
             .send({ activity_dt:activity_dt, purpose_code_id:purpose_code_id, organization_id:organization_id, account_number:account_number, loan_number:loan_number, loan_type_id:loan_type_id, call_code_id:call_code_id, collateral_code_id:collateral_code_id, lien_address:lien_address, lien_city:lien_city, lien_state:lien_state, lien_zip:lien_zip, amount:amount, term:term, is_cra_qualified:is_cra_qualified, is_3rd_party:is_3rd_party, is_affiliate:is_affiliate, state_code:state_code, county_code:county_code, tract:tract, msa:msa })
             .end((err, res) => {
                 if (err) {
@@ -47,7 +47,7 @@ export function deleteLoan(id)
         dispatch(loansIsLoading(true))
 
         request
-            .delete('http://cdtrax-backend-api.herokuapp.com/loans/' + id)
+            .delete('http://localhost:3001/loans/' + id)
             .end((err, res) => {
                 if (err) {
                     console.log('deleteLoan() API call failed')
@@ -68,7 +68,7 @@ export function updateLoan(id, activity_dt, purpose_code_id, organization_id, ac
         dispatch(loansIsLoading(true))
 
         request
-            .put('http://cdtrax-backend-api.herokuapp.com/loans/' + id)
+            .put('http://localhost:3001/loans/' + id)
             .send({id: id, activity_dt:activity_dt, purpose_code_id:purpose_code_id, organization_id:organization_id, account_number:account_number, loan_number:loan_number, loan_type_id:loan_type_id, call_code_id:call_code_id, collateral_code_id:collateral_code_id, lien_address:lien_address, lien_city:lien_city, lien_state:lien_state, lien_zip:lien_zip, amount:amount, term:term, is_cra_qualified:is_cra_qualified, is_3rd_party:is_3rd_party, is_affiliate:is_affiliate, state_code:state_code, county_code:county_code, tract:tract, msa:msa })
             .end((err, res) => {
                 if (err) {
@@ -100,7 +100,7 @@ export function getLoans()
         dispatch(loansIsLoading(true));
 
 		request
-            .get('http://cdtrax-backend-api.herokuapp.com/loans')
+            .get('http://localhost:3001/loans')
             .end((err, res) => {
                 if (err) {
                     console.log(err)
@@ -122,7 +122,7 @@ export function getLoan(id)
         dispatch(loansIsLoading(true));
 
 		request
-            .get('http://cdtrax-backend-api.herokuapp.com/loans/' + id)
+            .get('http://localhost:3001/loans/' + id)
             .end((err, res) => {
                 if (err) {
                     console.log(err)

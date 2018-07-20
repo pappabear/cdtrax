@@ -69,9 +69,17 @@ class Dashboard extends Component
     var orgsInvestedInYTD="n/a"
     var numberOfInvestmentsYTD="n/a"
 
+    var timePeriodArray = []
+    var craHoursArray = []
+    var nonCraHoursArray = []
+
+    var craLoansArray = []
+    var nonCraLoansArray = []
+
 
     if (this.props.dashboardData.length > 0)
     {
+      // SERVICE HOUS --------
       // pull out the total service hours from the API payload
       var len = this.props.dashboardData[0].length
       serviceHoursYTD = this.props.dashboardData[0][len-1].total_hours
@@ -95,9 +103,6 @@ class Dashboard extends Component
       activitiesWithServiceHoursYTD = this.props.dashboardData[2][len-1].sum_of_activities_with_service_hours
 
       // determine YoY values
-      var timePeriodArray = []
-      var craHoursArray = []
-      var nonCraHoursArray = []
       for (var i=0; i<this.props.dashboardData[0].length; i++)
       {
         var totalHours = parseInt(this.props.dashboardData[0][i].total_hours, 10)
@@ -107,8 +112,137 @@ class Dashboard extends Component
         craHoursArray.push(craHours)
         nonCraHoursArray.push(totalHours - craHours)
       }
+
+      // LOANS HOUS --------
+      // determine YoY values
+      timePeriodArray = []
+      for (var i=0; i<this.props.dashboardData[5].length; i++)
+      {
+        var totalAmount = parseInt(this.props.dashboardData[5][i].total_amount, 10)
+        var craAmount = parseInt(this.props.dashboardData[5][i].cra_amount, 10)
+        var year = this.props.dashboardData[5][i].loan_year
+        timePeriodArray.push(year)
+        craLoansArray.push(craAmount)
+        nonCraLoansArray.push(totalAmount - craAmount)
+      }
+      var loanAmountsByYear = this.props.dashboardData[5]
+      len = loanAmountsByYear.length
+      craLoansYTD = loanAmountsByYear[len-1].cra_amount
+      nonCraLoansYTD = parseInt(loanAmountsByYear[len-1].total_amount, 10) - parseInt(loanAmountsByYear[len-1].cra_amount, 10)
+      
+      var opts=''
+      loansValueYTD = parseInt(loanAmountsByYear[len-1].total_amount, 10)
+      if (loansValueYTD < 1000)
+      {
+        opts = '{style: "decimal", currency: "USD", minimumFractionDigits: 0}'
+        loansValueYTD = "$" + loansValueYTD.toLocaleString("en-US", opts)
+      }
+      else
+      {
+        opts = '{style: "decimal", currency: "USD", minimumFractionDigits: 0}'
+        loansValueYTD = parseInt(loansValueYTD / 1000, 10)
+        loansValueYTD = "$" + loansValueYTD.toLocaleString("en-US", opts) + "k"
+      }
+
+      orgsLentToYTD = this.props.dashboardData[6][len-1].count_of_organizations_with_loan_by_year
+      numberOfLoansYTD = this.props.dashboardData[7][len-1].count_of_loans_by_year
+  
+
+      // INVESTMENTS --------
+      var investmentAmountsByYear = this.props.dashboardData[8]
+      len = investmentAmountsByYear.length
+      craInvestmentsYTD = investmentAmountsByYear[len-1].cra_amount
+      nonCraInvestmentsYTD = investmentAmountsByYear[len-1].non_cra_amount
+      
+      investmentsValueYTD = parseInt(investmentAmountsByYear[len-1].cra_amount, 10) + parseInt(investmentAmountsByYear[len-1].non_cra_amount, 10)
+      if (investmentsValueYTD < 1000)
+      {
+        opts = '{style: "decimal", currency: "USD", minimumFractionDigits: 0}'
+        investmentsValueYTD = "$" + investmentsValueYTD.toLocaleString("en-US", opts)
+      }
+      else
+      {
+        opts = '{style: "decimal", currency: "USD", minimumFractionDigits: 0}'
+        investmentsValueYTD = parseInt(investmentsValueYTD / 1000, 10)
+        investmentsValueYTD = "$" + investmentsValueYTD.toLocaleString("en-US", opts) + "k"
+
+      }
+
+      orgsInvestedInYTD = this.props.dashboardData[9][len-1].count_of_organizations_with_investment_by_year
+      numberOfInvestmentsYTD = this.props.dashboardData[10][len-1].count_of_investments_by_year
     }
 
+    const loanPieOpts = 
+    {
+      title: {
+        display: true,
+        text: 'Loans YTD'
+      }
+    }
+    
+    const loanPieData = 
+    {
+      labels: [
+        'CRA Eligible',
+        'Not CRA Eligible',
+      ],
+      datasets: [
+        {
+          data: [craLoansYTD, nonCraLoansYTD],
+          backgroundColor: [
+            '#FF6384',
+            '#36A2EB',
+            '#FFCE56',
+          ],
+          hoverBackgroundColor: [
+            '#FF6384',
+            '#36A2EB',
+            '#FFCE56',
+          ],
+        }],
+    }
+  
+    const loanBarData = 
+    {
+      //labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      labels: timePeriodArray,
+      datasets: [
+        {
+          label: 'CRA Eligible',
+          backgroundColor: '#FF6384',
+          borderColor: 'rgba(255,99,132,1)',
+          borderWidth: 1,
+          hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+          hoverBorderColor: 'rgba(255,99,132,1)',
+          //data: [65, 59, 80, 81, 56, 55, 40],
+          data: craLoansArray
+        },
+        {
+          label: 'Not CRA Eligible',
+          backgroundColor: '#36A2EB',
+          borderColor: 'rgba(10,99,132,1)',
+          borderWidth: 1,
+          hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+          hoverBorderColor: 'rgba(255,99,132,1)',
+          //data: [60, 50, 90, 91, 46, 45, 30],
+          data: nonCraLoansArray
+        },
+      ],
+    }
+  
+    const loanBarOptions = 
+    {
+      title: {
+        display: true,
+        text: 'Loans YoY'
+      },
+      tooltips: {
+        enabled: false,
+        custom: CustomTooltips
+      },
+      maintainAspectRatio: false
+    }
+  
     const servicePieOpts = 
     {
       title: {
@@ -166,11 +300,11 @@ class Dashboard extends Component
         },
       ],
     }
-    
+
     const serviceBarOptions = {
       title: {
         display: true,
-        text: 'Hours YoY'
+        text: 'Investments YoY'
       },
       tooltips: {
         enabled: false,
@@ -179,90 +313,17 @@ class Dashboard extends Component
       maintainAspectRatio: false
     }
 
-
-    if (this.props.dashboardData.length > 0)
-    {
-
-      var loanAmountsByYear = this.props.dashboardData[5]
-      len = loanAmountsByYear.length
-      craLoansYTD = loanAmountsByYear[len-1].cra_amount
-      nonCraLoansYTD = parseInt(loanAmountsByYear[len-1].total_amount, 10) - parseInt(loanAmountsByYear[len-1].cra_amount, 10)
-      
-      var opts=''
-      loansValueYTD = parseInt(loanAmountsByYear[len-1].total_amount, 10)
-      if (loansValueYTD < 1000)
-      {
-        opts = '{style: "decimal", currency: "USD", minimumFractionDigits: 0}'
-        loansValueYTD = "$" + loansValueYTD.toLocaleString("en-US", opts)
-      }
-      else
-      {
-        opts = '{style: "decimal", currency: "USD", minimumFractionDigits: 0}'
-        loansValueYTD = parseInt(loansValueYTD / 1000, 10)
-        loansValueYTD = "$" + loansValueYTD.toLocaleString("en-US", opts) + "k"
-
-      }
-
-      orgsLentToYTD = this.props.dashboardData[6][len-1].count_of_organizations_with_loan_by_year
-      numberOfLoansYTD = this.props.dashboardData[7][len-1].count_of_loans_by_year
-  }
-
-    const loanPieOpts = 
-    {
+    const investmentBarOptions = {
       title: {
         display: true,
-        text: 'Loans YTD'
-      }
+        text: 'Investments YoY'
+      },
+      tooltips: {
+        enabled: false,
+        custom: CustomTooltips
+      },
+      maintainAspectRatio: false
     }
-    
-    const loanPieData = 
-    {
-      labels: [
-        'CRA Eligible',
-        'Not CRA Eligible',
-      ],
-      datasets: [
-        {
-          data: [craLoansYTD, nonCraLoansYTD],
-          backgroundColor: [
-            '#FF6384',
-            '#36A2EB',
-            '#FFCE56',
-          ],
-          hoverBackgroundColor: [
-            '#FF6384',
-            '#36A2EB',
-            '#FFCE56',
-          ],
-        }],
-    }
-    
-    
-    if (this.props.dashboardData.length > 0)
-    {
-
-      var investmentAmountsByYear = this.props.dashboardData[8]
-      len = investmentAmountsByYear.length
-      craInvestmentsYTD = investmentAmountsByYear[len-1].cra_amount
-      nonCraInvestmentsYTD = investmentAmountsByYear[len-1].non_cra_amount
-      
-      investmentsValueYTD = parseInt(investmentAmountsByYear[len-1].cra_amount, 10) + parseInt(investmentAmountsByYear[len-1].non_cra_amount, 10)
-      if (investmentsValueYTD < 1000)
-      {
-        opts = '{style: "decimal", currency: "USD", minimumFractionDigits: 0}'
-        investmentsValueYTD = "$" + investmentsValueYTD.toLocaleString("en-US", opts)
-      }
-      else
-      {
-        opts = '{style: "decimal", currency: "USD", minimumFractionDigits: 0}'
-        investmentsValueYTD = parseInt(investmentsValueYTD / 1000, 10)
-        investmentsValueYTD = "$" + investmentsValueYTD.toLocaleString("en-US", opts) + "k"
-
-      }
-
-      orgsInvestedInYTD = this.props.dashboardData[9][len-1].count_of_organizations_with_investment_by_year
-      numberOfInvestmentsYTD = this.props.dashboardData[10][len-1].count_of_investments_by_year
-  }
 
     const investmentPieOpts = 
     {
@@ -388,7 +449,7 @@ class Dashboard extends Component
                       </Col>
                       <Col sm="4">
                         <div className="chart-wrapper">
-                          <Bar data={serviceBarData} options={serviceBarOptions} />
+                          <Bar data={loanBarData} options={loanBarOptions} />
                         </div>
                       </Col>
                     </Row>
@@ -439,7 +500,7 @@ class Dashboard extends Component
                       </Col>
                       <Col sm="4">
                         <div className="chart-wrapper">
-                          <Bar data={serviceBarData} options={serviceBarOptions} />
+                          <Bar data={serviceBarData} options={investmentBarOptions} />
                         </div>
                       </Col>
                     </Row>

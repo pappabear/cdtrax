@@ -39,16 +39,16 @@ class Volunteers extends Component
       this.props.getVolunteers()
   }
 
-  actionFormatter(cell, row) 
-  {  
-      var editUrl = "#/volunteers/editvolunteer/" + row.id
-  
-      return (
-          <span> 
-              <Button outline color="info" href={editUrl} >{row.employee_code}</Button>
-          </span>
-      )
-  }
+    actionFormatter(cell, row) 
+    {  
+        var editUrl = "#/volunteers/editvolunteer/" + row.id
+
+        return (
+            <span> 
+                <Button outline color="info" href={editUrl} >{row.employee_code}</Button>
+            </span>
+        )
+    }
 
     totalHoursFormatter(cell, row) 
     {    

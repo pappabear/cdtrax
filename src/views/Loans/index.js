@@ -42,10 +42,24 @@ class Loans extends Component
   actionFormatter(cell, row) 
   {  
       var editUrl = "#/loans/editloan/" + row.id
-  
+
       return (
           <span> 
-              <Button outline color="info" href={editUrl} >Edit</Button>
+              <Button outline color="info" href={editUrl} >{row.activity_dt_formatted}</Button>
+          </span>
+      )
+  }
+
+  amountFormatter(cell, row) 
+  {    
+      // if the value is null, we are still waiting for the call to comeback
+      if ((row.amount === null) || (row.amount == null))
+          return
+      var v = row.amount.toString()
+      v = v.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+      return (
+          <span> 
+              {'$' + v}
           </span>
       )
   }
@@ -88,11 +102,11 @@ class Loans extends Component
             <CardHeader> <h3>Loans</h3> </CardHeader>
             <CardBody>
                 <BootstrapTable data={this.props.loans} version="4" striped bordered={false} hover pagination search options={this.options} >
-                    <TableHeaderColumn dataField="activity_dt_formatted" dataSort>Date</TableHeaderColumn>
-                    <TableHeaderColumn dataField="purpose_code_description" dataSort>Purpose</TableHeaderColumn>
+                    <TableHeaderColumn dataField="activity_dt_formatted" dataFormat={ this.actionFormatter } dataSort>Date</TableHeaderColumn>
                     <TableHeaderColumn dataField="organization_name" dataSort>Organization</TableHeaderColumn>
-                    <TableHeaderColumn dataField="amount" dataSort>Amount</TableHeaderColumn>
-                    <TableHeaderColumn isKey dataField="id" dataFormat={ this.actionFormatter } > </TableHeaderColumn>
+                    <TableHeaderColumn dataField="amount" dataFormat={ this.amountFormatter } dataAlign='right' dataSort>Amount</TableHeaderColumn>
+                    <TableHeaderColumn dataField="purpose_code_description" dataSort>Purpose</TableHeaderColumn>
+                    <TableHeaderColumn isKey dataField="id" hidden > </TableHeaderColumn>
                 </BootstrapTable>
             <p><Button outline color="success" onClick={() => this.gotoAddLoanForm() } >Add a new loan</Button></p>
             </CardBody>

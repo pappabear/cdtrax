@@ -19,7 +19,7 @@ export function addServiceType(code, description) {
         dispatch(serviceTypesIsLoading(true))
 
 		request
-            .post('http://cdtrax-backend-api.herokuapp.com/service_types')
+            .post('http://localhost:3001/service_types')
             .send({code:code, description:description})
             .end((err, res) => {
                 if (err) {
@@ -38,7 +38,7 @@ export function deleteServiceType(id) {
         dispatch(serviceTypesIsLoading(true))
 
         request
-            .delete('http://cdtrax-backend-api.herokuapp.com/service_types/' + id)
+            .delete('http://localhost:3001/service_types/' + id)
             .end((err, res) => {
                 if (err) {
                     //console.log('addServiceType() API call failed')
@@ -56,7 +56,7 @@ export function updateServiceType(id, code, description) {
         dispatch(serviceTypesIsLoading(true))
 
         request
-            .put('http://cdtrax-backend-api.herokuapp.com/service_types/' + id)
+            .put('http://localhost:3001/service_types/' + id)
             .send({id: id, code: code, description: description })
             .end((err, res) => {
                 if (err) {
@@ -85,7 +85,7 @@ export function getServiceTypes() {
         dispatch(serviceTypesIsLoading(true));
 
 		request
-            .get('http://cdtrax-backend-api.herokuapp.com/service_types')
+            .get('http://localhost:3001/service_types')
             .end((err, res) => {
                 if (err) {
                     dispatch(serviceTypesHasErrored(true));
@@ -104,7 +104,7 @@ export function getServiceType(id) {
         dispatch(serviceTypesIsLoading(true));
 
 		request
-            .get('http://cdtrax-backend-api.herokuapp.com/service_types/' + id)
+            .get('http://localhost:3001/service_types/' + id)
             .end((err, res) => {
                 if (err) {
                     dispatch(serviceTypesHasErrored(true));

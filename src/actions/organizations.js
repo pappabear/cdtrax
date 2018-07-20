@@ -19,7 +19,7 @@ export function addOrganization(name, address, city, state, zip, phone, mission,
         dispatch(organizationsIsLoading(true))
 
 		request
-            .post('http://cdtrax-backend-api.herokuapp.com/organizations')
+            .post('http://localhost:3001/organizations')
             .send({ name:name, address:address, city:city, state:state, zip:zip, phone:phone, mission:mission, number_of_employees:number_of_employees, revenue:revenue, website:website })
             .end((err, res) => {
                 if (err) {
@@ -39,7 +39,7 @@ export function deleteOrganization(id) {
         dispatch(organizationsIsLoading(true))
 
         request
-            .delete('http://cdtrax-backend-api.herokuapp.com/organizations/' + id)
+            .delete('http://localhost:3001/organizations/' + id)
             .end((err, res) => {
                 if (err) {
                     console.log('deleteOrganization() API call failed')
@@ -58,7 +58,7 @@ export function updateOrganization(id, name, address, city, state, zip, phone, m
         dispatch(organizationsIsLoading(true))
 
         request
-            .put('http://cdtrax-backend-api.herokuapp.com/organizations/' + id)
+            .put('http://localhost:3001/organizations/' + id)
             .send({ id: id, name:name, address:address, city:city, state:state, zip:zip, phone:phone, mission:mission, number_of_employees:number_of_employees, revenue:revenue, website:website })
             .end((err, res) => {
                 if (err) {
@@ -88,7 +88,7 @@ export function getOrganizations() {
         dispatch(organizationsIsLoading(true));
 
 		request
-            .get('http://cdtrax-backend-api.herokuapp.com/organizations')
+            .get('http://localhost:3001/organizations')
             .end((err, res) => {
                 if (err) {
                     console.log(err)
@@ -108,7 +108,7 @@ export function getOrganization(id) {
         dispatch(organizationsIsLoading(true));
 
 		request
-            .get('http://cdtrax-backend-api.herokuapp.com/organizations/' + id)
+            .get('http://localhost:3001/organizations/' + id)
             .end((err, res) => {
                 if (err) {
                     console.log(err)

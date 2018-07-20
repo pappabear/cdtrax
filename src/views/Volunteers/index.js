@@ -50,22 +50,32 @@ class Volunteers extends Component
       )
   }
 
-  totalHoursFormatter(cell, row) 
-  {    
-    return (
-        <span> 
-            {row.total_hours.toLocaleString()}
-        </span>
-    )
-}
+    totalHoursFormatter(cell, row) 
+    {    
+        // if the value is null, we are still waiting for the call to comeback
+        if ((row.total_hours === null) || (row.total_hours == null))
+            return
+        var v = row.total_hours.toString()
+        v = v.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        return (
+            <span> 
+                {v}
+            </span>
+        )
+    }
 
   craHoursFormatter(cell, row) 
   {    
-      return (
-          <span> 
-              {row.cra_hours.toLocaleString()}
-          </span>
-      )
+    // if the value is null, we are still waiting for the call to comeback
+    if (row.cra_hours === null)
+        return
+    var v = row.cra_hours.toString()
+    v = v.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    return (
+        <span> 
+            {v}
+        </span>
+    )
   }
 
   gotoAddVolunteerForm()
@@ -109,8 +119,8 @@ class Volunteers extends Component
                     <TableHeaderColumn isKey dataField="id" dataFormat={ this.actionFormatter } dataSort>Employee Code</TableHeaderColumn>
                     <TableHeaderColumn dataField="name" dataSort>Name</TableHeaderColumn>
                     <TableHeaderColumn dataField="title" dataSort>Title</TableHeaderColumn>
-                    <TableHeaderColumn dataField="total_hours" dataFormat={ this.totalHoursFormatter } dataAlign='right' dataSort>Total Hours</TableHeaderColumn>
-                    <TableHeaderColumn dataField="cra_hours" dataFormat={ this.craHoursFormatter } dataAlign='right' dataSort>CRA Hours</TableHeaderColumn>                        
+                    <TableHeaderColumn dataField="total_hours" dataAlign='right' dataFormat={ this.totalHoursFormatter } dataSort>Total Hours</TableHeaderColumn>
+                    <TableHeaderColumn dataField="cra_hours" dataAlign='right' dataSort>CRA Hours</TableHeaderColumn>                        
                 </BootstrapTable>
             <p><Button outline color="success" onClick={() => this.gotoAddVolunteerForm() } >Add a new volunteer</Button></p>
             </CardBody>

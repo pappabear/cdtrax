@@ -9,8 +9,13 @@ var volunteerBuffer = {}
 const mapStateToProps = state => {
 
     state.volunteers.map(e =>
-        volunteerBuffer = e
-)
+        {
+            // handle HACK here - action returns an array of one element, to deal with Rails API
+            if (e[0] != null)
+                volunteerBuffer = e[0]
+            else
+                volunteerBuffer = e
+        })
 
   return { 
     volunteer: volunteerBuffer,
@@ -137,15 +142,14 @@ class EditVolunteer extends Component
                     <Col xs={12} >
                         <form >
                         <Card>
-                            <CardHeader><CardTitle> <b> {this.props.volunteer.name} </b> </CardTitle></CardHeader>
+                            <CardHeader><CardTitle> <b> Editing <i> {this.props.volunteer.name}, {this.props.volunteer.title} ({this.props.volunteer.employee_code}) </i> </b> </CardTitle></CardHeader>
                                 <CardBody>
 
                                     <Row>
                                         <Col xs="12">
                                             <FormGroup>
                                                 <Label htmlFor="employee_code">Volunteer Code</Label>
-                                                <Input type="text" id="employee_code" 
-                                                    //placeholder="code"
+                                                <Input type="text" id="employee_code" name="employee_code" 
                                                     required
                                                     className={ this.state.codeHasErrors ? "is-invalid" : "" }
                                                     value={this.state.employee_code} 
@@ -158,7 +162,7 @@ class EditVolunteer extends Component
                                         <Col xs="12">
                                             <FormGroup>
                                                 <Label htmlFor="name">Name</Label>
-                                                <Input type="text" id="name" 
+                                                <Input type="text" id="name" name="name" 
                                                     required
                                                     className={ this.state.nameHasErrors ? "is-invalid" : "" }
                                                     value={this.state.name} 
@@ -170,8 +174,8 @@ class EditVolunteer extends Component
                                     <Row>
                                         <Col xs="12">
                                             <FormGroup>
-                                                <Label htmlFor="name">Title</Label>
-                                                <Input type="text" id="title" 
+                                                <Label htmlFor="title">Title</Label>
+                                                <Input type="text" id="title" name="title" 
                                                     required
                                                     className={ this.state.titleHasErrors ? "is-invalid" : "" }
                                                     value={this.state.title} 

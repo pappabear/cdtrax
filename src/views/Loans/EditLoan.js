@@ -4,6 +4,9 @@ import 'react-bootstrap-table/dist//react-bootstrap-table-all.min.css'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 
+import {TextMask, InputAdapter, SpanAdapter} from 'react-text-mask-hoc'
+import createNumberMask from 'text-mask-addons/dist/createNumberMask'
+
 import { connect } from 'react-redux'
 import { updateLoan, getLoan, deleteLoan } from '../../actions/loans'
 import { getPurposeCodes } from '../../actions/purposeCodes'
@@ -11,6 +14,16 @@ import { getOrganizations } from '../../actions/organizations'
 import { getLoanTypes } from '../../actions/loanTypes'
 import { getCallCodes } from '../../actions/callCodes'
 import { getCollateralCodes } from '../../actions/collateralCodes'
+
+const dollarMask = createNumberMask({
+    prefix: '$ ',
+    suffix: '',
+    thousandsSeparatorSymbol: ',',
+    integerLimit: 10,
+    allowDecimal: false,
+    decimalSymbol: ',',
+    decimalLimit: 0,
+})
 
 var loanBuffer = {}
 
@@ -127,7 +140,13 @@ class EditLoan extends Component
             this.setState({ activity_dt_hasErrors: null })
         }
 
-        if ((this.state.amount == null) || (this.state.amount === null) || (this.state.amount == "") || (this.state.amount <= 0))
+        //console.log(this.state.amount)
+        var amountBufferString = this.state.amount.toString().replace('$','').replace(' ', '').replace(',','')
+        //console.log(amountBufferString)
+        var amountBuffer = parseInt(amountBufferString)
+        //console.log(amountBuffer)
+
+        if ((this.state.amount == null) || (this.state.amount === null) || (amountBufferString == "") || (amountBufferString === "") || (amountBuffer <= 0))
         {
             this.setState({ amount_hasErrors: true })
             v=false
@@ -240,7 +259,10 @@ class EditLoan extends Component
             return
         }
 
-        this.props.updateLoan(this.props.loan.id, this.state.activity_dt, this.state.purpose_code_id.value, this.state.organization_id.value, this.state.account_number, this.state.loan_number, this.state.loan_type_id.value, this.state.call_code_id.value, this.state.collateral_code_id.value, this.state.lien_address, this.state.lien_city, this.state.lien_state, this.state.lien_zip, this.state.amount, this.state.term, this.state.is_cra_qualified, this.state.is_3rd_party, this.state.is_affiliate, this.state.state_code, this.state.county_code, this.state.tract, this.state.msa)
+        var amountBufferString = this.state.amount.toString().replace('$','').replace(' ', '').replace(',','')
+        var amountBuffer = parseInt(amountBufferString)
+
+        this.props.updateLoan(this.props.loan.id, this.state.activity_dt, this.state.purpose_code_id.value, this.state.organization_id.value, this.state.account_number, this.state.loan_number, this.state.loan_type_id.value, this.state.call_code_id.value, this.state.collateral_code_id.value, this.state.lien_address, this.state.lien_city, this.state.lien_state, this.state.lien_zip, amountBuffer, this.state.term, this.state.is_cra_qualified, this.state.is_3rd_party, this.state.is_affiliate, this.state.state_code, this.state.county_code, this.state.tract, this.state.msa)
 
         // navigate back to /loans after dispatching the add
         this.props.history.push('/loans')
@@ -406,13 +428,16 @@ class EditLoan extends Component
                                         <Col xs="3">
                                             <FormGroup>
                                                 <Label htmlFor="amount">Amount</Label>
-                                                <Input  type="text" 
+                                                <TextMask
+                                                    Component={InputAdapter}
+                                                    value={this.state.amount}
+                                                    mask={dollarMask}
+                                                    guide
+                                                    onChange={(e) => this.setState({ amount: e.target.value})}
+                                                    className={ this.state.amount_hasErrors ? "form-control is-invalid" : "form-control" }
                                                     id="amount"
-                                                    name="amount" 
-                                                    value={this.state.amount} 
-                                                    className={ this.state.amount_hasErrors ? "is-invalid" : "" }
-                                                    onChange={(e) => this.setState({ amount: e.target.value})} 
-                                                    />
+                                                    name="amount"     
+                                                />
                                             </FormGroup>
                                         </Col>
 

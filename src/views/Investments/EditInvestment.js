@@ -10,6 +10,18 @@ import { getPurposeCodes } from '../../actions/purposeCodes'
 import { getOrganizations } from '../../actions/organizations'
 import { getInvestmentTypes } from '../../actions/investmentTypes'
 
+import {TextMask, InputAdapter, SpanAdapter} from 'react-text-mask-hoc'
+import createNumberMask from 'text-mask-addons/dist/createNumberMask'
+const dollarMask = createNumberMask({
+    prefix: '$ ',
+    suffix: '',
+    thousandsSeparatorSymbol: ',',
+    integerLimit: 10,
+    allowDecimal: false,
+    decimalSymbol: ',',
+    decimalLimit: 0,
+})
+
 var investmentBuffer = {}
 
 var purposeCodeOptions = []
@@ -232,11 +244,11 @@ class EditInvestment extends Component
                     <Col xs={12} >
                         <form >
                         <Card>
-                            <CardHeader><CardTitle> <b> Editing Investment (ID={this.props.investment.id})</b> </CardTitle></CardHeader>
+                            <CardHeader><CardTitle> <b> Editing <i> investment in {this.props.investment.organization_name} for {this.props.investment.purpose_code_description}  on { this.props.investment.activity_dt_formatted }  (ID={this.props.match.params.id}) </i></b> </CardTitle></CardHeader>
                                 <CardBody>
 
                                     <Row>
-                                        <Col xs="12">
+                                        <Col xs="4">
                                             <FormGroup>
                                                 <Label htmlFor="date">Date of Investment</Label>
                                                 <Input  type="date" 
@@ -248,10 +260,8 @@ class EditInvestment extends Component
                                                     />
                                             </FormGroup>
                                         </Col>
-                                    </Row>
 
-                                    <Row>
-                                        <Col xs="12">
+                                        <Col xs="4">
                                             <FormGroup>
                                                 <Label htmlFor="investmentTypeSelect">Investment Type</Label>
                                                 <Select 
@@ -263,10 +273,8 @@ class EditInvestment extends Component
                                                     />
                                             </FormGroup>
                                         </Col>
-                                    </Row>
 
-                                    <Row>
-                                        <Col xs="12">
+                                        <Col xs="4">
                                             <FormGroup>
                                                 <Label htmlFor="purposeCodeSelect">Purpose</Label>
                                                 <Select
@@ -297,7 +305,7 @@ class EditInvestment extends Component
 
 
                                     <Row>
-                                        <Col xs="12">
+                                        <Col xs="3">
                                             <FormGroup>
                                                 <Label htmlFor="cusip_number">CUSIP Number</Label>
                                                 <Input  type="text" 
@@ -308,11 +316,8 @@ class EditInvestment extends Component
                                                     />
                                             </FormGroup>
                                         </Col>
-                                    </Row>
 
-
-                                    <Row>
-                                        <Col xs="12">
+                                        <Col xs="3">
                                             <FormGroup>
                                                 <Label htmlFor="maturity_dt">Maturity Date</Label>
                                                 <Input  type="date" 
@@ -324,39 +329,45 @@ class EditInvestment extends Component
                                                     />
                                             </FormGroup>
                                         </Col>
-                                    </Row>
 
-                                    <Row>
-                                        <Col xs="12">
-                                            <FormGroup>
-                                                <Label htmlFor="original_amount">Original Amount</Label>
-                                                <Input  type="text" 
-                                                    id="original_amount"
-                                                    name="original_amount" 
-                                                    value={this.state.original_amount} 
-                                                    className={ this.state.original_amount_hasErrors ? "is-invalid" : "" }
-                                                    onChange={(e) => this.setState({ original_amount: e.target.value})} 
-                                                    />
-                                            </FormGroup>
-                                        </Col>
-                                    </Row>
 
-                                    <Row>
-                                        <Col xs="12">
+                                        <Col xs="3">
                                             <FormGroup>
                                                 <Label htmlFor="book_value">Book Value</Label>
-                                                <Input  type="text" 
+                                                <TextMask
+                                                    Component={InputAdapter}
+                                                    value={this.state.book_value}
+                                                    mask={dollarMask}
+                                                    guide
+                                                    onChange={(e) => this.setState({ book_value: e.target.value})}
+                                                    className={ this.state.book_value_hasErrors ? "form-control is-invalid" : "form-control" }
                                                     id="book_value"
-                                                    name="book_value" 
-                                                    value={this.state.book_value} 
-                                                    onChange={(e) => this.setState({ book_value: e.target.value})} 
-                                                    />
+                                                    name="book_value"     
+                                                />
                                             </FormGroup>
                                         </Col>
+
+                                        <Col xs="3">
+                                            <FormGroup>
+                                                <Label htmlFor="original_amount">Original Amount</Label>
+                                                <TextMask
+                                                    Component={InputAdapter}
+                                                    value={this.state.original_amount}
+                                                    mask={dollarMask}
+                                                    guide
+                                                    onChange={(e) => this.setState({ original_amount: e.target.value})}
+                                                    className={ this.state.original_amount_hasErrors ? "form-control is-invalid" : "form-control" }
+                                                    id="original_amount"
+                                                    name="original_amount"     
+                                                />
+                                            </FormGroup>
+                                        </Col>
+
                                     </Row>
 
+
                                     <Row>
-                                        <Col xs="12">
+                                        <Col xs="3">
                                             <FormGroup>
                                                 <Label htmlFor="unfunded_committment">Unfunded Committment</Label>
                                                 <Input  type="text" 
@@ -367,10 +378,8 @@ class EditInvestment extends Component
                                                     />
                                             </FormGroup>
                                         </Col>
-                                    </Row>
 
-                                    <Row>
-                                        <Col xs="12">
+                                        <Col xs="3">
                                             <FormGroup>
                                                 <Label htmlFor="percent_of_entity_funding">Percent of Equity Funding</Label>
                                                 <Input  type="text" 
@@ -381,25 +390,21 @@ class EditInvestment extends Component
                                                     />
                                             </FormGroup>
                                         </Col>
+
+                                        <Col xs="3" >
+                                            <FormGroup check>
+                                                <Label check>
+                                                    <Input type="checkbox" 
+                                                        checked={this.state.is_cra_qualified} 
+                                                        name="is_cra_qualified"
+                                                        onChange={() => this.setState({ is_cra_qualified: !this.state.is_cra_qualified})} />
+                                                    <span className="form-check-sign"></span>
+                                                    CRA Qualified
+                                                </Label>
+                                            </FormGroup>
+                                        </Col>
                                     </Row>
 
-                                                    <Row>
-                                                        <Label sm={2}>
-                                                            &nbsp;
-                                                        </Label>
-                                                        <Col xs={12} sm={10} >
-                                                            <FormGroup check>
-                                                                <Label check>
-                                                                    <Input type="checkbox" 
-                                                                        checked={this.state.is_cra_qualified} 
-                                                                        name="is_cra_qualified"
-                                                                        onChange={() => this.setState({ is_cra_qualified: !this.state.is_cra_qualified})} />
-                                                                    <span className="form-check-sign"></span>
-                                                                    CRA Qualified
-                                                                </Label>
-                                                            </FormGroup>
-                                                        </Col>
-                                                    </Row>
 
                                     <Button outline color="success" onClick={() => this.handleUpdateInvestment()}>Save changes</Button> &nbsp;
                                     <Button outline color="danger" onClick={() => this.handleDeleteInvestment()}>Delete</Button> &nbsp;

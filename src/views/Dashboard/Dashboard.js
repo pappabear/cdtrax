@@ -75,11 +75,13 @@ class Dashboard extends Component
 
     var craLoansArray = []
     var nonCraLoansArray = []
+    var craInvestmentsArray = []
+    var nonCraInvestmentsArray = []
 
 
     if (this.props.dashboardData.length > 0)
     {
-      // SERVICE HOUS --------
+      // SERVICE HOURS --------
       // pull out the total service hours from the API payload
       var len = this.props.dashboardData[0].length
       serviceHoursYTD = this.props.dashboardData[0][len-1].total_hours
@@ -113,7 +115,7 @@ class Dashboard extends Component
         nonCraHoursArray.push(totalHours - craHours)
       }
 
-      // LOANS HOUS --------
+      // LOANS HOURS --------
       // determine YoY values
       timePeriodArray = []
       for (var i=0; i<this.props.dashboardData[5].length; i++)
@@ -149,6 +151,15 @@ class Dashboard extends Component
   
 
       // INVESTMENTS --------
+      for (var i=0; i<this.props.dashboardData[8].length; i++)
+      {
+        var nonCraAmount = parseInt(this.props.dashboardData[8][i].non_cra_amount, 10)
+        var craAmount = parseInt(this.props.dashboardData[8][i].cra_amount, 10)
+        var year = this.props.dashboardData[8][i].investment_year
+        craInvestmentsArray.push(craAmount)
+        nonCraInvestmentsArray.push(nonCraAmount)
+      }
+
       var investmentAmountsByYear = this.props.dashboardData[8]
       len = investmentAmountsByYear.length
       craInvestmentsYTD = investmentAmountsByYear[len-1].cra_amount
@@ -297,6 +308,31 @@ class Dashboard extends Component
           hoverBorderColor: 'rgba(255,99,132,1)',
           //data: [60, 50, 90, 91, 46, 45, 30],
           data: nonCraHoursArray
+        },
+      ],
+    }
+
+    const investmentBarData = 
+    {
+      labels: timePeriodArray,
+      datasets: [
+        {
+          label: 'CRA Eligible',
+          backgroundColor: '#FF6384',
+          borderColor: 'rgba(255,99,132,1)',
+          borderWidth: 1,
+          hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+          hoverBorderColor: 'rgba(255,99,132,1)',
+          data: craInvestmentsArray
+        },
+        {
+          label: 'Not CRA Eligible',
+          backgroundColor: '#36A2EB',
+          borderColor: 'rgba(10,99,132,1)',
+          borderWidth: 1,
+          hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+          hoverBorderColor: 'rgba(255,99,132,1)',
+          data: nonCraInvestmentsArray
         },
       ],
     }
@@ -500,7 +536,7 @@ class Dashboard extends Component
                       </Col>
                       <Col sm="4">
                         <div className="chart-wrapper">
-                          <Bar data={serviceBarData} options={investmentBarOptions} />
+                          <Bar data={investmentBarData} options={investmentBarOptions} />
                         </div>
                       </Col>
                     </Row>

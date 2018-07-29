@@ -72,6 +72,11 @@ const mapStateToProps = state => {
 
   return { 
     loan: loanBuffer,
+    purposeCodes: state.purposeCodes,
+    organizations: state.organizations,
+    loanTypes: state.loanTypes,
+    callCodes: state.callCodes,
+    collateralCodes: state.collateralCodes,
     hasErrored: state.loansHasErrored,
     isLoading: state.loansIsLoading
     }
@@ -140,11 +145,8 @@ class EditLoan extends Component
             this.setState({ activity_dt_hasErrors: null })
         }
 
-        //console.log(this.state.amount)
         var amountBufferString = this.state.amount.toString().replace('$','').replace(' ', '').replace(',','')
-        //console.log(amountBufferString)
         var amountBuffer = parseInt(amountBufferString)
-        //console.log(amountBuffer)
 
         if ((this.state.amount == null) || (this.state.amount === null) || (amountBufferString == "") || (amountBufferString === "") || (amountBuffer <= 0))
         {
@@ -307,6 +309,29 @@ class EditLoan extends Component
             )
         }
 
+        // use this to compensate for race condition
+        if ((this.props.purposeCodes.length === 0) ||
+            (this.props.organizations.length === 0) ||
+            (this.props.loanTypes.length === 0) ||
+            (this.props.callCodes.length === 0) ||
+            (this.props.collateralCodes.length === 0))
+            {
+                return (
+                    <div>
+    
+                        <Row>
+                            <Col xs={12}>
+                                <Card>
+                                    <CardBody>
+                                        <h3>Retreiving loan...</h3>
+                                    </CardBody>
+                                </Card>
+                            </Col>
+                        </Row>
+                    </div>
+                )
+            }
+        
         return (
 
             <div className="animated fadeIn">
@@ -315,7 +340,7 @@ class EditLoan extends Component
                     <Col xs={12} >
                         <form >
                         <Card>
-                            <CardHeader><CardTitle> <b> Editing <i> Loan to {this.props.loan.organization_name} for {this.props.loan.purpose_code_description}  on { this.props.loan.activity_dt_formatted }  (ID={this.props.match.params.id}) </i></b> </CardTitle></CardHeader>
+                            <CardHeader><CardTitle> <b> Editing loan to <i> {this.props.loan.organization_name} for {this.props.loan.purpose_code_description}  on { this.props.loan.activity_dt_formatted }  (ID={this.props.match.params.id}) </i></b> </CardTitle></CardHeader>
                                 <CardBody>
 
                                     <Row>

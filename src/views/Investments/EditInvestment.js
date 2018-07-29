@@ -57,6 +57,9 @@ const mapStateToProps = state => {
 
   return { 
     investment: investmentBuffer,
+    purposeCodes: state.purposeCodes,
+    organizations: state.organizations,
+    investmentTypes: state.investmentTypes,
     hasErrored: state.investmentsHasErrored,
     isLoading: state.investmentsIsLoading
     }
@@ -221,8 +224,7 @@ class EditInvestment extends Component
         if (this.props.isLoading) 
         {
             return (
-                <div>
-
+                <div className="animated fadeIn">
                     <Row>
                         <Col xs={12}>
                             <Card>
@@ -236,6 +238,27 @@ class EditInvestment extends Component
             )
         }
 
+        // use this to compensate for race condition
+        if ((this.props.purposeCodes.length === 0) ||
+            (this.props.organizations.length === 0) ||
+            (this.props.investmentTypes.length === 0))
+        {
+            return (
+                <div className="animated fadeIn">
+
+                    <Row>
+                        <Col xs={12}>
+                            <Card>
+                                <CardBody>
+                                    <h3>Retreiving investment...</h3>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                </div>
+            )
+        }
+    
         return (
 
             <div className="animated fadeIn">

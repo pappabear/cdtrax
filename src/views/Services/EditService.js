@@ -60,6 +60,11 @@ const mapStateToProps = state => {
 
   return { 
     service: serviceBuffer,
+    purposeCodes: state.purposeCodes,
+    organizations: state.organizations,
+    serviceTypes: state.serviceTypes,
+    volunteers: state.volunteers,
+    assessmentAreas: state.assessmentAreas,
     hasErrored: state.servicesHasErrored,
     isLoading: state.servicesIsLoading
     }
@@ -260,6 +265,29 @@ class EditService extends Component
             )
         }
 
+        // use this to compensate for race condition
+        if ((this.props.purposeCodes.length === 0) ||
+            (this.props.organizations.length === 0) ||
+            (this.props.volunteers.length === 0) ||
+            (this.props.assessmentAreas.length === 0) ||
+            (this.props.serviceTypes.length === 0))
+        {
+            return (
+                <div className="animated fadeIn">
+
+                    <Row>
+                        <Col xs={12}>
+                            <Card>
+                                <CardBody>
+                                    <h3>Retreiving service...</h3>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                </div>
+            )
+        }
+    
         return (
 
             <div className="animated fadeIn">

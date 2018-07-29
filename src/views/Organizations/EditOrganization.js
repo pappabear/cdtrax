@@ -8,7 +8,14 @@ var organizationBuffer = {}
 
 const mapStateToProps = state => {
     state.organizations.map(e =>
-        organizationBuffer = e
+        {
+        //organizationBuffer = e
+        // handle HACK here - action returns an array of one element, to deal with Rails API
+        if (e[0] != null)
+            organizationBuffer = e[0]
+        else
+            organizationBuffer = e
+        }
 )
 
   return { 
@@ -131,6 +138,11 @@ class EditOrganization extends Component
             )
         }
 
+        
+        console.log("this.props.organization=")
+        console.log(this.props.organization)
+
+
         return (
 
             <div className="animated fadeIn">
@@ -139,7 +151,7 @@ class EditOrganization extends Component
                     <Col xs={12} >
                         <form >
                         <Card>
-                            <CardHeader><CardTitle> <b> {this.props.organization.name} </b> </CardTitle></CardHeader>
+                            <CardHeader><CardTitle> <b> Editing <i> {this.props.organization.name} </i> </b> </CardTitle></CardHeader>
                                 <CardBody>
 
                                     <Row>
@@ -156,7 +168,7 @@ class EditOrganization extends Component
                                     </Row>
 
                                     <Row>
-                                        <Col xs="12">
+                                        <Col xs="4">
                                             <FormGroup>
                                                 <Label htmlFor="address">Address</Label>
                                                 <Input type="text" id="address" 
@@ -164,10 +176,8 @@ class EditOrganization extends Component
                                                     onChange={(e) => this.setState({ address: e.target.value})} />
                                             </FormGroup>
                                         </Col>
-                                    </Row>
 
-                                    <Row>
-                                        <Col xs="12">
+                                        <Col xs="3">
                                             <FormGroup>
                                                 <Label htmlFor="city">City</Label>
                                                 <Input type="text" id="city" 
@@ -175,10 +185,8 @@ class EditOrganization extends Component
                                                     onChange={(e) => this.setState({ city: e.target.value})} />
                                             </FormGroup>
                                         </Col>
-                                    </Row>
 
-                                    <Row>
-                                        <Col xs="12">
+                                        <Col xs="2">
                                             <FormGroup>
                                                 <Label htmlFor="state">State</Label>
                                                 <Input type="text" id="state" 
@@ -186,10 +194,8 @@ class EditOrganization extends Component
                                                     onChange={(e) => this.setState({ state: e.target.value})} />
                                             </FormGroup>
                                         </Col>
-                                    </Row>
 
-                                    <Row>
-                                        <Col xs="12">
+                                        <Col xs="2">
                                             <FormGroup>
                                                 <Label htmlFor="zip">Zip</Label>
                                                 <Input type="text" id="zip" 
@@ -200,7 +206,7 @@ class EditOrganization extends Component
                                     </Row>
 
                                     <Row>
-                                        <Col xs="12">
+                                        <Col xs="3">
                                             <FormGroup>
                                                 <Label htmlFor="phone">Phone</Label>
                                                 <Input type="text" id="phone" 
@@ -208,10 +214,8 @@ class EditOrganization extends Component
                                                     onChange={(e) => this.setState({ phone: e.target.value})} />
                                             </FormGroup>
                                         </Col>
-                                    </Row>
 
-                                    <Row>
-                                        <Col xs="12">
+                                        <Col xs="3">
                                             <FormGroup>
                                                 <Label htmlFor="website">Website</Label>
                                                 <Input type="text" id="website" 
@@ -219,10 +223,8 @@ class EditOrganization extends Component
                                                     onChange={(e) => this.setState({ website: e.target.value})} />
                                             </FormGroup>
                                         </Col>
-                                    </Row>
 
-                                    <Row>
-                                        <Col xs="12">
+                                        <Col xs="3">
                                             <FormGroup>
                                                 <Label htmlFor="revenue">Revenue</Label>
                                                 <Input type="text" id="revenue" 
@@ -230,10 +232,8 @@ class EditOrganization extends Component
                                                     onChange={(e) => this.setState({ revenue: e.target.value})} />
                                             </FormGroup>
                                         </Col>
-                                    </Row>
 
-                                    <Row>
-                                        <Col xs="12">
+                                        <Col xs="3">
                                             <FormGroup>
                                                 <Label htmlFor="number_of_employees">Number of employees</Label>
                                                 <Input type="text" id="number_of_employees" 

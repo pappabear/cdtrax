@@ -39,13 +39,14 @@ class Organizations extends Component
       this.props.getOrganizations()
   }
 
+  
   actionFormatter(cell, row) 
   {  
       var editUrl = "#/organizations/editorganization/" + row.id
   
       return (
           <span> 
-              <Button outline color="info" href={editUrl} >Edit</Button>
+              <Button outline color="info" href={editUrl} >{row.name}</Button>
           </span>
       )
   }
@@ -88,11 +89,9 @@ class Organizations extends Component
             <CardHeader> <h3>Organizations</h3> </CardHeader>
             <CardBody>
                 <BootstrapTable data={this.props.organizations} version="4" striped bordered={false} hover pagination search options={this.options} >
-                    <TableHeaderColumn dataField="name" dataSort>Name</TableHeaderColumn>
-                    <TableHeaderColumn dataField="city" dataSort>City</TableHeaderColumn>
-                    <TableHeaderColumn dataField="state" dataSort>State</TableHeaderColumn>
-                    <TableHeaderColumn dataField="zip" dataSort>Zip</TableHeaderColumn>                        
-                    <TableHeaderColumn isKey dataField="id" dataFormat={ this.actionFormatter } > </TableHeaderColumn>
+                    <TableHeaderColumn dataField="name" dataFormat={ this.actionFormatter } dataSort>Name</TableHeaderColumn>
+                    <TableHeaderColumn dataField="formatted_address" dataSort>Address</TableHeaderColumn>
+                    <TableHeaderColumn isKey dataField="id" hidden > </TableHeaderColumn>
                 </BootstrapTable>
             <p><Button outline color="success" onClick={() => this.gotoAddOrganizationForm() } >Add a new organization</Button></p>
             </CardBody>

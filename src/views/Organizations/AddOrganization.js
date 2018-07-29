@@ -121,7 +121,7 @@ class AddOrganization extends Component
                                     </Row>
 
                                     <Row>
-                                        <Col xs="12">
+                                        <Col xs="4">
                                             <FormGroup>
                                                 <Label htmlFor="address">Address</Label>
                                                 <Input type="text" id="address" 
@@ -129,10 +129,8 @@ class AddOrganization extends Component
                                                     onChange={(e) => this.setState({ address: e.target.value})} />
                                             </FormGroup>
                                         </Col>
-                                    </Row>
 
-                                    <Row>
-                                        <Col xs="12">
+                                        <Col xs="3">
                                             <FormGroup>
                                                 <Label htmlFor="city">City</Label>
                                                 <Input type="text" id="city" 
@@ -140,10 +138,8 @@ class AddOrganization extends Component
                                                     onChange={(e) => this.setState({ city: e.target.value})} />
                                             </FormGroup>
                                         </Col>
-                                    </Row>
 
-                                    <Row>
-                                        <Col xs="12">
+                                        <Col xs="2">
                                             <FormGroup>
                                                 <Label htmlFor="state">State</Label>
                                                 <Input type="text" id="state" 
@@ -151,10 +147,8 @@ class AddOrganization extends Component
                                                     onChange={(e) => this.setState({ state: e.target.value})} />
                                             </FormGroup>
                                         </Col>
-                                    </Row>
 
-                                    <Row>
-                                        <Col xs="12">
+                                        <Col xs="2">
                                             <FormGroup>
                                                 <Label htmlFor="zip">Zip</Label>
                                                 <Input type="text" id="zip" 
@@ -165,7 +159,7 @@ class AddOrganization extends Component
                                     </Row>
 
                                     <Row>
-                                        <Col xs="12">
+                                        <Col xs="3">
                                             <FormGroup>
                                                 <Label htmlFor="phone">Phone</Label>
                                                 <Input type="text" id="phone" 
@@ -173,10 +167,8 @@ class AddOrganization extends Component
                                                     onChange={(e) => this.setState({ phone: e.target.value})} />
                                             </FormGroup>
                                         </Col>
-                                    </Row>
 
-                                    <Row>
-                                        <Col xs="12">
+                                        <Col xs="3">
                                             <FormGroup>
                                                 <Label htmlFor="website">Website</Label>
                                                 <Input type="text" id="website" 
@@ -184,10 +176,8 @@ class AddOrganization extends Component
                                                     onChange={(e) => this.setState({ website: e.target.value})} />
                                             </FormGroup>
                                         </Col>
-                                    </Row>
 
-                                    <Row>
-                                        <Col xs="12">
+                                        <Col xs="3">
                                             <FormGroup>
                                                 <Label htmlFor="revenue">Revenue</Label>
                                                 <Input type="text" id="revenue" 
@@ -195,10 +185,8 @@ class AddOrganization extends Component
                                                     onChange={(e) => this.setState({ revenue: e.target.value})} />
                                             </FormGroup>
                                         </Col>
-                                    </Row>
 
-                                    <Row>
-                                        <Col xs="12">
+                                        <Col xs="3">
                                             <FormGroup>
                                                 <Label htmlFor="number_of_employees">Number of employees</Label>
                                                 <Input type="text" id="number_of_employees" 

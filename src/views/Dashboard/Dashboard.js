@@ -340,7 +340,7 @@ class Dashboard extends Component
     const serviceBarOptions = {
       title: {
         display: true,
-        text: 'Investments YoY'
+        text: 'Service Hours YoY'
       },
       tooltips: {
         enabled: false,

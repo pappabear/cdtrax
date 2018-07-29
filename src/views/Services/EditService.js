@@ -268,13 +268,13 @@ class EditService extends Component
                     <Col xs={12} >
                         <form >
                         <Card>
-                            <CardHeader><CardTitle> <b> Editing Service Hours Activity on {this.props.service.activity_dt_formatted}  (ID={this.props.service.id}) </b> </CardTitle></CardHeader>
+                            <CardHeader><CardTitle> <b> Editing service activity for <i> {this.props.service.organization_name} on {this.props.service.activity_dt_formatted} </i> (ID={this.props.service.id}) </b> </CardTitle></CardHeader>
                                 <CardBody>
 
                                     <Row>
-                                        <Col xs="12">
+                                        <Col xs="3">
                                             <FormGroup>
-                                                <Label htmlFor="name">Date of Service</Label>
+                                                <Label htmlFor="date">Date of Service</Label>
                                                 <Input  type="date" 
                                                     id="activity_dt"
                                                     name="activity_dt" 
@@ -287,54 +287,9 @@ class EditService extends Component
                                     </Row>
 
                                     <Row>
-                                        <Col xs="12">
+                                        <Col xs="6">
                                             <FormGroup>
-                                                <Label htmlFor="name">Service Type</Label>
-                                                <Select 
-                                                    name="serviceTypeSelect"
-                                                    value={this.state.service_type_id}
-                                                    style={{borderColor:this.state.service_type_borderColor}}
-                                                    options={serviceTypeOptions}
-                                                    onChange={(value) => this.setState({ service_type_id: value})}
-                                                    />
-                                            </FormGroup>
-                                        </Col>
-                                    </Row>
-
-                                    <Row>
-                                        <Col xs="12">
-                                            <FormGroup>
-                                                <Label htmlFor="name">Purpose</Label>
-                                                <Select
-                                                    name="purposeCodeSelect"
-                                                    value={this.state.purpose_code_id}
-                                                    style={{borderColor:this.state.purpose_code_borderColor}}
-                                                    options={purposeCodeOptions}
-                                                    onChange={(value) => this.setState({ purpose_code_id: value})}
-                                                    />
-                                            </FormGroup>
-                                        </Col>
-                                    </Row>
-
-                                    <Row>
-                                        <Col xs="12">
-                                            <FormGroup>
-                                                <Label htmlFor="name">Assessment Area</Label>
-                                                <Select
-                                                    name="assessmentAreaSelect"
-                                                    value={this.state.assessment_area_id}
-                                                    style={{borderColor:this.state.assessment_area_borderColor}}
-                                                    options={assessmentAreaOptions}
-                                                    onChange={(value) => this.setState({ assessment_area_id: value})}
-                                                    />
-                                            </FormGroup>
-                                        </Col>
-                                    </Row>
-
-                                    <Row>
-                                        <Col xs="12">
-                                            <FormGroup>
-                                                <Label htmlFor="name">Volunteer / Employee</Label>
+                                                <Label htmlFor="volunteerSelect">Volunteer / Employee</Label>
                                                 <Select
                                                     name="volunteerSelect"
                                                     value={this.state.volunteer_id}
@@ -344,12 +299,37 @@ class EditService extends Component
                                                     />
                                             </FormGroup>
                                         </Col>
+
+                                        <Col xs="3">
+                                            <FormGroup>
+                                                <Label htmlFor="name">Total Hours</Label>
+                                                <Input  type="text" 
+                                                    id="total_hours"
+                                                    name="total_hours" 
+                                                    value={this.state.total_hours} 
+                                                    className={ this.state.total_hours_hasErrors ? "is-invalid" : "" }
+                                                    onChange={(e) => this.setState({ total_hours: e.target.value})} 
+                                                    />
+                                            </FormGroup>
+                                        </Col>
+
+                                        <Col xs="3">
+                                            <FormGroup>
+                                                <Label htmlFor="name">CRA Eligible Hours</Label>
+                                                <Input  type="text" 
+                                                    id="cra_hours"
+                                                    name="cra_hours" 
+                                                    value={this.state.cra_hours} 
+                                                    onChange={(e) => this.setState({ cra_hours: e.target.value})} 
+                                                    />
+                                            </FormGroup>
+                                        </Col>
                                     </Row>
 
                                     <Row>
                                         <Col xs="12">
                                             <FormGroup>
-                                                <Label htmlFor="name">Organization</Label>
+                                                <Label htmlFor="organizationSelect">Organization</Label>
                                                 <Select
                                                     name="organizationSelect"
                                                     value={this.state.organization_id}
@@ -362,29 +342,41 @@ class EditService extends Component
                                     </Row>
 
                                     <Row>
-                                        <Col xs="12">
+                                        <Col xs="4">
                                             <FormGroup>
-                                                <Label htmlFor="name">Total Hours</Label>
-                                                <Input  type="text" 
-                                                    id="total_hours"
-                                                    name="total_hours" 
-                                                    value={this.state.total_hours} 
-                                                    className={ this.state.total_hours_hasErrors ? "is-invalid" : "" }
-                                                    onChange={(e) => this.setState({ total_hours: e.target.value})} 
+                                                <Label htmlFor="serviceTypeSelect">Service Type</Label>
+                                                <Select 
+                                                    name="serviceTypeSelect"
+                                                    value={this.state.service_type_id}
+                                                    style={{borderColor:this.state.service_type_borderColor}}
+                                                    options={serviceTypeOptions}
+                                                    onChange={(value) => this.setState({ service_type_id: value})}
                                                     />
                                             </FormGroup>
                                         </Col>
-                                    </Row>
 
-                                    <Row>
-                                        <Col xs="12">
+                                        <Col xs="4">
                                             <FormGroup>
-                                                <Label htmlFor="name">CRA Eligible Hours</Label>
-                                                <Input  type="text" 
-                                                    id="cra_hours"
-                                                    name="cra_hours" 
-                                                    value={this.state.cra_hours} 
-                                                    onChange={(e) => this.setState({ cra_hours: e.target.value})} 
+                                                <Label htmlFor="purposeCodeSelect">Purpose</Label>
+                                                <Select
+                                                    name="purposeCodeSelect"
+                                                    value={this.state.purpose_code_id}
+                                                    style={{borderColor:this.state.purpose_code_borderColor}}
+                                                    options={purposeCodeOptions}
+                                                    onChange={(value) => this.setState({ purpose_code_id: value})}
+                                                    />
+                                            </FormGroup>
+                                        </Col>
+
+                                        <Col xs="4">
+                                            <FormGroup>
+                                                <Label htmlFor="assessmentAreaSelect">Assessment Area</Label>
+                                                <Select
+                                                    name="assessmentAreaSelect"
+                                                    value={this.state.assessment_area_id}
+                                                    style={{borderColor:this.state.assessment_area_borderColor}}
+                                                    options={assessmentAreaOptions}
+                                                    onChange={(value) => this.setState({ assessment_area_id: value})}
                                                     />
                                             </FormGroup>
                                         </Col>

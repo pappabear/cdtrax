@@ -137,12 +137,7 @@ class EditOrganization extends Component
                 </div>
             )
         }
-
         
-        console.log("this.props.organization=")
-        console.log(this.props.organization)
-
-
         return (
 
             <div className="animated fadeIn">

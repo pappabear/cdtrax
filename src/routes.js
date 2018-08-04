@@ -42,6 +42,7 @@ import EditVolunteer from './views/Volunteers/EditVolunteer'
 import Organizations from './views/Organizations'
 import AddOrganization from './views/Organizations/AddOrganization'
 import EditOrganization from './views/Organizations/EditOrganization'
+import ViewOrganization from './views/Organizations/ViewOrganization'
 
 import Services from './views/Services'
 import AddService from './views/Services/AddService'
@@ -113,6 +114,7 @@ const routes = [
   { path: '/organizations', name: 'organizations', component: Organizations, exact: true },
   { path: '/organizations/addOrganization', name: 'addOrganization', component: AddOrganization },
   { path: '/organizations/editOrganization/:id', name: 'editOrganization', component: EditOrganization },
+  { path: '/organizations/viewOrganization/:id', name: 'ViewOrganization', component: ViewOrganization },
 
   { path: '/loans', name: 'loans', component: Loans, exact: true },
   { path: '/loans/AddLoan', name: 'AddLoan', component: AddLoan },

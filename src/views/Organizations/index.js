@@ -42,11 +42,11 @@ class Organizations extends Component
   
   actionFormatter(cell, row) 
   {  
-      var editUrl = "#/organizations/editorganization/" + row.id
+      var url = "#/organizations/ViewOrganization/" + row.id
   
       return (
           <span> 
-              <Button outline color="info" href={editUrl} >{row.name}</Button>
+              <Button outline color="info" href={url} >{row.name}</Button>
           </span>
       )
   }

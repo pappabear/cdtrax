@@ -57,6 +57,7 @@ import AddInvestment from './views/Investments/AddInvestment'
 import EditInvestment from './views/Investments/EditInvestment'
 
 import Dashboard from './views/Dashboard/Dashboard'
+import Reports from './views/Reports'
 
 //function Loading() {
 //  return <div>Loading...</div>;
@@ -74,6 +75,7 @@ import Dashboard from './views/Dashboard/Dashboard'
 const routes = [
   { path: '/', name: 'Home', component: DefaultLayout, exact: true },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
+  { path: '/reports', name: 'Reports', component: Reports },
 
   { path: '/setup/banks', name: 'Banks', component: Banks, exact: true },
   { path: '/setup/banks/addbank', name: 'Add Bank', component: AddBank },

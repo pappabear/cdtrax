@@ -19,7 +19,7 @@ export function addCallCode(code, description) {
         dispatch(callCodesIsLoading(true))
 
 		request
-            .post('http://localhost:3001/call_codes')
+            .post('http://cdtrax-backend-api.herokuapp.com/call_codes')
             .send({code:code, description:description})
             .end((err, res) => {
                 if (err) {
@@ -38,7 +38,7 @@ export function deleteCallCode(id) {
         dispatch(callCodesIsLoading(true))
 
         request
-            .delete('http://localhost:3001/call_codes/' + id)
+            .delete('http://cdtrax-backend-api.herokuapp.com/call_codes/' + id)
             .end((err, res) => {
                 if (err) {
                     //console.log('addCallCode() API call failed')
@@ -56,7 +56,7 @@ export function updateCallCode(id, code, description) {
         dispatch(callCodesIsLoading(true))
 
         request
-            .put('http://localhost:3001/call_codes/' + id)
+            .put('http://cdtrax-backend-api.herokuapp.com/call_codes/' + id)
             .send({id: id, code: code, description: description })
             .end((err, res) => {
                 if (err) {
@@ -85,7 +85,7 @@ export function getCallCodes() {
         dispatch(callCodesIsLoading(true));
 
 		request
-            .get('http://localhost:3001/call_codes')
+            .get('http://cdtrax-backend-api.herokuapp.com/call_codes')
             .end((err, res) => {
                 if (err) {
                     dispatch(callCodesHasErrored(true));
@@ -105,7 +105,7 @@ export function getCallCode(id) {
         dispatch(callCodesIsLoading(true));
 
 		request
-            .get('http://localhost:3001/call_codes/' + id)
+            .get('http://cdtrax-backend-api.herokuapp.com/call_codes/' + id)
             .end((err, res) => {
                 if (err) {
                     dispatch(callCodesHasErrored(true));

@@ -19,7 +19,7 @@ export function addAssistanceType(code, description) {
         dispatch(assistanceTypesIsLoading(true))
 
 		request
-            .post('http://localhost:3001/assistance_types')
+            .post('http://cdtrax-backend-api.herokuapp.com/assistance_types')
             .send({code:code, description:description})
             .end((err, res) => {
                 if (err) {
@@ -38,7 +38,7 @@ export function deleteAssistanceType(id) {
         dispatch(assistanceTypesIsLoading(true))
 
         request
-            .delete('http://localhost:3001/assistance_types/' + id)
+            .delete('http://cdtrax-backend-api.herokuapp.com/assistance_types/' + id)
             .end((err, res) => {
                 if (err) {
                     //console.log('addAssistanceType() API call failed')
@@ -56,7 +56,7 @@ export function updateAssistanceType(id, code, description) {
         dispatch(assistanceTypesIsLoading(true))
 
         request
-            .put('http://localhost:3001/assistance_types/' + id)
+            .put('http://cdtrax-backend-api.herokuapp.com/assistance_types/' + id)
             .send({id: id, code: code, description: description })
             .end((err, res) => {
                 if (err) {
@@ -85,7 +85,7 @@ export function getAssistanceTypes() {
         dispatch(assistanceTypesIsLoading(true));
 
 		request
-            .get('http://localhost:3001/assistance_types')
+            .get('http://cdtrax-backend-api.herokuapp.com/assistance_types')
             .end((err, res) => {
                 if (err) {
                     dispatch(assistanceTypesHasErrored(true));
@@ -105,7 +105,7 @@ export function getAssistanceType(id) {
         dispatch(assistanceTypesIsLoading(true));
 
 		request
-            .get('http://localhost:3001/assistance_types/' + id)
+            .get('http://cdtrax-backend-api.herokuapp.com/assistance_types/' + id)
             .end((err, res) => {
                 if (err) {
                     dispatch(assistanceTypesHasErrored(true));

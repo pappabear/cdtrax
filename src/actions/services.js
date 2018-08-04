@@ -25,7 +25,7 @@ export function addService(activity_dt, purpose_code_id, volunteer_id, organizat
         dispatch(servicesIsLoading(true))
 
 		request
-            .post('http://localhost:3001/services')
+            .post('http://cdtrax-backend-api.herokuapp.com/services')
             .send({ activity_dt:activity_dt, purpose_code_id:purpose_code_id, volunteer_id:volunteer_id, organization_id:organization_id, service_type_id:service_type_id, assessment_area_id:assessment_area_id, total_hours:total_hours, cra_hours:cra_hours })
             .end((err, res) => {
                 if (err) {
@@ -47,7 +47,7 @@ export function deleteService(id)
         dispatch(servicesIsLoading(true))
 
         request
-            .delete('http://localhost:3001/services/' + id)
+            .delete('http://cdtrax-backend-api.herokuapp.com/services/' + id)
             .end((err, res) => {
                 if (err) {
                     console.log('deleteService() API call failed')
@@ -68,7 +68,7 @@ export function updateService(id, activity_dt, purpose_code_id, volunteer_id, or
         dispatch(servicesIsLoading(true))
 
         request
-            .put('http://localhost:3001/services/' + id)
+            .put('http://cdtrax-backend-api.herokuapp.com/services/' + id)
             .send({id: id, activity_dt:activity_dt, purpose_code_id:purpose_code_id, volunteer_id:volunteer_id, organization_id:organization_id, service_type_id:service_type_id, assessment_area_id:assessment_area_id, total_hours:total_hours, cra_hours:cra_hours })
             .end((err, res) => {
                 if (err) {
@@ -100,7 +100,7 @@ export function getServices()
         dispatch(servicesIsLoading(true));
 
 		request
-            .get('http://localhost:3001/services')
+            .get('http://cdtrax-backend-api.herokuapp.com/services')
             .end((err, res) => {
                 if (err) {
                     console.log(err)
@@ -122,7 +122,7 @@ export function getService(id)
         dispatch(servicesIsLoading(true));
 
 		request
-            .get('http://localhost:3001/services/' + id)
+            .get('http://cdtrax-backend-api.herokuapp.com/services/' + id)
             .end((err, res) => {
                 if (err) {
                     console.log(err)

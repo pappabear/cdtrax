@@ -19,7 +19,7 @@ export function addInvestmentType(code, description) {
         dispatch(investmentTypesIsLoading(true))
 
 		request
-            .post('http://localhost:3001/investment_types')
+            .post('http://cdtrax-backend-api.herokuapp.com/investment_types')
             .send({code:code, description:description})
             .end((err, res) => {
                 if (err) {
@@ -38,7 +38,7 @@ export function deleteInvestmentType(id) {
         dispatch(investmentTypesIsLoading(true))
 
         request
-            .delete('http://localhost:3001/investment_types/' + id)
+            .delete('http://cdtrax-backend-api.herokuapp.com/investment_types/' + id)
             .end((err, res) => {
                 if (err) {
                     //console.log('addInvestmentType() API call failed')
@@ -56,7 +56,7 @@ export function updateInvestmentType(id, code, description) {
         dispatch(investmentTypesIsLoading(true))
 
         request
-            .put('http://localhost:3001/investment_types/' + id)
+            .put('http://cdtrax-backend-api.herokuapp.com/investment_types/' + id)
             .send({id: id, code: code, description: description })
             .end((err, res) => {
                 if (err) {
@@ -85,7 +85,7 @@ export function getInvestmentTypes() {
         dispatch(investmentTypesIsLoading(true));
 
 		request
-            .get('http://localhost:3001/investment_types')
+            .get('http://cdtrax-backend-api.herokuapp.com/investment_types')
             .end((err, res) => {
                 if (err) {
                     dispatch(investmentTypesHasErrored(true));
@@ -105,7 +105,7 @@ export function getInvestmentType(id) {
         dispatch(investmentTypesIsLoading(true));
 
 		request
-            .get('http://localhost:3001/investment_types/' + id)
+            .get('http://cdtrax-backend-api.herokuapp.com/investment_types/' + id)
             .end((err, res) => {
                 if (err) {
                     dispatch(investmentTypesHasErrored(true));

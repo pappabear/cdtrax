@@ -11,50 +11,40 @@ export default {
       name: 'Loans',
       url: '/loans',
       icon: 'fa fa-handshake-o',
-      badge: {
-        variant: 'danger',
-        text: '11',
-      },
+      //badge: {
+        //variant: 'danger',
+        //text: '11',
+      //},
     },
 
     {
       name: 'Investments',
       url: '/investments',
       icon: 'fa fa-thumbs-o-up',
-      badge: {
-        variant: 'danger',
-        text: '9',
-      },
     },
 
     {
       name: 'Service Hours',
       url: '/services',
       icon: 'fa fa-clock-o',
-      badge: {
-        variant: 'danger',
-        text: '21',
-      },
     },
 
     {
       name: 'Volunteers',
       url: '/volunteers',
       icon: 'icon-people',
-      badge: {
-        variant: 'danger',
-        text: '21',
-      },
     },
 
     {
       name: 'Organizations',
       url: '/organizations',
       icon: 'fa fa-institution',
-      badge: {
-        variant: 'danger',
-        text: '8',
-      },
+    },
+
+    {
+      name: 'Reports',
+      url: '/reports',
+      icon: 'fa fa-newspaper-o',
     },
 
     {

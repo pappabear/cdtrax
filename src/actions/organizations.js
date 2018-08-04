@@ -19,7 +19,7 @@ export function addOrganization(name, address, city, state, zip, phone, mission,
         dispatch(organizationsIsLoading(true))
 
 		request
-            .post('http://localhost:3001/organizations')
+            .post('http://cdtrax-backend-api.herokuapp.com/organizations')
             .send({ name:name, address:address, city:city, state:state, zip:zip, phone:phone, mission:mission, number_of_employees:number_of_employees, revenue:revenue, website:website })
             .end((err, res) => {
                 if (err) {
@@ -39,7 +39,7 @@ export function deleteOrganization(id) {
         dispatch(organizationsIsLoading(true))
 
         request
-            .delete('http://localhost:3001/organizations/' + id)
+            .delete('http://cdtrax-backend-api.herokuapp.com/organizations/' + id)
             .end((err, res) => {
                 if (err) {
                     console.log('deleteOrganization() API call failed')
@@ -58,7 +58,7 @@ export function updateOrganization(id, name, address, city, state, zip, phone, m
         dispatch(organizationsIsLoading(true))
 
         request
-            .put('http://localhost:3001/organizations/' + id)
+            .put('http://cdtrax-backend-api.herokuapp.com/organizations/' + id)
             .send({ id: id, name:name, address:address, city:city, state:state, zip:zip, phone:phone, mission:mission, number_of_employees:number_of_employees, revenue:revenue, website:website })
             .end((err, res) => {
                 if (err) {
@@ -88,7 +88,7 @@ export function getOrganizations() {
         dispatch(organizationsIsLoading(true));
 
 		request
-            .get('http://localhost:3001/organizations')
+            .get('http://cdtrax-backend-api.herokuapp.com/organizations')
             .end((err, res) => {
                 if (err) {
                     console.log(err)
@@ -108,7 +108,7 @@ export function getOrganization(id) {
         dispatch(organizationsIsLoading(true));
 
 		request
-            .get('http://localhost:3001/organizations/' + id)
+            .get('http://cdtrax-backend-api.herokuapp.com/organizations/' + id)
             .end((err, res) => {
                 if (err) {
                     console.log(err)

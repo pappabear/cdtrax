@@ -19,7 +19,7 @@ export function addInvestmentType(code, description) {
         dispatch(investmentTypesIsLoading(true))
 
 		request
-            .post('http://cdtrax-backend-api.herokuapp.com/investment_types')
+            .post('https://cdtrax-backend-api.herokuapp.com/investment_types')
             .send({code:code, description:description})
             .end((err, res) => {
                 if (err) {
@@ -38,7 +38,7 @@ export function deleteInvestmentType(id) {
         dispatch(investmentTypesIsLoading(true))
 
         request
-            .delete('http://cdtrax-backend-api.herokuapp.com/investment_types/' + id)
+            .delete('https://cdtrax-backend-api.herokuapp.com/investment_types/' + id)
             .end((err, res) => {
                 if (err) {
                     //console.log('addInvestmentType() API call failed')
@@ -56,7 +56,7 @@ export function updateInvestmentType(id, code, description) {
         dispatch(investmentTypesIsLoading(true))
 
         request
-            .put('http://cdtrax-backend-api.herokuapp.com/investment_types/' + id)
+            .put('https://cdtrax-backend-api.herokuapp.com/investment_types/' + id)
             .send({id: id, code: code, description: description })
             .end((err, res) => {
                 if (err) {
@@ -85,7 +85,7 @@ export function getInvestmentTypes() {
         dispatch(investmentTypesIsLoading(true));
 
 		request
-            .get('http://cdtrax-backend-api.herokuapp.com/investment_types')
+            .get('https://cdtrax-backend-api.herokuapp.com/investment_types')
             .end((err, res) => {
                 if (err) {
                     dispatch(investmentTypesHasErrored(true));
@@ -105,7 +105,7 @@ export function getInvestmentType(id) {
         dispatch(investmentTypesIsLoading(true));
 
 		request
-            .get('http://cdtrax-backend-api.herokuapp.com/investment_types/' + id)
+            .get('https://cdtrax-backend-api.herokuapp.com/investment_types/' + id)
             .end((err, res) => {
                 if (err) {
                     dispatch(investmentTypesHasErrored(true));

@@ -19,7 +19,7 @@ export function addBank(code, description) {
         dispatch(banksIsLoading(true))
 
 		request
-            .post('http://cdtrax-backend-api.herokuapp.com/banks')
+            .post('https://cdtrax-backend-api.herokuapp.com/banks')
             .send({code:code, description:description})
             .end((err, res) => {
                 if (err) {
@@ -38,7 +38,7 @@ export function deleteBank(id) {
         dispatch(banksIsLoading(true))
 
         request
-            .delete('http://cdtrax-backend-api.herokuapp.com/banks/' + id)
+            .delete('https://cdtrax-backend-api.herokuapp.com/banks/' + id)
             .end((err, res) => {
                 if (err) {
                     //console.log('addBank() API call failed')
@@ -56,7 +56,7 @@ export function updateBank(id, code, description) {
         dispatch(banksIsLoading(true))
 
         request
-            .put('http://cdtrax-backend-api.herokuapp.com/banks/' + id)
+            .put('https://cdtrax-backend-api.herokuapp.com/banks/' + id)
             .send({id: id, code: code, description: description })
             .end((err, res) => {
                 if (err) {
@@ -85,7 +85,7 @@ export function getBanks() {
         dispatch(banksIsLoading(true));
 
 		request
-            .get('http://cdtrax-backend-api.herokuapp.com/banks')
+            .get('https://cdtrax-backend-api.herokuapp.com/banks')
             .end((err, res) => {
                 if (err) {
                     dispatch(banksHasErrored(true));
@@ -104,7 +104,7 @@ export function getBank(id) {
         dispatch(banksIsLoading(true));
 
 		request
-            .get('http://cdtrax-backend-api.herokuapp.com/banks/' + id)
+            .get('https://cdtrax-backend-api.herokuapp.com/banks/' + id)
             .end((err, res) => {
                 if (err) {
                     dispatch(banksHasErrored(true));

@@ -24,7 +24,7 @@ export function addAssessmentArea(code, description, bankId) {
         console.log(bankId)
         
 		request
-            .post('http://cdtrax-backend-api.herokuapp.com/assessment_areas')
+            .post('https://cdtrax-backend-api.herokuapp.com/assessment_areas')
             .send({code:code, description:description, bank_id:bankId})
             .end((err, res) => {
                 if (err) {
@@ -45,7 +45,7 @@ export function deleteAssessmentArea(id) {
         dispatch(assessmentAreasIsLoading(true))
 
         request
-            .delete('http://cdtrax-backend-api.herokuapp.com/assessment_areas/' + id)
+            .delete('https://cdtrax-backend-api.herokuapp.com/assessment_areas/' + id)
             .end((err, res) => {
                 if (err) {
                     console.log('deleteAssessmentArea() API call failed')
@@ -65,7 +65,7 @@ export function updateAssessmentArea(id, code, description, bankId) {
         dispatch(assessmentAreasIsLoading(true))
 
         request
-            .put('http://cdtrax-backend-api.herokuapp.com/assessment_areas/' + id)
+            .put('https://cdtrax-backend-api.herokuapp.com/assessment_areas/' + id)
             .send({id: id, code: code, description: description, bank_id:bankId })
             .end((err, res) => {
                 if (err) {
@@ -96,7 +96,7 @@ export function getAssessmentAreas() {
         dispatch(assessmentAreasIsLoading(true));
 
 		request
-            .get('http://cdtrax-backend-api.herokuapp.com/assessment_areas')
+            .get('https://cdtrax-backend-api.herokuapp.com/assessment_areas')
             .end((err, res) => {
                 if (err) {
                     console.log('getAssessmentAreas() API call failed')
@@ -119,7 +119,7 @@ export function getAssessmentArea(id) {
         dispatch(assessmentAreasIsLoading(true));
 
 		request
-            .get('http://cdtrax-backend-api.herokuapp.com/assessment_areas/' + id)
+            .get('https://cdtrax-backend-api.herokuapp.com/assessment_areas/' + id)
             .end((err, res) => {
                 if (err) {
                     dispatch(assessmentAreasHasErrored(true));

@@ -19,7 +19,7 @@ export function addCollateralCode(code, description) {
         dispatch(collateralCodesIsLoading(true))
 
 		request
-            .post('http://cdtrax-backend-api.herokuapp.com/collateral_codes')
+            .post('https://cdtrax-backend-api.herokuapp.com/collateral_codes')
             .send({code:code, description:description})
             .end((err, res) => {
                 if (err) {
@@ -38,7 +38,7 @@ export function deleteCollateralCode(id) {
         dispatch(collateralCodesIsLoading(true))
 
         request
-            .delete('http://cdtrax-backend-api.herokuapp.com/collateral_codes/' + id)
+            .delete('https://cdtrax-backend-api.herokuapp.com/collateral_codes/' + id)
             .end((err, res) => {
                 if (err) {
                     //console.log('addCollateralCode() API call failed')
@@ -56,7 +56,7 @@ export function updateCollateralCode(id, code, description) {
         dispatch(collateralCodesIsLoading(true))
 
         request
-            .put('http://cdtrax-backend-api.herokuapp.com/collateral_codes/' + id)
+            .put('https://cdtrax-backend-api.herokuapp.com/collateral_codes/' + id)
             .send({id: id, code: code, description: description })
             .end((err, res) => {
                 if (err) {
@@ -85,7 +85,7 @@ export function getCollateralCodes() {
         dispatch(collateralCodesIsLoading(true));
 
 		request
-            .get('http://cdtrax-backend-api.herokuapp.com/collateral_codes')
+            .get('https://cdtrax-backend-api.herokuapp.com/collateral_codes')
             .end((err, res) => {
                 if (err) {
                     dispatch(collateralCodesHasErrored(true));
@@ -105,7 +105,7 @@ export function getCollateralCode(id) {
         dispatch(collateralCodesIsLoading(true));
 
 		request
-            .get('http://cdtrax-backend-api.herokuapp.com/collateral_codes/' + id)
+            .get('https://cdtrax-backend-api.herokuapp.com/collateral_codes/' + id)
             .end((err, res) => {
                 if (err) {
                     dispatch(collateralCodesHasErrored(true));
